@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.11.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="C++书籍推荐 语言：C++ Primer, &lt;the C++ programming lauguage&gt; 经验：effective C++ 系列 标准库：the C++ standard library STL 源码解析  本文主要介绍C++中的类的基础，通过complex和string两个类介绍类的基础构成和规范写法。主要包括构造函数，拷贝、赋值构造函数，穿插一些小知识点，比如头文">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++学习笔记1--类">
+<meta property="og:url" content="http://example.com/2018/04/15/C++%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="StoneHan&#39;s blog">
+<meta property="og:description" content="C++书籍推荐 语言：C++ Primer, &lt;the C++ programming lauguage&gt; 经验：effective C++ 系列 标准库：the C++ standard library STL 源码解析  本文主要介绍C++中的类的基础，通过complex和string两个类介绍类的基础构成和规范写法。主要包括构造函数，拷贝、赋值构造函数，穿插一些小知识点，比如头文">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.imgur.com/gp2WhS2.png">
+<meta property="og:image" content="https://i.imgur.com/zzUZnCq.png">
+<meta property="og:image" content="https://i.imgur.com/3J344Qx.png">
+<meta property="og:image" content="https://i.imgur.com/pxxKYNT.png">
+<meta property="article:published_time" content="2018-04-15T10:25:09.000Z">
+<meta property="article:modified_time" content="2018-09-29T13:43:05.757Z">
+<meta property="article:author" content="StoneHan">
+<meta property="article:tag" content="C++">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/gp2WhS2.png">
+
+
+<link rel="canonical" href="http://example.com/2018/04/15/C++%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2018/04/15/C++%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/","path":"2018/04/15/C++学习笔记/","title":"C++学习笔记1--类"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>C++学习笔记1--类 | StoneHan's blog</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">StoneHan's blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">韩苏东的个人博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#C-%E4%B9%A6%E7%B1%8D%E6%8E%A8%E8%8D%90"><span class="nav-number">1.</span> <span class="nav-text">C++书籍推荐</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%B4%E6%96%87%E4%BB%B6%E5%92%8C%E7%B1%BB%E7%9A%84%E5%A3%B0%E6%98%8E"><span class="nav-number">2.</span> <span class="nav-text">头文件和类的声明</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#C-vs-C"><span class="nav-number">2.1.</span> <span class="nav-text">C vs C++</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%B4%E6%96%87%E4%BB%B6"><span class="nav-number">2.2.</span> <span class="nav-text">头文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ifndef%E5%92%8Cpragma-once%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">2.2.1.</span> <span class="nav-text">ifndef和pragma once的区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84"><span class="nav-number">2.3.</span> <span class="nav-text">文件结构</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#inline-%E5%87%BD%E6%95%B0"><span class="nav-number">3.</span> <span class="nav-text">inline 函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E8%81%94%E5%87%BD%E6%95%B0%E5%92%8C%E5%AE%8F%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">3.1.</span> <span class="nav-text">内联函数和宏的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E8%81%94%E5%87%BD%E6%95%B0%E7%9A%84%E9%80%82%E7%94%A8%E6%83%85%E5%86%B5"><span class="nav-number">3.2.</span> <span class="nav-text">内联函数的适用情况</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="nav-number">4.</span> <span class="nav-text">构造函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E7%9A%84%E9%87%8D%E8%BD%BD"><span class="nav-number">4.1.</span> <span class="nav-text">构造函数的重载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F"><span class="nav-number">4.2.</span> <span class="nav-text">单例模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E9%87%8F%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0"><span class="nav-number">4.3.</span> <span class="nav-text">常量成员函数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92-value-x2F-reference-to-const"><span class="nav-number">5.</span> <span class="nav-text">参数传递 value&#x2F;reference(to const)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8D%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8%E5%BC%95%E7%94%A8%E7%9A%84%E6%83%85%E5%86%B5"><span class="nav-number">5.1.</span> <span class="nav-text">不可以使用引用的情况</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8B%E5%85%83"><span class="nav-number">5.2.</span> <span class="nav-text">友元</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E7%AC%A6%E9%87%8D%E8%BD%BD"><span class="nav-number">6.</span> <span class="nav-text">操作符重载</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0"><span class="nav-number">6.1.</span> <span class="nav-text">成员函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%9E%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0"><span class="nav-number">6.2.</span> <span class="nav-text">非成员函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lt-lt-%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD"><span class="nav-number">6.3.</span> <span class="nav-text">&lt;&lt;运算符重载</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0complex%E7%B1%BB%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">7.</span> <span class="nav-text">实现complex类需要注意的问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#String%E7%B1%BB"><span class="nav-number">8.</span> <span class="nav-text">String类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E5%92%8C%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0"><span class="nav-number">8.1.</span> <span class="nav-text">构造函数和析构函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E5%92%8C%E6%8B%B7%E8%B4%9D%E8%B5%8B%E5%80%BC"><span class="nav-number">8.2.</span> <span class="nav-text">拷贝构造和拷贝赋值</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A0%86%E3%80%81%E6%A0%88%E5%92%8C%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86"><span class="nav-number">9.</span> <span class="nav-text">堆、栈和内存管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#new%E7%9A%84%E8%BF%87%E7%A8%8B"><span class="nav-number">9.1.</span> <span class="nav-text">new的过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#delete%E7%9A%84%E8%BF%87%E7%A8%8B"><span class="nav-number">9.2.</span> <span class="nav-text">delete的过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E5%8D%A0%E7%94%A8%E7%9A%84%E7%A9%BA%E9%97%B4"><span class="nav-number">9.3.</span> <span class="nav-text">类在内存中占用的空间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">9.4.</span> <span class="nav-text">遇到的问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A1%A5%E5%85%85"><span class="nav-number">10.</span> <span class="nav-text">补充</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E6%88%90%E5%91%98static"><span class="nav-number">10.1.</span> <span class="nav-text">静态成员static</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cout"><span class="nav-number">10.2.</span> <span class="nav-text">cout</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB%E6%A8%A1%E6%9D%BF%E5%92%8C%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF"><span class="nav-number">10.3.</span> <span class="nav-text">类模板和函数模板</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#namespace"><span class="nav-number">10.4.</span> <span class="nav-text">namespace</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#const"><span class="nav-number">10.5.</span> <span class="nav-text">const</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E8%BD%BDoperator-new-x2F-delete-x2F"><span class="nav-number">10.6.</span> <span class="nav-text">重载operator new&#x2F;delete&#x2F;[]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9B%B4%E5%A4%9A"><span class="nav-number">10.7.</span> <span class="nav-text">更多</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="StoneHan"
+      src="/images/3.jpg">
+  <p class="site-author-name" itemprop="name">StoneHan</p>
+  <div class="site-description" itemprop="description">想把你写成一首歌，想养一只猫</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">41</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Stone-Han" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Stone-Han" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:592024747@qq.com" title="E-Mail → mailto:592024747@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://weibo.com/2133952903/profile?rightmod=1&wvr=6&mod=personinfo" title="Weibo → http:&#x2F;&#x2F;weibo.com&#x2F;2133952903&#x2F;profile?rightmod&#x3D;1&amp;wvr&#x3D;6&amp;mod&#x3D;personinfo" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/04/15/C++%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/3.jpg">
+      <meta itemprop="name" content="StoneHan">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="StoneHan's blog">
+      <meta itemprop="description" content="想把你写成一首歌，想养一只猫">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="C++学习笔记1--类 | StoneHan's blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          C++学习笔记1--类
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-04-15 18:25:09" itemprop="dateCreated datePublished" datetime="2018-04-15T18:25:09+08:00">2018-04-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2018-09-29 21:43:05" itemprop="dateModified" datetime="2018-09-29T21:43:05+08:00">2018-09-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="C-书籍推荐"><a href="#C-书籍推荐" class="headerlink" title="C++书籍推荐"></a>C++书籍推荐</h1><ol>
+<li>语言：C++ Primer, &lt;the C++ programming lauguage&gt;</li>
+<li>经验：effective C++ 系列</li>
+<li>标准库：the C++ standard library STL 源码解析</li>
+</ol>
+<p>本文主要介绍C++中的类的基础，通过complex和string两个类介绍类的基础构成和规范写法。主要包括构造函数，拷贝、赋值构造函数，穿插一些小知识点，比如头文件、单例模式、内存管理等知识。</p>
+<span id="more"></span>
+
+
+<h1 id="头文件和类的声明"><a href="#头文件和类的声明" class="headerlink" title="头文件和类的声明"></a>头文件和类的声明</h1><h2 id="C-vs-C"><a href="#C-vs-C" class="headerlink" title="C vs C++"></a>C vs C++</h2><p>在C中，所有的函数都可以访问data。在C++中，将数据和函数封装在一起，只有这个类中的函数才能访问这个类中的数据。</p>
+<ul>
+<li>Object Based: 单一class的设计</li>
+<li>Object Oriented: 多重classes之间的设计。</li>
+</ul>
+<p>classes 的两个经典分类：</p>
+<ul>
+<li>class without pointer members (complex)（多半不需要析构函数）</li>
+<li>class with pointer members (string)</li>
+</ul>
+<h2 id="头文件"><a href="#头文件" class="headerlink" title="头文件"></a>头文件</h2><p>为了防止头文件的重复包含，要定义下面的防卫式声明：</p>
+<pre><code>#ifndef __COMPLEX__
+#define __COMPLEX__
+#endif
+</code></pre>
+<h3 id="ifndef和pragma-once的区别"><a href="#ifndef和pragma-once的区别" class="headerlink" title="ifndef和pragma once的区别"></a>ifndef和pragma once的区别</h3><p>ifndef的方式受C&#x2F;C++语言标准支持。它不光可以保证同一个文件不会被包含多次，也能保证内容完全相同的两个文件（或者代码片段）不会被不小心同时包含。</p>
+<p>当然，缺点就是如果不同头文件中的宏名不小心“撞车”，可能就会导致你看到头文件明明存在，编译器却硬说找不到声明的状况——这种情况有时非常让人抓狂。</p>
+<p>由于编译器每次都需要打开头文件才能判定是否有重复定义，因此在编译大型项目时，ifndef会使得编译时间相对较长，因此一些编译器逐渐开始支持#pragma once的方式。</p>
+<p>pragma once一般由编译器提供保证：同一个文件不会被包含多次。注意这里所说的“同一个文件”是指物理上的一个文件，而不是指内容相同的两个文件。你无法对一个头文件中的一段代码作pragma once声明，而只能针对文件。</p>
+<p>其好处是，你不必再费劲想个宏名了，当然也就不会出现宏名碰撞引发的奇怪问题。大型项目的编译速度也因此提高了一些。</p>
+<p>对应的缺点就是如果某个头文件有多份拷贝，本方法不能保证他们不被重复包含。当然，相比宏名碰撞引发的“找不到声明”的问题，这种重复包含很容易被发现并修正。</p>
+<h2 id="文件结构"><a href="#文件结构" class="headerlink" title="文件结构"></a>文件结构</h2><ol>
+<li>类的声明（模板）</li>
+<li>类的实现</li>
+<li>前置声明</li>
+</ol>
+<h1 id="inline-函数"><a href="#inline-函数" class="headerlink" title="inline 函数"></a>inline 函数</h1><p>inline是指嵌入代码，就是在调用函数的地方不是跳转，而是把代码直接写到那里去。对于短小的代码来说，inline可以带来一定的效率提升，而且和C时代的宏函数相比，inline 更安全可靠。</p>
+<h2 id="内联函数和宏的区别"><a href="#内联函数和宏的区别" class="headerlink" title="内联函数和宏的区别"></a>内联函数和宏的区别</h2><ol>
+<li>内联函数在运行时可调试，而宏定义不可以;</li>
+<li>编译器会对内联函数的参数类型做安全检查或自动类型转换（同普通函数），而宏定义则不会； </li>
+<li>内联函数可以访问类的成员变量，宏定义则不能； </li>
+<li>在类中声明同时定义的成员函数，自动转化为内联函数。</li>
+</ol>
+<h2 id="内联函数的适用情况"><a href="#内联函数的适用情况" class="headerlink" title="内联函数的适用情况"></a>内联函数的适用情况</h2><ol>
+<li><p>一个函数不断被重复调用。</p>
+</li>
+<li><p>函数只有简单的几行，且函数不包含for、while、switch语句。</p>
+</li>
+</ol>
+<p>inline函数对编译器来说只是一个建议，编译器可以选择忽略。</p>
+<h1 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h1><pre><code>class complex
+&#123;
+    complex (double r=0, double i=0)
+    :re(r), im(i)	//1
+    &#123;&#125;	//2
+
+private:
+    double re, im;
+&#125;;
+</code></pre>
+<p>在1和2位置初始化的区别：在1是初始化，在2是赋值。 </p>
+<p><strong>类的初始化尽量使用初始化列表。</strong></p>
+<h2 id="构造函数的重载"><a href="#构造函数的重载" class="headerlink" title="构造函数的重载"></a>构造函数的重载</h2><pre><code>1. complex (double r=0, double i=0)
+    :re(r), im(i)	//1
+    &#123;&#125;	
+2. complex ():re(0),im(0) &#123;&#125;
+</code></pre>
+<p>1和2不可以同时存在，假如有代码<code>complex c1; complex c2();</code>，两个都不带有参数，构造函数1和2都不带有参数，都可以调用，所以这两个不能同时存在。</p>
+<h2 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h2><p>构造函数通常不会放在private里面，因为在创造对象的时候会调用构造函数，如果构造函数是private，就不能被外界调用。但是下面的单例模式情况例外：</p>
+<pre><code>class A &#123;
+public:
+    static A&amp; getInstance();
+    setup () &#123;...&#125;
+private:
+    A();
+    A(const A&amp; rhs);
+    static A a;
+    ...
+&#125;;
+
+A&amp; A::getInstance()
+&#123;
+    
+    return a;
+&#125;
+
+A::getInstance().setup();
+</code></pre>
+<p>首先private里面有一个自己a，然后构造函数也是私有的，也就是不允许外界构造。类A只有一个对象a。那么外界如何调用呢，通过A::getInstance返回的a，然后调用setup进行其他操作。<br>但是这种写法，当外界不调用的时候a仍然存在。</p>
+<pre><code>class A &#123;
+public:
+    static A&amp; getInstance();
+    setup () &#123;...&#125;
+private:
+    A();
+    A(const A&amp; rhs);
+
+    ...
+&#125;;
+
+A&amp; A::getInstance()
+&#123;
+    static A a;
+    return a;
+&#125;
+
+A::getInstance().setup();
+</code></pre>
+<p>只有有人调用的时候a才会存在，并且只有一份。</p>
+<h2 id="常量成员函数"><a href="#常量成员函数" class="headerlink" title="常量成员函数"></a>常量成员函数</h2><pre><code>double real() const &#123; return re; &#125;
+</code></pre>
+<p><strong>如果函数不改变数据，在函数后面加上</strong>const<strong>关键字。</strong></p>
+<p>如果函数没有加const关键字，当有一个常量类对象<code>const complex c1(2,1)</code>想调用<code>c1.real()</code>时，用户指定c1不会改变，但是函数却没有加const，意思是可能会改变c1的值，这时就会产生矛盾。具体见下面const一章。</p>
+<h1 id="参数传递-value-x2F-reference-to-const"><a href="#参数传递-value-x2F-reference-to-const" class="headerlink" title="参数传递 value&#x2F;reference(to const)"></a>参数传递 value&#x2F;reference(to const)</h1><p><strong>参数传递尽量使用引用,返回值传递也尽量使用引用</strong></p>
+<p>值传递就是把一整包数据传递过去，通过栈。数据多大就传多大。<br>引用只是传递指针，速度比较快。<br>有时候只希望传递效率快，但是不希望传递的值被改变，这时候需要加const。</p>
+<h2 id="不可以使用引用的情况"><a href="#不可以使用引用的情况" class="headerlink" title="不可以使用引用的情况"></a>不可以使用引用的情况</h2><p>函数的结果传递有两种情况，第一种是生成一个临时变量，比如<code>return a+b;</code>；第二种是返回东西已经有空间存放。<br>此时第一种情况不可以返回引用，因为当函数结束的时候，这个对象就会消失，传递的引用是坏的。（参考操作符重载-非成员函数的例子）</p>
+<p><strong>当使用引用时，传递者无需考虑接受者是以什么形式接收</strong><br>参考操作符重载一章。</p>
+<p>指针和引用的区别参考下面的博客：</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/x_wukong/p/5712345.html">https://www.cnblogs.com/x_wukong&#x2F;p&#x2F;5712345.html</a></p>
+<h2 id="友元"><a href="#友元" class="headerlink" title="友元"></a>友元</h2><p>友元函数打破封装，可以直接拿类里面的数据，效率比较高。</p>
+<pre><code>int func(const complex&amp; param)
+&#123; return param.re + param.im; &#125;
+c2.func(c1);
+</code></pre>
+<p>相同class 的各个objects互为friend</p>
+<h1 id="操作符重载"><a href="#操作符重载" class="headerlink" title="操作符重载"></a>操作符重载</h1><p>操作符实际上也是一种函数，C++允许重载。</p>
+<h2 id="成员函数"><a href="#成员函数" class="headerlink" title="成员函数"></a>成员函数</h2><pre><code>c2+=c1;
+</code></pre>
+<p>+&#x3D;重载使用成员函数是因为需要调用类的成员变量。<br>符号+&#x3D;作用在左边的对象，编译器寻找左边对象中有没有+&#x3D;这个函数。</p>
+<pre><code>inline complex&amp; 	//1
+__doapl(complex* ths, const complex&amp; r)
+&#123;
+    ths-&gt;re += r.re;
+    ths-&gt;im += r.im;
+    return *ths;
+&#125;
+inline complex&amp; 	//2
+complex::operator +=(const complex&amp; r)
+&#123;
+    return __doapl(this,r);
+&#125;
+</code></pre>
+<p><strong>所有的成员函数都隐含有一个this指针</strong>，在这里把c2传给this指针，c1传给r。__doapl(do assignment plus)封装成一个函数便于其他函数调用。</p>
+<p><strong>当使用引用时，传递者无需考虑接受者是以什么形式接收</strong><br>看上面的代码1，<code>return *ths</code>但是返回参数写的是<code>complex&amp;</code>。<br>传递一个object，接受者是<code>complex&amp;</code>，如果对方也是引用，ok。如果对方用value也可以。</p>
+<p><strong>允许连续赋值</strong><br>在语句2地方返回引用使得用户可以使用<code>c3+=c2+=c1</code>这种用法。假如函数返回的是void，那么<code>c3+=(void)</code>是不可以的。</p>
+<p><strong>问题：返回值是complex类型可以连续赋值吗？</strong></p>
+<h2 id="非成员函数"><a href="#非成员函数" class="headerlink" title="非成员函数"></a>非成员函数</h2><pre><code>inline complex
+operator + (const complex&amp; x, const complex&amp; y)
+&#123;
+    return complex(real(x)+real(y),
+                    imag(x)+imag(y));
+&#125;
+
+inline complex
+operator + (const complex&amp; x, double y)&#123;...&#125;
+
+inline complex
+operator + (double x, const complex&amp; y)&#123;...&#125;
+</code></pre>
+<p>这三种重载函数允许复数+复数、复数+实数、实数+复数。</p>
+<p>注意这里的函数不能返回引用，因为他们的返回值一定是个local object。</p>
+<p>complex();–typename();的用法就是创建了一个临时对象。在下一行生命结束。</p>
+<p><strong>问题：complex(); complex c3();complex c3的区别</strong></p>
+<p><strong>问题：这里的double类型为什么不用const呢？</strong></p>
+<p>上面函数后面加const是因为怕使用者创建const对象调用非const函数。参数上加const是因为防止被修改，如果不想被修改就加上const。这里不加是因为没有加的必要，从第一个原因上来说，加入调用者创建const double y，也能传给double y。 另外这里很确定不会改变y的值。<br><strong>const也是函数签名的一部分，也就是说允许加const和不加const的函数同时存在。</strong></p>
+<h2 id="lt-lt-运算符重载"><a href="#lt-lt-运算符重载" class="headerlink" title="&lt;&lt;运算符重载"></a>&lt;&lt;运算符重载</h2><p>只能写成非成员函数。如果写成成员函数，那么使用时成了c1&lt;&lt;cout，这是不可以的。</p>
+<pre><code>ostream&amp;
+operator &lt;&lt;(ostream&amp; os, const complex&amp; x)
+&#123;
+    return os &lt;&lt; &#39;(&#39; &lt;&lt; real(x) &lt;&lt; &#39;,&#39; &lt;&lt; imag(x) &lt;&lt; &#39;)&#39;;
+&#125;
+
+调用：
+cout&lt;&lt;c1;
+</code></pre>
+<ol>
+<li>参数的确定：第一个参数是&lt;&lt;左边的对象，也就是cout的类型。第二个参数是&lt;&lt;右边的对象。</li>
+<li>要不要const？每次输出的时候实际上在改变os的状态，所以不能加const。</li>
+<li>返回值类型。为了能够连续输出，还需要作为左值，所以返回值还是ostream类型。</li>
+</ol>
+<h1 id="实现complex类需要注意的问题"><a href="#实现complex类需要注意的问题" class="headerlink" title="实现complex类需要注意的问题"></a>实现complex类需要注意的问题</h1><ol>
+<li>+&#x3D;运算符只重载了一次<code>complex&amp; operator +=( const complex&amp; y)</code>，5被转化为complex类。 对应的调用注意加括号。<code>cout&lt;&lt;(c2+=5)&lt;&lt;endl;</code> 如果不实现为友元函数的话，则应该在类内实现，因为需要调用this指针。</li>
+<li>&lt;&lt;的重载函数要写成std::ostream，并且包含头文件#include <iostream>. 另外ostream不允许在数据声明中使用inline。</li>
+</ol>
+<h1 id="String类"><a href="#String类" class="headerlink" title="String类"></a>String类</h1><pre><code>class String
+&#123;
+public:
+    String(const char* cstr = 0);
+    String(const String&amp; str);	//参数是String类本身，所以叫拷贝构造函数
+    String&amp; operator= (const String&amp; str);	//同样，拷贝赋值函数
+    ~String();
+    char* get_c_str() const &#123; return m_data; &#125;	//不改变，加const
+private:
+    char* m_data;
+&#125;
+</code></pre>
+<h2 id="构造函数和析构函数"><a href="#构造函数和析构函数" class="headerlink" title="构造函数和析构函数"></a>构造函数和析构函数</h2><pre><code>inline
+String:: String(const char* cstr = 0)
+&#123;
+    if (cstr)
+    &#123;
+        m_data = new char[strlen(cstr)+1];
+        strcpy(m_data, cstr);
+    &#125;
+    else
+    &#123;
+        m_data = new char[1];
+        *m_data = &#39;\0&#39;;
+    &#125;
+&#125;
+inline
+String::~String()
+&#123;
+    delete[] m_data;
+&#125;
+
+////////////////////////////////
+String s1();
+String s2(&quot;hello&quot;);
+    
+String* p = new String(&quot;hello&quot;);
+delete p;
+</code></pre>
+<p><strong>问题：new和新建对象方式有什么不同？</strong></p>
+<h2 id="拷贝构造和拷贝赋值"><a href="#拷贝构造和拷贝赋值" class="headerlink" title="拷贝构造和拷贝赋值"></a>拷贝构造和拷贝赋值</h2><p><strong>带有指针的类必须有拷贝构造函数和拷贝赋值函数。</strong>为什么不带指针的类不需要呢？因为系统会默认给一个拷贝构造函数，使两边（二进制）内容一样。对于上面的complex类来说，正是我们需要的。</p>
+<p>而对于带有指针的类来说，当使用默认拷贝（浅拷贝）的时候，两个对象指向同一个地方。假如有两个对象，String a(“hello”), String b(“World”). 当浅拷贝的时候，b的指针和a的指针相同，都指向hello的位置。此时world所占的内存就会被泄露。而此时如果a对这个指针指向的地方进行操作，b的值也会被改变。</p>
+<p>所以，拷贝构造函数的作用：</p>
+<ol>
+<li>防止内存泄露</li>
+<li>使两个对象的操作互不影响。</li>
+</ol>
+<p><strong>这里主要是第二个影响吧，因为拷贝构造的对象还没有生成，所以没有开辟空间。第一个作用主要针对拷贝赋值函数。</strong></p>
+<p><strong>为什么拷贝构造函数的参数是引用？</strong><br>如果允许拷贝构造函数传值，就会在拷贝构造函数中调用拷贝构造函数，就会造成永无休止的递归调用从而导致栈溢出。</p>
+<p>深拷贝：</p>
+<pre><code>inline
+String::String(const String&amp; str)
+&#123;
+    m_data = new char[ strlen(str.m_data) + 1 ];
+    strcpy(m_data , str.m_data);
+&#125;
+
+////////////////
+String s2(s1);
+String s2 = s1;
+</code></pre>
+<p>拷贝构造和拷贝赋值的区别：拷贝构造是以b为蓝本创建一个a，拷贝赋值是使a和b的内容一样。a和b之前都已经被创造出来。</p>
+<p>拷贝赋值：</p>
+<pre><code>inline
+String&amp; String:: operator = (const String&amp; str)
+&#123;
+    if(this == &amp;str)	//检测自我赋值
+    &#123;return *this;&#125;
+
+    delete [] m_data;
+    m_data = new char[strlen(str.m_data)+1];
+    strcpy(m_data, str.m_data);
+    return *this;
+&#125;
+</code></pre>
+<p>步骤有3：</p>
+<ol>
+<li>删除自己原来的内容。</li>
+<li>开辟和对方一样的空间。</li>
+<li>将对方的内容拷贝过来。</li>
+</ol>
+<p>检测自我赋值的作用：</p>
+<ol>
+<li>提高效率（如果是自我赋值的话，直接返回，不用进行下面的步骤）。</li>
+<li>如果没有这个检测的话，在第一步删除了自身的内容，后面进行第二步的时候就会出错。</li>
+</ol>
+<p>考虑上面代码的异常安全性的解法：<br>上面的代码先delete再new，如果这时内存不够，得到的就是一个空指针，容易引起程序崩溃。<br>解决的方案有两种：第一种，先new再delete掉原来的空间。这样如果new成功会释放原来的，new不成功能够保留原来的内容。第二种，创建临时实例。如下：</p>
+<pre><code>inline
+String&amp; String:: operator = (const String&amp; str)
+&#123;
+    if(this!= &amp;str)
+    &#123;
+        String strTemp(str);
+        char* temp = strTemp.m_data;
+        strTemp.m_data = m_data;
+        m_data = temp;
+    &#125;
+    return *this;
+&#125;
+</code></pre>
+<p>由于strTemp是一个临时变量，程序运行到if外面之后会自动调用析构函数。strTemp交换之后就是原来的内存空间，所以原来的空间被自动释放。</p>
+<h1 id="堆、栈和内存管理"><a href="#堆、栈和内存管理" class="headerlink" title="堆、栈和内存管理"></a>堆、栈和内存管理</h1><p>栈，是存在于某作用域(scope)的一块内存空间。包括参数、返回地址、local object等。当离开这个作用域，对象的生命就会消失。</p>
+<p>堆，是指由操作系统提供的一块global的内存空间，程序可以动态分配从中获得若干区块。</p>
+<pre><code>Complex c3(1,2);
+&#123;
+    Complex c1(1,2);
+    Complex* p = new Complex(3);
+    static Complex c2(1,2);
+&#125;
+</code></pre>
+<p>c2: 加上static关键字，c2的生命在作用域结束之后依然存在，直到整个程序结束。<br><strong>问题：c2存放在哪里？</strong> <strong>答：静态存储区</strong></p>
+<p>c3: global object, 作用域也是整个程序。<strong>和static有什么不同？存放在哪里？</strong></p>
+<p>static全局变量与普通全局变量有什么区别？</p>
+<p>答：static全局变量和普通全局变量存储区域相同，不同的是：</p>
+<p>static全局变量只在声明此static全局变量的文件中有效；</p>
+<p>普通全局变量对整个源程序都有效，当此源程序包含多于一个文件的程序时，对其他文件依然有效。</p>
+<h2 id="new的过程"><a href="#new的过程" class="headerlink" title="new的过程"></a>new的过程</h2><p>分为三个步骤：</p>
+<ol>
+<li><p>分配内存</p>
+</li>
+<li><p>转型</p>
+</li>
+<li><p>构造函数</p>
+<pre><code> Complex *pc = new Complex(1,2);
+ void* mem = operator new (sizeof(Complex));
+ pc = static_cast&lt;Complex*&gt;(mem);
+ pc-&gt; Complex::Complex(1,2);
+</code></pre>
+</li>
+<li><p>operator new 内部调用malloc，申请一块空间。</p>
+</li>
+<li><p>将mem转成pc</p>
+</li>
+<li><p>通过指针调用构造函数，Complex(pc,1,2)。由于构造函数自带this指针，所以这里的this就是pc，而pc就是刚才申请的空间的地址。</p>
+</li>
+</ol>
+<h2 id="delete的过程"><a href="#delete的过程" class="headerlink" title="delete的过程"></a>delete的过程</h2><pre><code>    String *ps = new String(&quot;Hello&quot;);
+
+    ...
+
+    delete ps;
+
+     转化为：
+    String::~String(ps);
+
+    operator delete(ps);
+</code></pre>
+<ol>
+<li>调用析构函数，析构函数中delete[] m_data，hello存放的空间释放掉。</li>
+<li>释放内存，调用free(ps)，释放掉指针</li>
+</ol>
+<h2 id="类在内存中占用的空间"><a href="#类在内存中占用的空间" class="headerlink" title="类在内存中占用的空间"></a>类在内存中占用的空间</h2><p><img src="https://i.imgur.com/gp2WhS2.png"></p>
+<ol>
+<li>Complex类，8个字节存放2个double数据，灰色的部分为调试信息。红色的部分是malloc和free为了回收记录的分配空间的大小。因为调用malloc只有一个指针，没办法确定大小。总共加起来空间是52，这个空间必须是16的倍数，所以调整到64.64转换成16进制是40，然后用1bit记录这块空间有没有被分配出去，所以变成了41，也就是红色部分的内容。</li>
+<li>当不需要调试信息的时候，8+4*2，刚好是16</li>
+</ol>
+<p><img src="https://i.imgur.com/zzUZnCq.png"></p>
+<p><strong>对于array new，一定要使用array delete</strong></p>
+<p>对于Complex类来说，比刚才多了一个3.用来记录数组的大小。当使用<code>delete[] p</code>的时候，编译器就知道你要删除的是一个数组，因此会调用3次析构函数来释放空间。如果不加[]，编译器只会调用一次，会发生内存泄漏。</p>
+<p><strong>调试信息什么时候被回收？是delete p的时候回收吗？</strong><br><strong>问题：第二步不是删除指针p吗，这里记录的是总的大小，为什么不直接删除所有的大小？</strong></p>
+<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><p>错误	C4996	‘strcpy’: This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.	MyString	d:\program\c11\mystring\mystring\mysting.h	24	</p>
+<p>之前的strcpy函数被认为是不安全的，所以提供了strcpy_s代替。如果不想改的话，解决方法：</p>
+<ol>
+<li>其实在下面的输出错误信息中有解决方法，“To disable deprecation , use _CRT_SECURE_NO_WARNINGS”,意思是我们可以不进行兼容性检查，我们可以在项目-属性-配置属性-c&#x2F;c++-预处理器-预处理定义里边加上一句：_CRT_SECURE_NO_WARNINGS</li>
+<li>也是在下面的输出信息中，我们可以看到有一处错误代号“ error C4996:”，所以我们可以在程序开头加上一句“#pragma warning(disable:4996)”就行，意思是忽略这个错误，</li>
+<li>第三种方法是：我们可以在：项目-属性-配置属性-c&#x2F;c++中的常规，里面有个SDL选项，关了。还有在代码生成中有个安全检查选项(&#x2F;GS)，关了。虽然这种方法也可以解决这个问题，但是我本人不太提倡这种解决办法，还是前两种解决方法比较好</li>
+</ol>
+<h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><h2 id="静态成员static"><a href="#静态成员static" class="headerlink" title="静态成员static"></a>静态成员static</h2><p>普通成员变量存在于每个对象当中，当调用成员函数的时候<code>c1.real()</code>，默认传入第一个参数this指针，这样编译器就知道是谁调用了这个函数。</p>
+<p>static成员变量指的是只有一份这个值，比如银行账户每个人都有，但是利率只有一个。<br>静态成员函数用来处理静态成员变量。</p>
+<p><strong>静态成员变量在类外定义</strong></p>
+<p>静态函数的方式：</p>
+<ol>
+<li>类名调用Account::set_rate(5.0);</li>
+<li>对象调用a.set_rate(7.0);</li>
+</ol>
+<p>应用：单例模式</p>
+<h2 id="cout"><a href="#cout" class="headerlink" title="cout"></a>cout</h2><p>在ostream中对cout做了各种类型的重载，所以cout可以输出很多种类型的数据。</p>
+<h2 id="类模板和函数模板"><a href="#类模板和函数模板" class="headerlink" title="类模板和函数模板"></a>类模板和函数模板</h2><pre><code>template&lt;typename T&gt;
+</code></pre>
+<p>对数据类型进行操作，每创造不同类型的对象，就会创造出一份代码。所以也有人说模板会引起代码的膨胀。</p>
+<pre><code>templete&lt;class T&gt;
+inline
+const T&amp; min(const T&amp;a, const T&amp;b)
+&#123;
+    return b &lt; a ? b : a;
+&#125;
+</code></pre>
+<p>当对一个类进行比大小的时候，发现对所有的类都是一样的操作，所以把类型变成一个类。<br>但是在使用的时候不用像类模板一样指明类型，编译器会进行自动推导。<br>当调用r3&#x3D;min (r1,r2)的时候，b &lt; a, 但是编译器并不知道怎么比较大小，所以去找b有没有对&lt;的运算符重载。所以还应该在类里对&lt;进行运算符重载。</p>
+<h2 id="namespace"><a href="#namespace" class="headerlink" title="namespace"></a>namespace</h2><ol>
+<li><p>using directive: using namespace std;&#x2F;&#x2F;全部打开</p>
+</li>
+<li><p>using declaration: using std::cout;</p>
+</li>
+<li><p>std::cin;</p>
+<h2 id="const"><a href="#const" class="headerlink" title="const"></a>const</h2></li>
+</ol>
+<p><img src="https://i.imgur.com/3J344Qx.png"></p>
+<p>这里const object和const member function相互调用的时候，当const对象调用非const函数时会报错。因为const object指定不会修改成员变量，但是成员函数却说我不保证成员变量不变。<br><strong>当成员函数的const和non-const版本同时存在，const object只能调用const版本，non-const只能调用non-const。</strong></p>
+<p>在string类中有两个对[]的重载函数，<strong>const也是函数签名的一部分</strong>，所以这两个函数是同时存在的。</p>
+<pre><code>charT operator[] (size_type pos) const
+&#123;// 不用考虑COW(Copy On Write)&#125;
+reference operator[] (size_type pos)
+&#123;// 必须考虑COW&#125;
+</code></pre>
+<p><img src="https://i.imgur.com/pxxKYNT.png"></p>
+<p>C++学习笔记2中对于委托+复合中有一个例子，如上图。可以用多个指针指向一个string。但是对于这个string的调用会用一个reference counting 进行计数。如果对这个内容进行了改变，那么就要考虑COW.如果是常量字符串，那么就不可能改变内容，所以不必考虑COW。（由于上面的第一条规则，所以const成员函数只能被const对象调用。）</p>
+<h2 id="重载operator-new-x2F-delete-x2F"><a href="#重载operator-new-x2F-delete-x2F" class="headerlink" title="重载operator new&#x2F;delete&#x2F;[]"></a>重载operator new&#x2F;delete&#x2F;[]</h2><pre><code>void* operator new(size_t size);
+void operator delete(void* p,size_t size);
+</code></pre>
+<p>同样可以定义类成员的重载。<br>如果想要绕过自定义的重载函数，那么可以用<code>::delete p;</code></p>
+<p>对于new 和delete的重载：</p>
+<ol>
+<li>可以重载operator new这个函数</li>
+<li>可以重载成员或者全局函数</li>
+<li>可以重载placement new()，但是必须有不同的参数列，第一个参数必须是size_t。也可以重载placement operator delete，但是不会被delete调用，只有当ctor出现异常，才会调用。 但是如果delete不一一对应new也没关系，只是自己放弃处理ctor发出的异常。</li>
+<li></li>
+</ol>
+<h2 id="更多"><a href="#更多" class="headerlink" title="更多"></a>更多</h2><p>operator type() const;<br>explicit complex;<br>pointer-like object;<br>template specialization;<br>standard library;<br>c++11;</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C/" rel="tag"># C++</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2018/04/11/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="prev" title="动态规划">
+                  <i class="fa fa-chevron-left"></i> 动态规划
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/04/20/C++%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02/" rel="next" title="C++学习笔记2-类之间的关系">
+                  C++学习笔记2-类之间的关系 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">StoneHan</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

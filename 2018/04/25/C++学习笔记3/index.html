@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.11.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="转换函数 pointer-like class &amp; function-like class 泛型编程 模板特化">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++学习笔记3--类">
+<meta property="og:url" content="http://example.com/2018/04/25/C++%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B03/index.html">
+<meta property="og:site_name" content="StoneHan&#39;s blog">
+<meta property="og:description" content="转换函数 pointer-like class &amp; function-like class 泛型编程 模板特化">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.imgur.com/4xgwvCa.png">
+<meta property="og:image" content="https://i.imgur.com/v0HJHtA.png">
+<meta property="og:image" content="https://i.imgur.com/rSIgdeE.png">
+<meta property="og:image" content="https://i.imgur.com/B31Zngk.png">
+<meta property="og:image" content="https://i.imgur.com/RfJrDAb.png">
+<meta property="og:image" content="https://i.imgur.com/zZ2JcSN.png">
+<meta property="og:image" content="https://i.imgur.com/XWdAgAP.png">
+<meta property="article:published_time" content="2018-04-25T10:25:09.000Z">
+<meta property="article:modified_time" content="2018-08-15T22:19:04.267Z">
+<meta property="article:author" content="StoneHan">
+<meta property="article:tag" content="C++">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/4xgwvCa.png">
+
+
+<link rel="canonical" href="http://example.com/2018/04/25/C++%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B03/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2018/04/25/C++%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B03/","path":"2018/04/25/C++学习笔记3/","title":"C++学习笔记3--类"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>C++学习笔记3--类 | StoneHan's blog</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">StoneHan's blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">韩苏东的个人博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BD%AC%E6%8D%A2%E5%87%BD%E6%95%B0"><span class="nav-number">1.</span> <span class="nav-text">转换函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#non-eplicit-one-argument-ctor"><span class="nav-number">1.1.</span> <span class="nav-text">non-eplicit-one-argument ctor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#explicit"><span class="nav-number">1.2.</span> <span class="nav-text">explicit</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pointer-like-classes"><span class="nav-number">2.</span> <span class="nav-text">pointer-like classes#</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88"><span class="nav-number">2.1.</span> <span class="nav-text">智能指针#</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%AD%E4%BB%A3%E5%99%A8"><span class="nav-number">2.2.</span> <span class="nav-text">迭代器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#function-like-classes"><span class="nav-number">3.</span> <span class="nav-text">function-like classes</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#namespace"><span class="nav-number">4.</span> <span class="nav-text">namespace</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#template"><span class="nav-number">5.</span> <span class="nav-text">template</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#class-template"><span class="nav-number">5.1.</span> <span class="nav-text">class template</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#function-template"><span class="nav-number">5.2.</span> <span class="nav-text">function template</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#member-template"><span class="nav-number">5.3.</span> <span class="nav-text">member template</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#specialization-%E6%A8%A1%E6%9D%BF%E7%89%B9%E5%8C%96"><span class="nav-number">6.</span> <span class="nav-text">specialization 模板特化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%81%8F%E7%89%B9%E5%8C%96-%E4%B8%AA%E6%95%B0%E7%9A%84%E5%81%8F"><span class="nav-number">6.1.</span> <span class="nav-text">偏特化-个数的偏</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%81%8F%E7%89%B9%E5%8C%96-%E8%8C%83%E5%9B%B4"><span class="nav-number">6.2.</span> <span class="nav-text">偏特化-范围</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A8%A1%E6%9D%BF%E6%A8%A1%E6%9D%BF%E5%8F%82%E6%95%B0"><span class="nav-number">7.</span> <span class="nav-text">模板模板参数</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="StoneHan"
+      src="/images/3.jpg">
+  <p class="site-author-name" itemprop="name">StoneHan</p>
+  <div class="site-description" itemprop="description">想把你写成一首歌，想养一只猫</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">41</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Stone-Han" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Stone-Han" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:592024747@qq.com" title="E-Mail → mailto:592024747@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://weibo.com/2133952903/profile?rightmod=1&wvr=6&mod=personinfo" title="Weibo → http:&#x2F;&#x2F;weibo.com&#x2F;2133952903&#x2F;profile?rightmod&#x3D;1&amp;wvr&#x3D;6&amp;mod&#x3D;personinfo" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/04/25/C++%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B03/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/3.jpg">
+      <meta itemprop="name" content="StoneHan">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="StoneHan's blog">
+      <meta itemprop="description" content="想把你写成一首歌，想养一只猫">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="C++学习笔记3--类 | StoneHan's blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          C++学习笔记3--类
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-04-25 18:25:09" itemprop="dateCreated datePublished" datetime="2018-04-25T18:25:09+08:00">2018-04-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2018-08-16 06:19:04" itemprop="dateModified" datetime="2018-08-16T06:19:04+08:00">2018-08-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <ul>
+<li>转换函数</li>
+<li>pointer-like class &amp; function-like class</li>
+<li>泛型编程</li>
+<li>模板特化</li>
+<li><span id="more"></span></li>
+</ul>
+<h1 id="转换函数"><a href="#转换函数" class="headerlink" title="转换函数"></a>转换函数</h1><p>转换函数有两个方向。</p>
+<p>##将类转换成别的类##<br>    class Fraction<br>    {<br>        operator double() const<br>        {return (double)(m_numerator&#x2F;m_denominator);}<br>    }<br>    &#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;<br>    Fraction f(3,5);<br>    double d&#x3D;4+f;</p>
+<p>编译器行为：首先查找有没有+的重载，没有。那么尝试把f转换成double，找到有operator double()，于是把f转成double。</p>
+<h2 id="non-eplicit-one-argument-ctor"><a href="#non-eplicit-one-argument-ctor" class="headerlink" title="non-eplicit-one-argument ctor"></a>non-eplicit-one-argument ctor</h2><pre><code>class Fraction
+&#123;
+    Fraction(int num, int den=1)
+        :m_numerator(num),m_denominator(den)
+    &#123;&#125;
+    Fraction operator+(const Fraction&amp; f)
+    &#123;return Fraction(...);&#125;
+&#125;
+////////
+Fraction f(3,5);
+double d2=f+4;
+</code></pre>
+<p>编译器行为：找fraction有没有+的重载，找到了，但是这个函数的参数是个fraction，不是double，于是编译器看能否把4转换成fraction，于是调用上面的non-explicit-one-argument ctor，把4转换成4&#x2F;1。</p>
+<h2 id="explicit"><a href="#explicit" class="headerlink" title="explicit"></a>explicit</h2><pre><code>class Fraction
+&#123;
+
+    explicit Fraction(int num, int den=1)
+        :m_numerator(num),m_denominator(den)
+    &#123;&#125;
+
+    operator double() const
+    &#123;return (double)(m_numerator/m_denominator);&#125;
+
+    Fraction operator+(const Fraction&amp; f)
+    &#123;return Fraction(...);&#125;
+&#125;
+</code></pre>
+<p>如果ctor和转换函数并存，对于d2&#x3D;f+4来说，既可以把f再转换成double，又可以把4转成fraction，产生ambiguous歧义。但是对于d&#x3D;4+f来说可以并存的。</p>
+<p>解决办法：在Fraction ctor前面加上explicit。这样4就不会自动转换成fraction。此时[error] conversion from double to fraction requested.</p>
+<p><strong>问题：f+4不调用double转换吗？</strong></p>
+<p>标准库中的应用：</p>
+<p><img src="https://i.imgur.com/4xgwvCa.png"></p>
+<p>operator[]重载这个函数应该返回一个bool值，但是却返回了reference，这是一个__bit_reference类，代码中包括了operator bool() const这样的一个转换函数。</p>
+<h1 id="pointer-like-classes"><a href="#pointer-like-classes" class="headerlink" title="pointer-like classes#"></a>pointer-like classes#</h1><h2 id="智能指针"><a href="#智能指针" class="headerlink" title="智能指针#"></a>智能指针#</h2><p>有时候会将类构造成一个指针，这个类具有和指针同样的操作，但是比指针要更智能一些。</p>
+<pre><code>struct Foo
+&#123;
+    void method(void)&#123;...&#125;
+&#125;;
+
+template &lt;class T&gt;
+class shared_ptr
+&#123;
+public:
+    T&amp; operator*() const
+    &#123; return *px;&#125;
+    T* operator-&gt;() const
+    &#123; return px;&#125;
+private:
+    T* px;
+&#125;
+////////////////////////////////
+shared_ptr&lt;Foo&gt; sp(new Foo);
+Foo f(*sp);
+sp-&gt;method();
+</code></pre>
+<p>首先创建一个智能指针sp，初始化用new Foo的普通指针。<br>然后来看 * 这个操作，是取一个对象，那么函数应该返回 *px。<br>对于-&gt;这个操作，通过指针调用函数method，函数应该返回px, 等同于px-&gt;method(); 但是当-&gt;作用上去，这个-&gt;符号被消耗掉了，那么px怎么调用method呢？这里的解释是-&gt;这个符号是连续作用的。</p>
+<h2 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h2><p>迭代器要指向容器中的一个元素，所以也是一个point-like class。但是迭代器由于有遍历操作，所以还要实现++,–等操作。</p>
+<pre><code>reference operator*() const
+&#123;return (*node).data;&#125;
+pointer operator-&gt;() const
+&#123;return &amp;(operator*() );&#125;
+
+///////////////////////////////
+list&lt;Foo&gt;::iteration it;
+*it;
+it-&gt;method();
+</code></pre>
+<p>对于*，取得的是一个object。</p>
+<p>对于-&gt;，意思是调用Foo::method();相当于(*it).method();<br>相当于(&amp;(*it))-&gt;method();</p>
+<h1 id="function-like-classes"><a href="#function-like-classes" class="headerlink" title="function-like classes"></a>function-like classes</h1><p>主要是对于()的重载。因为函数主要通过()对函数调用。</p>
+<p><img src="https://i.imgur.com/v0HJHtA.png"></p>
+<p>C++里面有个类叫pair，第一个元素和第二个元素可以是任意类。现在我们要设计function-like classes，来取它的第一个和第二个元素值。</p>
+<p><strong>类里面没有成员函数吗？为什么要用一个类来模拟呢？</strong></p>
+<p>对于select1st这个类来说，接收的是Pair类型的class，对（）重载返回第一个元素。灰色的地方还有继承关系，这里没有写出来。</p>
+<p>调用形式：<code>select1st&lt;pair&gt;()();</code></p>
+<p>第一个小括号创建临时对象，第二个调用operator()重载。</p>
+<h1 id="namespace"><a href="#namespace" class="headerlink" title="namespace"></a>namespace</h1><p>可以利用不同的namespace进行测试。</p>
+<h1 id="template"><a href="#template" class="headerlink" title="template"></a>template</h1><h2 id="class-template"><a href="#class-template" class="headerlink" title="class template"></a>class template</h2><pre><code>template&lt;typename T&gt;
+</code></pre>
+<p>对数据类型进行操作，每创造不同类型的对象，就会创造出一份代码。所以也有人说模板会引起代码的膨胀。</p>
+<h2 id="function-template"><a href="#function-template" class="headerlink" title="function template"></a>function template</h2><pre><code>templete&lt;class T&gt;
+inline
+const T&amp; min(const T&amp;a, const T&amp;b)
+&#123;
+    return b &lt; a ? b : a;
+&#125;
+</code></pre>
+<p>当对一个类进行比大小的时候，发现对所有的类都是一样的操作，所以把类型变成一个类。<br>但是在使用的时候不用像类模板一样指明类型，编译器会进行自动推导。<br>当调用r3&#x3D;min (r1,r2)的时候，b &lt; a, 但是编译器并不知道怎么比较大小，所以去找b有没有对&lt;的运算符重载。所以还应该在类里对&lt;进行运算符重载。</p>
+<h2 id="member-template"><a href="#member-template" class="headerlink" title="member template"></a>member template</h2><pre><code>template &lt;class T1, class T2&gt;
+struct pair&#123;
+T1 first;
+T2 second;
+pair(): first(T1()),second(T2())&#123;&#125;
+pair(const T1&amp; a, const T2&amp; b):first(a),second(b) &#123;&#125;
+template &lt;class U1,class U2&gt;
+pair(const pair&lt;U1, U2&gt;&amp;p):
+    first(p.first),second(p.second)&#123;&#125;
+&#125;;
+
+//////////////////////////////////////
+pair&lt;Derived1,Derived2&gt; p;
+pair&lt;Base1,Base2&gt; p2(p);
+</code></pre>
+<p>成员模板允许上述对p2初始化的动作。假设有四个类，父类分别是鱼类和鸟类，各自的派生类是鲫鱼和麻雀。那么我们可以把鲫鱼和麻雀组成的pair放入一个由鱼类和鸟类构成的pair中。因为此时赋值操作first(p.first)能够成功，因为鲫鱼是一种鱼类，反之不可。</p>
+<p>标准库应用：<br>对于普通指针有如下用法：</p>
+<pre><code>Base1* p=new Derived1;//up-cast
+</code></pre>
+<p>对于上面出现过的智能指针也应该有这个功能</p>
+<pre><code>template&lt;typename _Tp&gt;
+class shared_ptr:public__shared_ptr&lt;_Tp&gt;
+&#123;
+    template&lt;typename _Tp1&gt;
+    explicit shared_ptr(_Tp1* __p)
+        :__shared_ptr&lt;_Tp&gt;(__p)&#123;&#125;
+&#125;
+//////////////////////////////////
+shared_ptr&lt;Base1&gt; sptr(new Derived1);
+</code></pre>
+<h1 id="specialization-模板特化"><a href="#specialization-模板特化" class="headerlink" title="specialization 模板特化"></a>specialization 模板特化</h1><p>针对模板的特殊类型进行的设计。比如原来template能够传很多类型，但是你现在针对一个bool类进行设计。被绑定之后不用写尖括号里面的东西。</p>
+<p><img src="https://i.imgur.com/rSIgdeE.png"></p>
+<h2 id="偏特化-个数的偏"><a href="#偏特化-个数的偏" class="headerlink" title="偏特化-个数的偏"></a>偏特化-个数的偏</h2><p>原来有两个参数，现在绑定一个。</p>
+<p><img src="https://i.imgur.com/B31Zngk.png"></p>
+<h2 id="偏特化-范围"><a href="#偏特化-范围" class="headerlink" title="偏特化-范围"></a>偏特化-范围</h2><p>原来的类型是T，现在只是指定指针。</p>
+<pre><code>class &lt;typename T&gt;
+class C &#123;&#125;;
+
+class &lt;typename T&gt;
+class C&lt;T*&gt;&#123;&#125;;
+</code></pre>
+<h1 id="模板模板参数"><a href="#模板模板参数" class="headerlink" title="模板模板参数"></a>模板模板参数</h1><p>模板的第二个参数也是个模板，Container以第一个模板参数作为参数。用户在使用的时候<code>XCLs&lt;string, list&gt; mylist;</code>指定任意类型和任意容器。但是容器的模板还有第二第三参数，所以直接写<code>&lt;string,list&gt;</code>编译器无法通过，需要用<code>using...</code>这句话。</p>
+<p><img src="https://i.imgur.com/RfJrDAb.png"></p>
+<p>对于容器之外的参数，比如SmartPtr接收一个参数的就可以直接通过。</p>
+<p><img src="https://i.imgur.com/zZ2JcSN.png"></p>
+<p>对于下面这种情况，第二个参数是被制定好的，这不是模板模板参数。<br><img src="https://i.imgur.com/XWdAgAP.png"></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C/" rel="tag"># C++</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2018/04/20/C++%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02/" rel="prev" title="C++学习笔记2-类之间的关系">
+                  <i class="fa fa-chevron-left"></i> C++学习笔记2-类之间的关系
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/04/30/C++%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B04/" rel="next" title="C++学习笔记4--C++11">
+                  C++学习笔记4--C++11 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">StoneHan</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

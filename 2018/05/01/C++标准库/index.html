@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.11.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="C++ Standard Library(C++标准库) Standard Template Library（STL，标准模板库）C++标准库&gt;STL，除了对六大类型的封装之外，C++标准库还封装了其他一些东西。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++标准库">
+<meta property="og:url" content="http://example.com/2018/05/01/C++%E6%A0%87%E5%87%86%E5%BA%93/index.html">
+<meta property="og:site_name" content="StoneHan&#39;s blog">
+<meta property="og:description" content="C++ Standard Library(C++标准库) Standard Template Library（STL，标准模板库）C++标准库&gt;STL，除了对六大类型的封装之外，C++标准库还封装了其他一些东西。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.imgur.com/u5C5oY9.png">
+<meta property="og:image" content="https://i.imgur.com/jA33Pxf.png">
+<meta property="og:image" content="https://i.imgur.com/psYUDyM.png">
+<meta property="og:image" content="https://i.imgur.com/fxCLjet.png">
+<meta property="og:image" content="https://i.imgur.com/R9BqVxp.png">
+<meta property="og:image" content="https://i.imgur.com/c4bRoDz.png">
+<meta property="og:image" content="https://i.imgur.com/YTPUHq3.png">
+<meta property="og:image" content="https://i.imgur.com/t42LhlC.png">
+<meta property="og:image" content="https://i.imgur.com/MKOTuKc.png">
+<meta property="og:image" content="https://i.imgur.com/BTcnGQg.png">
+<meta property="og:image" content="https://i.imgur.com/N21gcjY.png">
+<meta property="og:image" content="https://i.imgur.com/symkawk.png">
+<meta property="og:image" content="https://i.imgur.com/kLhkcRn.png">
+<meta property="og:image" content="https://i.imgur.com/yomZTeh.png">
+<meta property="og:image" content="https://i.imgur.com/UvMF98x.png">
+<meta property="og:image" content="https://i.imgur.com/BLlPEyg.png">
+<meta property="og:image" content="https://i.imgur.com/Jk6QPjd.png">
+<meta property="og:image" content="https://i.imgur.com/QIsE17Z.png">
+<meta property="og:image" content="https://i.imgur.com/XC1Nq16.png">
+<meta property="og:image" content="https://i.imgur.com/DpBxGBS.png">
+<meta property="og:image" content="https://i.imgur.com/uIwhVDf.png">
+<meta property="og:image" content="https://i.imgur.com/Cw96Ahr.png">
+<meta property="og:image" content="https://i.imgur.com/mlcMk9j.png">
+<meta property="article:published_time" content="2018-05-01T10:25:09.000Z">
+<meta property="article:modified_time" content="2018-08-28T13:05:30.938Z">
+<meta property="article:author" content="StoneHan">
+<meta property="article:tag" content="C++">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/u5C5oY9.png">
+
+
+<link rel="canonical" href="http://example.com/2018/05/01/C++%E6%A0%87%E5%87%86%E5%BA%93/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2018/05/01/C++%E6%A0%87%E5%87%86%E5%BA%93/","path":"2018/05/01/C++标准库/","title":"C++标准库"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>C++标准库 | StoneHan's blog</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">StoneHan's blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">韩苏东的个人博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#STL%E5%85%AD%E5%A4%A7%E9%83%A8%E4%BB%B6"><span class="nav-number">1.</span> <span class="nav-text">STL六大部件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GP-vs-OOP"><span class="nav-number">2.</span> <span class="nav-text">GP vs. OOP</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%B9%E5%99%A8"><span class="nav-number">3.</span> <span class="nav-text">容器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Sequence-Containers"><span class="nav-number">3.1.</span> <span class="nav-text">Sequence Containers</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#array"><span class="nav-number">3.1.1.</span> <span class="nav-text">array</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vector"><span class="nav-number">3.1.2.</span> <span class="nav-text">vector</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#list"><span class="nav-number">3.1.3.</span> <span class="nav-text">list</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#list-%E7%9A%84-iterator"><span class="nav-number">3.1.3.1.</span> <span class="nav-text">list 的 iterator</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#G4-9"><span class="nav-number">3.1.3.2.</span> <span class="nav-text">G4.9</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#forward-list"><span class="nav-number">3.1.3.3.</span> <span class="nav-text">forward list</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#deque"><span class="nav-number">3.1.4.</span> <span class="nav-text">deque</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#stack-x2F-queue"><span class="nav-number">3.1.5.</span> <span class="nav-text">stack&#x2F;queue</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Assosiative-Containers"><span class="nav-number">3.2.</span> <span class="nav-text">Assosiative Containers</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%A2%E9%BB%91%E6%A0%91"><span class="nav-number">3.2.1.</span> <span class="nav-text">红黑树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#set-x2F-multiset"><span class="nav-number">3.2.2.</span> <span class="nav-text">set&#x2F;multiset</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#map-x2F-multimap"><span class="nav-number">3.2.3.</span> <span class="nav-text">map&#x2F;multimap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hashtable"><span class="nav-number">3.2.4.</span> <span class="nav-text">hashtable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#unordered-multiset-x2F-multimap"><span class="nav-number">3.2.5.</span> <span class="nav-text">unordered multiset&#x2F;multimap</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E9%85%8D%E5%99%A8-allocators"><span class="nav-number">4.</span> <span class="nav-text">分配器 allocators</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#operator-new-%E5%92%8C-malloc"><span class="nav-number">4.1.</span> <span class="nav-text">operator new() 和 malloc()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VC6-%E7%9A%84-allocator"><span class="nav-number">4.2.</span> <span class="nav-text">VC6 的 allocator</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BC5-%E7%9A%84-allocator"><span class="nav-number">4.3.</span> <span class="nav-text">BC5 的 allocator</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GCC2-9-%E7%9A%84-allocator"><span class="nav-number">4.4.</span> <span class="nav-text">GCC2.9 的 allocator</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#G4-9-%E7%9A%84-allocator"><span class="nav-number">4.5.</span> <span class="nav-text">G4.9 的 allocator</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%AD%E4%BB%A3%E5%99%A8"><span class="nav-number">5.</span> <span class="nav-text">迭代器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#traits%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">5.1.</span> <span class="nav-text">traits的作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#iterator%E9%9C%80%E8%A6%81%E9%81%B5%E5%BE%AA%E7%9A%84%E5%8E%9F%E5%88%99%EF%BC%88%E7%89%B9%E6%80%A7%EF%BC%89"><span class="nav-number">5.2.</span> <span class="nav-text">iterator需要遵循的原则（特性）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8D%E5%90%8C%E5%AE%B9%E5%99%A8%E7%9A%84%E8%BF%AD%E4%BB%A3%E5%99%A8%E7%B1%BB%E5%9E%8B"><span class="nav-number">5.3.</span> <span class="nav-text">不同容器的迭代器类型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AE%97%E6%B3%95"><span class="nav-number">6.</span> <span class="nav-text">算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%AD%E4%BB%A3%E5%99%A8%E5%AF%B9%E7%AE%97%E6%B3%95%E7%9A%84%E5%BD%B1%E5%93%8D"><span class="nav-number">6.1.</span> <span class="nav-text">迭代器对算法的影响</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="StoneHan"
+      src="/images/3.jpg">
+  <p class="site-author-name" itemprop="name">StoneHan</p>
+  <div class="site-description" itemprop="description">想把你写成一首歌，想养一只猫</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">41</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Stone-Han" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Stone-Han" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:592024747@qq.com" title="E-Mail → mailto:592024747@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://weibo.com/2133952903/profile?rightmod=1&wvr=6&mod=personinfo" title="Weibo → http:&#x2F;&#x2F;weibo.com&#x2F;2133952903&#x2F;profile?rightmod&#x3D;1&amp;wvr&#x3D;6&amp;mod&#x3D;personinfo" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/05/01/C++%E6%A0%87%E5%87%86%E5%BA%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/3.jpg">
+      <meta itemprop="name" content="StoneHan">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="StoneHan's blog">
+      <meta itemprop="description" content="想把你写成一首歌，想养一只猫">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="C++标准库 | StoneHan's blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          C++标准库
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-05-01 18:25:09" itemprop="dateCreated datePublished" datetime="2018-05-01T18:25:09+08:00">2018-05-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2018-08-28 21:05:30" itemprop="dateModified" datetime="2018-08-28T21:05:30+08:00">2018-08-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <ul>
+<li>C++ Standard Library(C++标准库)</li>
+<li>Standard Template Library（STL，标准模板库）<br>C++标准库&gt;STL，除了对六大类型的封装之外，C++标准库还封装了其他一些东西。</li>
+</ul>
+<span id="more"></span>
+
+<h1 id="STL六大部件"><a href="#STL六大部件" class="headerlink" title="STL六大部件"></a>STL六大部件</h1><ul>
+<li>容器 Containers</li>
+<li>分配器 Allocators</li>
+<li>算法 Algorithms</li>
+<li>迭代器 Iterators</li>
+<li>适配器 Adapters</li>
+<li>仿函数 Functors</li>
+</ul>
+<p>程序&#x3D;算法+数据结构。数据结构也就是这里的容器，因为容易不需要管内存分配的事情，所以分配器负责这部分。另一部分实现了算法。但是算法不是在容器的类里面的，所以要对容器进行操作需要使用迭代器。另外对类进行加减的行为称为仿函数。适配器可以对容器、迭代器、仿函数进行转换。</p>
+<p>问题：<br><strong>一个程序里面可以用两个using namespace吗？</strong></p>
+<h1 id="GP-vs-OOP"><a href="#GP-vs-OOP" class="headerlink" title="GP vs. OOP"></a>GP vs. OOP</h1><p>C++标准库的主要思想并不是OOP（继承关系不是很复杂），而是GP。 OOP是将data和method联系在一起，而GP却是将data和method分开来。它用全局的函数，通过迭代器进行沟通。这样的好处是，containers和algorithm可以分别开发。list容器中有sort函数，而vector和deque没有sort函数，需要使用全局的排序函数。全局的排序函数有对指针直接进行加减乘除的操作，而list是链表，不能这样对指针进行加减乘除。</p>
+<p><strong>操作符重载</strong> &amp; <strong>模板</strong>是标准库的基础。</p>
+<p>模板分为：类模板，函数模板，成员模板。</p>
+<p>模板还分为泛化，全特化和偏特化。</p>
+<h1 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h1><p>分类：</p>
+<ul>
+<li>Sequence Containers</li>
+<li>Assosiative Containers(主要用于查找，主要用红黑树实现set&#x2F;map)</li>
+<li>Unordered Container(实际还是一种Assoiative Containers, C++11, 用hashtable实现，开链法)</li>
+</ul>
+<p><img src="https://i.imgur.com/u5C5oY9.png"></p>
+<p>这个图展示了各种容器之间的基层与衍生层的关系，这里的衍生并非继承，而是复合。</p>
+<p>蓝色的框里展示的是一个对象的大小，不包含数据。</p>
+<h2 id="Sequence-Containers"><a href="#Sequence-Containers" class="headerlink" title="Sequence Containers"></a>Sequence Containers</h2><p><img src="https://i.imgur.com/jA33Pxf.png"></p>
+<h3 id="array"><a href="#array" class="headerlink" title="array"></a>array</h3><p>array的实现比vector更简单，它的具体实现如下图：</p>
+<p><img src="https://i.imgur.com/psYUDyM.png"></p>
+<p>array的data就是 _M_instance[_Nm ? _Nm : 1],类型是value_type，就是传入的第一个模板参数。</p>
+<h3 id="vector"><a href="#vector" class="headerlink" title="vector"></a>vector</h3><p>vector是前开后闭的。</p>
+<p>vector只有一个push_back()，因为如果从前面插入的话，后面所有的元素都要挪动位置。</p>
+<p>增长的速度是2倍2倍地增长。先从另外一个地方找一个两倍大的空间，然后把原来的都搬过来，所以成长的速度比较慢。可以使用size()和capacity()来看当前的实际大小和分配的空间大小。</p>
+<p>vector 的具体实现有三个指针：start, finish, end_of_storage<br>下面这个图展示了vector的成员变量和一些函数。</p>
+<p><img src="https://i.imgur.com/fxCLjet.png"></p>
+<p>因为vector是连续存储，所以vector的迭代器实际上是指针。</p>
+<h3 id="list"><a href="#list" class="headerlink" title="list"></a>list</h3><p><img src="https://i.imgur.com/R9BqVxp.png"></p>
+<p>首先看List类，包括一个link_type的node，link_type是个<code>list_node*</code>，也就是个指针，所以list包括了一个指针，所以大小为4(G2.9). 然后看list_node包括两个指针，prev和next和数据data，这两个指针指向<code>void*</code>，这意味着这两个指针在使用的时候需要类型转换。后面的版本会改进。</p>
+<p>所有的线性容器，除了array之外都是前闭后开的，后开的意思就是最后一个元素不是数据元素。为了实现这个，会加一个空白结点（图中灰色结点）。</p>
+<h4 id="list-的-iterator"><a href="#list-的-iterator" class="headerlink" title="list 的 iterator"></a>list 的 iterator</h4><p>为了实现iterator像指针一样，必须要对操作符进行重载。主要是对++,–,*,-&gt;的重载。这里拿++举例。</p>
+<p><img src="https://i.imgur.com/c4bRoDz.png"></p>
+<p>因为++i和i++都是单目运算操作符，因此编译器并没有办法区分，因此设计了两个不同的函数，一个是前++<code>operator++()</code>，一个是后++<code>operator++(int)</code>。</p>
+<p>先来看图下面的前++，这个函数取当前节点的next指针，然后返回这个指针。</p>
+<p>而后++，<code>self tmp = *this</code>这句并不会唤起<code>operator*</code>这个函数，而是会唤起拷贝构造函数，*this被解释为拷贝构造函数的参数。如图中深蓝箭头1所指的函数。 然后再进行++，返回tmp。</p>
+<p>另外注意这两个函数的返回值。参考int的++操作，由于C++不允许对整数进行两次后++，即i++++是错误的，所以后++返回的不是一个引用，而前++返回引用，可以多次连续++。</p>
+<p>另外，对于*和-&gt;的重载如下：</p>
+<pre><code>T&amp; operator*() const
+&#123;return (*node).data;&#125;
+
+T* operator-&gt;() const
+&#123;return &amp;(operator*());&#125;
+</code></pre>
+<p>对于<code>*</code>，就是解引用，<code>*it</code>就是指一个object，所以返回的是data, 而对于-&gt;实际上是指针调用，所以返回的是data的指针。</p>
+<h4 id="G4-9"><a href="#G4-9" class="headerlink" title="G4.9"></a>G4.9</h4><p>改进：</p>
+<ul>
+<li>模板参数只有一个</li>
+<li>node在结构有parent</li>
+<li>node的成员type比较精确（指针指向自己）</li>
+</ul>
+<p>但是G4.9的继承关系比较复杂。</p>
+<p>G4.9版本的结构基本上是一个容器继承一个基类，这个容器有一个指针指向impl实现，这个实现public继承allocator。变得复杂是为了一个OO的目标，一个class里面有一个指针表现实现手法，这种模型叫做handle-body。但是侯捷认为不应该是public继承，因为这表示“是一个”，但是impl并不是allocator。</p>
+<p>在2.9版是一个指针指向空白结点，到4.9是这个结构直接包括了两个指针，所以size变成了8.</p>
+<p><strong>max_size()是如何计算的？</strong></p>
+<p><strong>list自身也有sort函数，全局也有sort函数，用容器自身的排序函数会比较快。</strong></p>
+<h4 id="forward-list"><a href="#forward-list" class="headerlink" title="forward list"></a>forward list</h4><p>只提供push_front()<strong>为什么？这个不也是个list吗？不是动态增长的吗？</strong></p>
+<p>slist:(不属于标准库，但是用法和forward list相同)</p>
+<h3 id="deque"><a href="#deque" class="headerlink" title="deque"></a>deque</h3><p><img src="https://i.imgur.com/YTPUHq3.png"></p>
+<p>deque可以向前或者向后扩充。</p>
+<p>deque每次扩充都扩充一个buffer，如图所示，向后扩充如果不够，就分配一个buffer，同理向前扩充也一样。deque中间控制的地方是个vector，这个vector聪明的地方在于，如果现在buffer满了，那么在扩充之后它会保持原来的元素在buffer中间，这样便于向两边扩展。</p>
+<p>deque的iterator包括四个指针，当指针指向buffer的最后一个元素，再加加时，指针应该指向下一个buffer的第一个元素，所以有一个node指针，指向中控中心。另外还有两个iterator，也就是start和finish，分别是这个容器的头和尾。</p>
+<p><img src="https://i.imgur.com/t42LhlC.png"></p>
+<p>deque的成员有一个指针map_pointer，一个size，两个迭代器start,finish，其中每个包括四个指针，所以deque的大小为4<em>4</em>2+4+4&#x3D;40.</p>
+<p>deque的模板默认参数有一个缓冲区大小默认为0，有一个计算缓冲区大小的函数__deque_buf_size，如果不为0，则设定为n，如果为0，设定为默认大小。</p>
+<p>deque的insert函数需要判断插入的元素距离头比较近还是距离尾比较近，因为它需要移动其他元素并且可以双向移动。</p>
+<p>deque如何模拟连续空间？都是deque iterator的功劳。<br>这是一些基本操作：</p>
+<p><img src="https://i.imgur.com/MKOTuKc.png"></p>
+<p>其中<code>-</code>的重载：</p>
+<p><img src="https://i.imgur.com/BTcnGQg.png"></p>
+<p>首先计算这里面有几个buffer，乘以buffer_size，然后再加上头和尾的元素。</p>
+<ul>
+<li>对++和–的重载：</li>
+</ul>
+<p><img src="https://i.imgur.com/N21gcjY.png"></p>
+<p>对++的重载有两个，一个是前++，一个是后++。首先检查加了之后有没有到达缓冲区尾端，如果到达就跳到下一个节点的起点。其中<code>set_node</code>函数就是跳到下一个缓冲区，包括重新设置first和last指针。</p>
+<p>对–的重载也有两个。–首先检查当前是不是在缓冲区的起点，如果是的话就跳到前一个缓冲区的末端。</p>
+<p><img src="https://i.imgur.com/symkawk.png"></p>
+<p>另外deque还有+&#x3D;和+的操作。其中+就是调用+&#x3D;。<br>+&#x3D;的逻辑是这样的：首先计算出来要跳到的位置offset，如果offset在当前buffer的区域，直接跳。否则计算需要跳几个缓冲区，切换到正确的缓冲区再跳到元素的位置。</p>
+<p>而-&#x3D;直接调用+&#x3D;(-n)就可以。</p>
+<h3 id="stack-x2F-queue"><a href="#stack-x2F-queue" class="headerlink" title="stack&#x2F;queue"></a>stack&#x2F;queue</h3><p><img src="https://i.imgur.com/kLhkcRn.png"></p>
+<p>stack:push_back,pop_back</p>
+<p>queue:push_back,pop_front</p>
+<p>实际上deque已经包含了stack和queue，所以也叫做adapter.</p>
+<p><strong>stack和queue都不允许遍历，也不提供iterator</strong><br>因为stack和queue是先进先出&#x2F;先进后出，所以不提供iterator，这样就会破坏stack&#x2F;queue的特性。</p>
+<p><strong>stack和queue可以选择list或者deque作为底层结构，不可以选择map&#x2F;set。</strong></p>
+<p>stack可以选择vector作为底层结构，但是queue不可以，因为queue调用pop的时候需要调用vector的pop_front，但是vector没有这个函数。</p>
+<h2 id="Assosiative-Containers"><a href="#Assosiative-Containers" class="headerlink" title="Assosiative Containers"></a>Assosiative Containers</h2><p><img src="https://i.imgur.com/yomZTeh.png"><br>关联式容器的底层实现是红黑树和hashtable。</p>
+<h3 id="红黑树"><a href="#红黑树" class="headerlink" title="红黑树"></a>红黑树</h3><p><img src="https://i.imgur.com/UvMF98x.png"></p>
+<p>红黑树是平衡二叉搜索树中经常被使用的一种。平衡二叉搜索树的特征：排列规则有利于search和insert，并且保持适度平衡。</p>
+<p>红黑树按照正常规则遍历(++)便能够获得排序状态。红黑树从最左边的结点开始遍历，遍历到最右边的结点。另外红黑树有个头结点，是个空结点，便于操作。</p>
+<p>虽然红黑树提供iterator，但是我们不应该用iterator来改变元素的值，这样会破坏红黑树的结构。</p>
+<p>红黑树有两种插入：insert_unique和insert_equal，前一种不允许key重复，后一种允许。</p>
+<p><img src="https://i.imgur.com/BLlPEyg.png"></p>
+<p>红黑树的模板参数包括五个：</p>
+<ul>
+<li>key 的类型</li>
+<li>value (key+data)的类型</li>
+<li>keyOfValue key应该如何得到</li>
+<li>Compare 元素如何比大小</li>
+<li>alloc</li>
+</ul>
+<p>参数：</p>
+<ul>
+<li><p>node_account, 结点数量,4</p>
+</li>
+<li><p>header，指向红黑树的结点,4</p>
+</li>
+<li><p>Compare，可能是仿函数，大小应该是0，创造出来的对象大小是1</p>
+<p>  rb_tree&lt;int,int,identity<int>,less<int>,alloc&gt; myTree;</p>
+</li>
+</ul>
+<p>这是一个堆红黑树的使用。<br>其中identity是gnu C的一个仿函数，返回元素本身，less是标准库的一个比大小的函数。</p>
+<pre><code>    template &lt;class T&gt;
+    struct identity:public unary_function&lt;T,T&gt;
+    &#123;
+        const T&amp; operator()(const T&amp; x) const &#123; return x; &#125;
+    &#125;
+    struct less:public binary_function&lt;T,T,bool&gt;
+    &#123;
+        bool operator()(const T&amp; x,const T&amp;y) const
+        return &#123; x&lt;y; &#125;
+    &#125;
+</code></pre>
+<p><strong>问题：红黑树和AVT有什么区别？</strong></p>
+<h3 id="set-x2F-multiset"><a href="#set-x2F-multiset" class="headerlink" title="set&#x2F;multiset"></a>set&#x2F;multiset</h3><p>set&#x2F;mulitset以红黑树为底层结构，key和value合二为一。</p>
+<p>set调用insert_unique()，multiset调用insert_equal()。</p>
+<p><img src="https://i.imgur.com/Jk6QPjd.png"></p>
+<p>set的底层实现实际上就是一颗红黑树，看上图可以看到从set的声明到set的模板参数到树的参数的转换。</p>
+<p>但是我们无法使用set&#x2F;multiset的iterator改变元素值，这是怎么实现的呢？看源码，set中定义了一个iterator,是const_iterator类型，这就保证了不允许改元素的值。</p>
+<p>查找速度非常快。</p>
+<h3 id="map-x2F-multimap"><a href="#map-x2F-multimap" class="headerlink" title="map&#x2F;multimap"></a>map&#x2F;multimap</h3><p>和set不同的地方是，map把key和data包成一个包，keyOfValue是select1st。之前的set是把iterator变成const，这里是把key变成const。</p>
+<pre><code>insert(pair&lt;long,string&gt;(i,buf));
+</code></pre>
+<p>map在插入的时候可以使用<code>c[i]=string(buf)</code>，但是multimap不可以。<br>[]的作用是返回下标对应的元素值，如果不存在，则用默认值创建然后返回。源代码可以看对[]的重载，首先利用<code>lower bound</code>进行查找，如果有这个元素，就返回下标，否则就返回适合这个元素插入的位置，然后执行<code>insert()</code>函数。</p>
+<h3 id="hashtable"><a href="#hashtable" class="headerlink" title="hashtable"></a>hashtable</h3><p>bucket_count()可能比元素多，因为有的篮子可能是空的。当元素&gt;&#x3D;篮子数，篮子就会扩充，把元素重新打散。打散的方式就是把篮子*2附近的质数，所有的元素都要重新计算一遍。</p>
+<p>hashtable的模板参数：</p>
+<p><img src="https://i.imgur.com/QIsE17Z.png"></p>
+<ul>
+<li>hash 1</li>
+<li>equals 1</li>
+<li>get_key 1</li>
+<li>bukets 12</li>
+<li>num_elements 4</li>
+</ul>
+<p>hashtable的iterator必须能够从当前节点回到buckets，所以有一个指针ht指向hashtable本身。</p>
+<p>hashtable的应用：</p>
+<pre><code>hashtable&lt;const char*,
+          const char*,
+          hash&lt;const char*&gt;,
+          identity&lt;const char*&gt;,
+          eqstr,
+          alloc&gt;
+ht(50,hash&lt;const char*&gt;(),eqstr());
+ht.insert_unique(&quot;kiwi&quot;);
+ht.insert_unique(&quot;apple&quot;);
+
+struct eqstr&#123;bool operator()(const char*s1, s2)const
+&#123; return strcmp(s1,s2)==0; &#125;&#125;
+</code></pre>
+<p>为什么这里不用strcmp呢？因为strcmp返回值是-1,0,1，不是返回bool，所以必须加一层外套。</p>
+<p>在gnuC中，有一个结构体struct hash{}; 还有hash<char>等等，这是一种泛化和特化。如果是数值，返回本身的值。如果是char<em>，利用__stl_hash_string(const char</em>s)这个函数将字符串映射成一个数值。这里是乘以5再加上下一个字符迭代。这里的hash函数可以定义实现。但是标准库没有提供hash<a href="std::string">std::string</a>的函数。</p>
+<p>决定每个元素落在哪个篮子里最终都是调用<code>bkt_num_key</code>这个函数，返回<code>hash(key)%n</code>，其中这里的hash不是上面的struct hash，而是hasher的hash。</p>
+<p><strong>hasher这里的hash是做什么用的？</strong></p>
+<h3 id="unordered-multiset-x2F-multimap"><a href="#unordered-multiset-x2F-multimap" class="headerlink" title="unordered multiset&#x2F;multimap"></a>unordered multiset&#x2F;multimap</h3><p>实际上unordered_(multi)list&#x2F;set就是之前的hash_(multi)list&#x2F;set，使用方法和slist一样，#include&lt;ext&#x2F;slist&gt;。</p>
+<h1 id="分配器-allocators"><a href="#分配器-allocators" class="headerlink" title="分配器 allocators"></a>分配器 allocators</h1><p>尽量使用容器而不要使用分配器，因为分配器不像malloc和free，它还内存的时候还要指定特定的字节。</p>
+<h2 id="operator-new-和-malloc"><a href="#operator-new-和-malloc" class="headerlink" title="operator new() 和 malloc()"></a>operator new() 和 malloc()</h2><p>所有的获取空间追究到底层都是malloc()。<br>malloc会生成一个(五彩内存分配图)。</p>
+<h2 id="VC6-的-allocator"><a href="#VC6-的-allocator" class="headerlink" title="VC6 的 allocator"></a>VC6 的 allocator</h2><p>allocator-&gt;operator new-&gt;malloc。<br>VC6的allocator只是以operator new 和operator delete 完成allocate()和deallocate()，没有任何特殊设计。</p>
+<p>在delete的时候，需要指定要回收多少字节。</p>
+<h2 id="BC5-的-allocator"><a href="#BC5-的-allocator" class="headerlink" title="BC5 的 allocator"></a>BC5 的 allocator</h2><p>BC5的allocator只是以operator new 和operator delete 完成allocate()和deallocate()，没有任何特殊设计。</p>
+<p>比VC6贴心的是第二个参数VC6需要给一个指针，而BC5第二个参数给了默认值。</p>
+<h2 id="GCC2-9-的-allocator"><a href="#GCC2-9-的-allocator" class="headerlink" title="GCC2.9 的 allocator"></a>GCC2.9 的 allocator</h2><p>GCC2.9的allocator只是以operator new 和operator delete 完成allocate()和deallocate()，没有任何特殊设计。</p>
+<p>但是这个allocator并不是容器所使用的，源代码中使用的是alloc。</p>
+<p>当分配的内存比较小的时候，用malloc比较浪费空间，因为它还需要申请空间记录其他信息，其中cookie记录的是这块空间的大小，用于指针回收的时候知道要回收多少。</p>
+<p><img src="https://i.imgur.com/XC1Nq16.png"></p>
+<p>alloc的结构如图，它一共分为16块，0号存储8个字节的，1号存储16个字节的，以此类推。当下面没有分配内存时才调用一次malloc。</p>
+<p>具体需要看内存管理。</p>
+<h2 id="G4-9-的-allocator"><a href="#G4-9-的-allocator" class="headerlink" title="G4.9 的 allocator"></a>G4.9 的 allocator</h2><p>G4.9 -&gt; std::allocator -&gt; new_allocator -&gt; allocate -&gt; operator new</p>
+<p>在G4.9中没有用上面那个特殊设计的alloc，而是沿用了之前的分配器。但是alloc还在。</p>
+<p>G4.9 有很多extension allcoators，其中__pool_alloc就是G2.9的alloc。</p>
+<pre><code>vector&lt;string,__gnu_cxx::__pool_alloc&lt;string&gt;&gt; vec;
+</code></pre>
+<p>真是源码面前无秘密啊。</p>
+<h1 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h1><h2 id="traits的作用"><a href="#traits的作用" class="headerlink" title="traits的作用"></a>traits的作用</h2><p>traits能够萃取出一个类型的特征，有iterator traits, type traits, pointer traits等等。</p>
+<h2 id="iterator需要遵循的原则（特性）"><a href="#iterator需要遵循的原则（特性）" class="headerlink" title="iterator需要遵循的原则（特性）"></a>iterator需要遵循的原则（特性）</h2><p>迭代器是算法和容器之间的桥梁。算法在对容器操作的时候需要知道容器的一些性质，比如rotate这个函数，调用了iterator_category()（判断这个容器是能++&#x2F;–&#x2F;+i），difference type()（两个iterator之间的距离用什么类型表现，比如unsigned integer范围2^32）, value type()（iterator本身指向的是什么数据类型）。</p>
+<p>associated type:</p>
+<ul>
+<li>category</li>
+<li>difference type</li>
+<li>value type</li>
+<li>reference type</li>
+<li>pointer type</li>
+</ul>
+<p>当算法提问的时候，可以直接提问：<br><code>I::iterator_category</code></p>
+<p>但是当iterator不是一个class的时候不可以这么调用，比如指针，是一个iterator（指针是退化的iterator，iterator是泛化的pointer），但是不是class，所以这时候需要用traits来萃取pointer的特征，来回答算法的提问。traits是一个中间层，他能够区分它所获得的iterator是class还是pointer。用偏特化可以实现。</p>
+<p><img src="https://i.imgur.com/DpBxGBS.png"></p>
+<p>当算法提问的时候，问iterator_traits。<br>如果I是class，那么进入1，如果是pointer to T就进入2，如果是pointer to const T，就进入3.</p>
+<p>但是当I是pointer to const T的时候，value_type是T而不是const T。因为value_type的主要目的是声明变量，而一个无法被复制的变量没有用，所以iterator的value_type不应该加const。</p>
+<h2 id="不同容器的迭代器类型"><a href="#不同容器的迭代器类型" class="headerlink" title="不同容器的迭代器类型"></a>不同容器的迭代器类型</h2><p>迭代器共有5中iterator category:</p>
+<ul>
+<li>input_iterator_tag</li>
+<li>output_iterator_tag</li>
+<li>forward_iterator_tag: public input_iterator_tag</li>
+<li>bidirectional_iterator_tag: public forward_iterator_tag</li>
+<li>random_access_iterator_tag: public bidirectional_iterator tag</li>
+</ul>
+<p>对于sequence containers来说：</p>
+<p>array, vector, deque是random_access_iterator_tag</p>
+<p>list是bidirectional_iterator_tag</p>
+<p>forward_list是forward_iterator_tag</p>
+<p>对于Associative containers：</p>
+<p>(multi)set&#x2F;map 是bidirectional_iterator</p>
+<p>unordered_(multi)set&#x2F;map 要看vector下面是用的单向链表还是双向链表来判断。</p>
+<p>下面是用程序测试各种容器的iterator类型的代码：</p>
+<p><img src="https://i.imgur.com/uIwhVDf.png"></p>
+<p>另外还可以使用<code>cout&lt;&lt;&quot;typeid(itr).name()=&quot;&lt;&lt;typeid(itr).name()&lt;&lt;endl;</code>来打印出各种容器的iterator_category的typeid。打印出的typeid在前面输出的前后会加一些东西，这是由编译器的具体实现决定的。</p>
+<p>调用函数<code>display_category</code>，利用traits::iterator_category来询问迭代器的类型。</p>
+<p>为什么这个类型不用12345的数字来表示，而用一个结构体呢？<br>看上面的程序就可以知道，用结构体能写的更规范。另外一个原因是，参考算法那部分的distance例子，这里只设计了两个函数，分别针对random_access_iterator和input_iterator，当有比如forward_iterator的时候，由于它继承了input_iterator，所以它是一种input_iterator，所以会调用input_iterator对应的函数。</p>
+<h1 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h1><p>STL中的算法是什么？</p>
+<p>从语言层面上来讲，STL除了算法是function template之外，其他都是class template。<br><code>template&lt;typename Iterator&gt; Algorithm(Iterator it1, Iterator it2,(typename Cmp))&#123;...&#125;</code></p>
+<p>算法看不到容器，所以它需要的一切信息都必须从Iterator中获得，Iterator必须能够回答算法的所有提问，才能搭配算法的所有操作。</p>
+<h2 id="迭代器对算法的影响"><a href="#迭代器对算法的影响" class="headerlink" title="迭代器对算法的影响"></a>迭代器对算法的影响</h2><p>算法的效率和迭代器的类型有很大的关系。</p>
+<p>举个例子来说，加入有一个函数<code>distance()</code>用于计算两个迭代器之间的距离。由于random_access_iterator和其他iterator不一样，它只需要用两个指针相减就可以了，而其他迭代器需要遍历两个迭代器，并且用n来计数。注意这里调用的是<code>category()</code>临时对象。同时返回值是<code>difference_type</code>。对于100万条数据来说，这两种函数的效率可见一斑。</p>
+<p><img src="https://i.imgur.com/Cw96Ahr.png"></p>
+<p>同理advance函数也有相同的结构，这个函数的作用是向前进。假如是random_access，就直接+&#x3D;n，如果是双向，判断n的正负，如果是单向，就<code>while (n--) ++i;</code>.</p>
+<p>再举一个例子，copy这个函数。从下面可以看到这个函数对于不同情况的分类有多么精细。首先判断copy的对象是不是const char*&#x2F;wchar_t，如果是的话，就调用<code>memmove()</code>，这个函数是底层的拷贝函数，速度非常快。如果不是的话，再判断是不是指针 const T*，如果是的话，判断有没有重要的拷贝复制，如果没有的话，调用 <code>memmove()</code>，如果有的话，调用<code>__copy_d()</code>，对于不是指针的iterator来说，判断是不是random、_access类型，是的话调用<code>__copy_d()</code>，不是的话以iterator是否相等来决定for-loop函数。这个函数和<code>__copy_d()</code>相比较慢。另外，判断拷贝复制是不是重要主要看这个类里面有没有指针，如果没有指针，那么拷贝赋值函数可以直接用底层函数赋值，如果有指针就需要调用拷贝复制了。<br>这一部分叫做<code>type_traits</code>。</p>
+<p><img src="https://i.imgur.com/mlcMk9j.png"></p>
+<p>但是算法源码中对iterator_category没有强制，而是“暗示”。比如</p>
+<pre><code>template &lt;class RandomAccessIterator&gt;
+inline void sort(...)&#123;...&#125;
+</code></pre>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C/" rel="tag"># C++</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2018/04/30/C++%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B04/" rel="prev" title="C++学习笔记4--C++11">
+                  <i class="fa fa-chevron-left"></i> C++学习笔记4--C++11
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/05/08/%E9%87%91%E8%9E%8D%E6%80%9D%E7%BB%B47/" rel="next" title="金融思维7：资本资产定价 股票/公司估值">
+                  金融思维7：资本资产定价 股票/公司估值 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">StoneHan</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

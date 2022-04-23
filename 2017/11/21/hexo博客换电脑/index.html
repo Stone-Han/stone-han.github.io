@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.11.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="最近由于实验室换了新电脑，所以要重新配置一下新的博客环境。在网上看了很多，什么创建分支之类的，但是感觉说的都不清楚。 本文的操作基于有之前的hexo备份。 参考：知乎第二高票回答 写得很好的一个博客">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hexo博客换电脑">
+<meta property="og:url" content="http://example.com/2017/11/21/hexo%E5%8D%9A%E5%AE%A2%E6%8D%A2%E7%94%B5%E8%84%91/index.html">
+<meta property="og:site_name" content="StoneHan&#39;s blog">
+<meta property="og:description" content="最近由于实验室换了新电脑，所以要重新配置一下新的博客环境。在网上看了很多，什么创建分支之类的，但是感觉说的都不清楚。 本文的操作基于有之前的hexo备份。 参考：知乎第二高票回答 写得很好的一个博客">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2017-11-21T13:36:09.000Z">
+<meta property="article:modified_time" content="2017-11-21T14:10:52.000Z">
+<meta property="article:author" content="StoneHan">
+<meta property="article:tag" content="hexo">
+<meta property="article:tag" content="个人博客">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2017/11/21/hexo%E5%8D%9A%E5%AE%A2%E6%8D%A2%E7%94%B5%E8%84%91/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2017/11/21/hexo%E5%8D%9A%E5%AE%A2%E6%8D%A2%E7%94%B5%E8%84%91/","path":"2017/11/21/hexo博客换电脑/","title":"hexo博客换电脑"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>hexo博客换电脑 | StoneHan's blog</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">StoneHan's blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">韩苏东的个人博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text">环境安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%87%E4%BB%BDhexo"><span class="nav-number">2.</span> <span class="nav-text">备份hexo</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E6%96%B0%E7%8E%AF%E5%A2%83"><span class="nav-number">3.</span> <span class="nav-text">配置新环境</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AESSH"><span class="nav-number">4.</span> <span class="nav-text">设置SSH</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="StoneHan"
+      src="/images/3.jpg">
+  <p class="site-author-name" itemprop="name">StoneHan</p>
+  <div class="site-description" itemprop="description">想把你写成一首歌，想养一只猫</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">41</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Stone-Han" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Stone-Han" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:592024747@qq.com" title="E-Mail → mailto:592024747@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://weibo.com/2133952903/profile?rightmod=1&wvr=6&mod=personinfo" title="Weibo → http:&#x2F;&#x2F;weibo.com&#x2F;2133952903&#x2F;profile?rightmod&#x3D;1&amp;wvr&#x3D;6&amp;mod&#x3D;personinfo" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2017/11/21/hexo%E5%8D%9A%E5%AE%A2%E6%8D%A2%E7%94%B5%E8%84%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/3.jpg">
+      <meta itemprop="name" content="StoneHan">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="StoneHan's blog">
+      <meta itemprop="description" content="想把你写成一首歌，想养一只猫">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="hexo博客换电脑 | StoneHan's blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          hexo博客换电脑
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2017-11-21 21:36:09 / Modified: 22:10:52" itemprop="dateCreated datePublished" datetime="2017-11-21T21:36:09+08:00">2017-11-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>最近由于实验室换了新电脑，所以要重新配置一下新的博客环境。<br>在网上看了很多，什么创建分支之类的，但是感觉说的都不清楚。</p>
+<p>本文的操作基于有之前的hexo备份。</p>
+<p>参考：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/21193762">知乎第二高票回答</a></p>
+<p><a target="_blank" rel="noopener" href="http://lowrank.science/Hexo-Migration/">写得很好的一个博客</a></p>
+<span id="more"></span>
+
+<h1 id="环境安装"><a href="#环境安装" class="headerlink" title="环境安装"></a>环境安装</h1><p>首先安装Node.js 和Git.直接用安装包安装就可以。</p>
+<p>然后再安装hexo。<br>由于npm国内安装太慢，所以我们将源改成国内的淘宝镜像。<br>如果遇到<code>npm install hexo</code>报错：<code>npm WARN deprecated swig@1.4.2: This package is no longer maintained </code></p>
+<p>也按照如下步骤执行：</p>
+<pre><code>npm config set registry &quot;https://registry.npm.taobao.org&quot;
+</code></pre>
+<p>然后再安装hexo</p>
+<pre><code>cnpm install -g hexo-cli
+</code></pre>
+<h1 id="备份hexo"><a href="#备份hexo" class="headerlink" title="备份hexo"></a>备份hexo</h1><p>下面就将原来的文件拷贝到新电脑中，但是要注意哪些文件是必须的，哪些文件是可以删除的。</p>
+<ol>
+<li>讨论下哪些文件是必须拷贝的：首先是之前自己修改的文件，像站点配置_config.yml，theme文件夹里面的主题，以及source里面自己写的博客文件，这些肯定要拷贝的。除此之外，还有三个文件需要有，就是scaffolds文件夹（文章的模板）、package.json（说明使用哪些包）和.gitignore（限定在提交的时候哪些文件可以忽略）。其实，这三个文件不是我们修改的，所以即使丢失了，也没有关系，我们可以建立一个新的文件夹，然后在里面执行hexo init，就会生成这三个文件，我们只需要将它们拷贝过来使用即可。总结：_config.yml，theme&#x2F;，source&#x2F;，scaffolds&#x2F;，package.json，.gitignore，是需要拷贝的。</li>
+<li>（2）再讨论下哪些文件是不必拷贝的，或者说可以删除的：首先是.git文件，无论是在站点根目录下，还是主题目录下的.git文件，都可以删掉。然后是文件夹node_modules（在用npm install会重新生成），public（这个在用hexo g时会重新生成），.deploy_git文件夹（在使用hexo d时也会重新生成），db.json文件。其实上面这些文件也就是.gitignore文件里面记载的可以忽略的内容。总结：.git&#x2F;，node_modules&#x2F;，public&#x2F;，.deploy_git&#x2F;，db.json文件需要删除。</li>
+</ol>
+<h1 id="配置新环境"><a href="#配置新环境" class="headerlink" title="配置新环境"></a>配置新环境</h1><p>在git bash中切换目录到新拷贝的文件夹里，使用 <code>cnpm install</code> 命令，进行模块安装。很明显我们这里没用<code>hexo init</code>初始化，因为有的文件我们已经拷贝生成过来了，所以不必用<code>hexo init</code>去整体初始化，如果不慎在此时用了<code>hexo init</code>，则站点的配置文件_config.yml里面内容会被清空使用默认值，所以这一步一定要慎重，不要用<code>hexo init</code>。</p>
+<p>为了使用hexo部署，我们需要安装</p>
+<pre><code>cnpm install hexo-deployer-git --save
+</code></pre>
+<p>如果原来安装了其他插件的在这里也要重新安装，安装完之后需要配置文件_config.yml的要重新配置</p>
+<p>到这里，运行<code>hexo g</code>, <code>hexo s</code>，在本地预览网站应该没问题了。</p>
+<h1 id="设置SSH"><a href="#设置SSH" class="headerlink" title="设置SSH"></a>设置SSH</h1><p>但是此时我们还不能部署，因为需要设置新电脑的SSH。</p>
+<ul>
+<li><p>在 Git Bash 下执行如下命令，生成 SSH key</p>
+<p>  <code>ssh-keygen -t rsa -b 4096 -C &quot;your_email@example.com&quot;</code></p>
+<p>  其中，<a href="mailto:&#x79;&#111;&#x75;&#x72;&#x5f;&#101;&#x6d;&#97;&#x69;&#108;&#64;&#x65;&#x78;&#97;&#x6d;&#x70;&#x6c;&#x65;&#x2e;&#99;&#111;&#x6d;">&#x79;&#111;&#x75;&#x72;&#x5f;&#101;&#x6d;&#97;&#x69;&#108;&#64;&#x65;&#x78;&#97;&#x6d;&#x70;&#x6c;&#x65;&#x2e;&#99;&#111;&#x6d;</a> 是你的 Github 注册邮箱，剩下的一路回车即可。</p>
+</li>
+<li><p>将 SSH key 添加到 ssh-agent</p>
+<ul>
+<li><p>在 Git Bash 下执行如下命令，开启 ssh-agent</p>
+<p>  <code>eval &quot;$(ssh-agent -s)&quot;</code></p>
+</li>
+<li><p>将这个 SSH key 添加到 ssh-agent 里去</p>
+<p>  <code>ssh-add ~/.ssh/id_rsa</code></p>
+</li>
+</ul>
+</li>
+<li><pre><code> 将 SSH key 添加到 Github 账户
+</code></pre>
+<ul>
+<li><p>在 Git Bash 中将 SSH Key 拷贝出来：</p>
+<p>  <code>clip &lt; ~/.ssh/id_rsa.pub</code></p>
+</li>
+</ul>
+<p>   此时，SSH Key 已经在我们的剪切板里了。然后登录 Github 帐号，依次点击自己的头像，Settings，SSH and GPG keys， Add SSH key， 在 Title 这里输入 Key 的label，比如 your_name - PC，然后在 Key 里面把 SSH Key 粘贴进去，点击 Add SSH key 大功告成。</p>
+</li>
+<li><p>测试 SSH 连接，在 Git Bash 中敲入</p>
+<pre><code> `ssh -T git@github.com`
+</code></pre>
+<p>  应该可以看到提示你成功的信息。</p>
+</li>
+</ul>
+<p>执行<code>hexo deploy</code> 应该就可以大功告成了。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/hexo/" rel="tag"># hexo</a>
+              <a href="/tags/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" rel="tag"># 个人博客</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2016/12/01/ubuntu%E4%B8%8Bmysql%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/" rel="prev" title="ubuntu下mysql简单使用">
+                  <i class="fa fa-chevron-left"></i> ubuntu下mysql简单使用
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/02/01/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0chap01/" rel="next" title="机器学习笔记1">
+                  机器学习笔记1 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">StoneHan</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

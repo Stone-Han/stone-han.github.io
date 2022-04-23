@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.11.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="因为最近要写一个线程池，所以找了本书《C++并发编程实战》。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++并发编程实战chap2">
+<meta property="og:url" content="http://example.com/2016/09/22/C++%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98chap2/index.html">
+<meta property="og:site_name" content="StoneHan&#39;s blog">
+<meta property="og:description" content="因为最近要写一个线程池，所以找了本书《C++并发编程实战》。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2016-09-22T10:36:09.000Z">
+<meta property="article:modified_time" content="2017-05-10T10:40:14.521Z">
+<meta property="article:author" content="StoneHan">
+<meta property="article:tag" content="c++">
+<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="多线程">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2016/09/22/C++%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98chap2/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2016/09/22/C++%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98chap2/","path":"2016/09/22/C++并发编程实战chap2/","title":"C++并发编程实战chap2"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>C++并发编程实战chap2 | StoneHan's blog</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">StoneHan's blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">韩苏东的个人博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AE%A1%E7%90%86%E7%BA%BF%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">管理线程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E7%BA%BF%E7%A8%8B%E7%AE%A1%E7%90%86"><span class="nav-number">1.1.</span> <span class="nav-text">基本线程管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8%E7%BA%BF%E7%A8%8B"><span class="nav-number">1.1.1.</span> <span class="nav-text">启动线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#join"><span class="nav-number">1.1.2.</span> <span class="nav-text">join()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#detach"><span class="nav-number">1.1.3.</span> <span class="nav-text">detach()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E4%BC%A0%E5%8F%82"><span class="nav-number">1.2.</span> <span class="nav-text">线程传参</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A7%BB%E5%8A%A8%E7%BA%BF%E7%A8%8Bmove"><span class="nav-number">1.3.</span> <span class="nav-text">移动线程move()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#thread-hardware-currency-%E7%BA%BF%E7%A8%8B%E6%95%B0%E9%87%8F"><span class="nav-number">1.4.</span> <span class="nav-text">thread::hardware_currency 线程数量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#std-thread-id-%E7%BA%BF%E7%A8%8Bid"><span class="nav-number">1.5.</span> <span class="nav-text">std::thread::id 线程id</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="StoneHan"
+      src="/images/3.jpg">
+  <p class="site-author-name" itemprop="name">StoneHan</p>
+  <div class="site-description" itemprop="description">想把你写成一首歌，想养一只猫</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">41</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Stone-Han" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Stone-Han" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:592024747@qq.com" title="E-Mail → mailto:592024747@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://weibo.com/2133952903/profile?rightmod=1&wvr=6&mod=personinfo" title="Weibo → http:&#x2F;&#x2F;weibo.com&#x2F;2133952903&#x2F;profile?rightmod&#x3D;1&amp;wvr&#x3D;6&amp;mod&#x3D;personinfo" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2016/09/22/C++%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98chap2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/3.jpg">
+      <meta itemprop="name" content="StoneHan">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="StoneHan's blog">
+      <meta itemprop="description" content="想把你写成一首歌，想养一只猫">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="C++并发编程实战chap2 | StoneHan's blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          C++并发编程实战chap2
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2016-09-22 18:36:09" itemprop="dateCreated datePublished" datetime="2016-09-22T18:36:09+08:00">2016-09-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2017-05-10 18:40:14" itemprop="dateModified" datetime="2017-05-10T18:40:14+08:00">2017-05-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>因为最近要写一个线程池，所以找了本书《C++并发编程实战》。</p>
+<span id="more"></span>
+
+<h1 id="管理线程"><a href="#管理线程" class="headerlink" title="管理线程"></a>管理线程</h1><h2 id="基本线程管理"><a href="#基本线程管理" class="headerlink" title="基本线程管理"></a>基本线程管理</h2><h3 id="启动线程"><a href="#启动线程" class="headerlink" title="启动线程"></a>启动线程</h3><pre><code> void do_some_work();
+ std::thread my_thread(do_some_work);
+</code></pre>
+<p>其中构造函数中可以传入任何callable类型。<br>比如</p>
+<pre><code>class background_task&#123;
+public:
+    void operator()() const
+    &#123;
+        do1();
+        do2();
+    &#125;
+
+&#125;;
+background_task f;
+std::thread my_thread(f);
+</code></pre>
+<p>但是编译器可能会解释成<code>std::thread my_thread(background_task())；</code></p>
+<p>正确的语法为<code>std::thread my_thread( (background_task()) ); std::thread my_thread&#123;background_task()&#125;;</code></p>
+<p><strong>但是我试过上面3中方法都没有报错。do1();会报错找不到标识符。</strong></p>
+<p>另外还可以用lambda表达式（A.5）。</p>
+<pre><code>std::thread mythread( [] &#123;
+        do_something();
+        do_something_else();
+    &#125;);
+</code></pre>
+<p><strong>这里需要注意的是要明确决定线程是join还是detach</strong><br><strong>当不等待线程结束且线程有局部变量的指针或者引用时，要格外注意。处理这种情况的方法是把数据复制到线程中而不是共享。</strong><br>详见清单2.1</p>
+<h3 id="join"><a href="#join" class="headerlink" title="join()"></a>join()</h3><p>join()会清理所有与该线程相关联的存储器。只能对一个给定的线程调用一次join()</p>
+<p>但是如果在调用join()之前发生了异常，就容易跳过对join的调用。<br>这时候我们可以用try&#x2F;catch块开捕捉异常，但是又显得太啰嗦。</p>
+<p>解决方法是利用标准的<strong>资源获取即初始化RAII</strong>语法。</p>
+<pre><code>class thread_guard
+&#123;
+    std::thread&amp; t;
+public:
+    explicit thread_guard(std::thread&amp; t_):
+        t(t_)
+    &#123;&#125;
+    ~thread_guard()
+    &#123;
+        if(t.joinable())   //1
+        &#123;
+            t.join();		//2
+        &#125;
+    &#125;
+    thread_guard(thread_guard const&amp;)=delete;	//3
+    thread_guard&amp; operator=(thread_guard const&amp;)=delete;
+&#125;;
+
+
+struct func&#123;&#125;;
+
+void f()
+&#123;
+    int some_local_state;
+    func my_func(some_local_state);
+    std::thread t(my_func);
+    thread_guard g(t);
+        
+    do_something_in_current_thread();
+&#125;//4
+</code></pre>
+<p>当执行到末尾4时，局部对象按照构造函数的逆序销毁。因此thread_guard对象g首先被销毁，并且析构函数中线程执行了join()。即使异常退出也会执行。</p>
+<p>2调用join前首先要判断是不是joinable的。因为join只能调用一次。</p>
+<p>3这里使用了delete(A.2)，主要的作用是控制有些构造函数不被复制。</p>
+<h3 id="detach"><a href="#detach" class="headerlink" title="detach()"></a>detach()</h3><p>被分离的线程通常叫做守护线程，它运行在后台，可能再应用程序的整个生命周期中运行。</p>
+<p>当调用detach()之后，线程将不能再被join()。<br>可以通过<code>t.joinalbe()</code>判断(false)。</p>
+<p>案例：word文档实际上是在一个程序中开启不同线程编辑。详见清单2.4。</p>
+<h2 id="线程传参"><a href="#线程传参" class="headerlink" title="线程传参"></a>线程传参</h2><p>当给线程传递参数的时候，参数会以默认的方式被复制到内部存储空间，即使参数中有引用。</p>
+<pre><code>void f(int i, std::string const&amp; s);
+std::thread t(f,3,&quot;hello&quot;);
+</code></pre>
+<p>“hello”当在新线程的上下文中才会作为char const*传送并转换成string。</p>
+<pre><code>void f(int i,std::string const&amp; s);
+void oops(int some_param)
+&#123;
+    char buf[1024];
+    sprintf(buf,&quot;%i&quot;,some_param);	//此函数的作用是将int param转换成char[]类型
+    std::thread t(f,3,buf);		//wrong
+    std::thread t(f,3,std::string(buf));	//right
+    t.detach();
+&#125;
+</code></pre>
+<p>函数oops会在buf在新线程上被转换成string类型之前退出，从而导致程序报错未定义。<br>解决方法是在buf传递给线程的之前转换成string。</p>
+<p>另外可能当你希望通过引用改变对象的值时，由于复制而没有改变。</p>
+<pre><code>void update_data(widget_id w, widget_data&amp; data);
+void oops(widget_id w)
+&#123;
+    widget_data data;
+    std::thread t(update_data,w,data);
+    display_status();
+    t.join();
+    process_data(data);
+&#125;
+</code></pre>
+<p>这里我们希望线程t调用update_data将data更新，然后传给process_data对更新过的数据进行处理。但是构造函数只是盲目地复制data的副本。因此它调用update_data时，传递的是data在内部的副本，而不是引用。当线程完成时，随着内部副本的销毁，改动都被舍弃，传递一个未改变的data给process。</p>
+<p>解决方案用std::ref</p>
+<pre><code>std::thread t(update_data, w, std::ref(data));
+</code></pre>
+<p>另外，这里的参数能被移动。一个对象内保存的数据转移到另一个对象，使原来的对象变成NULL。结合std::unique_ptr使用。</p>
+<pre><code>void process_object(std::unique_ptr&lt;object&gt;);
+std::unique_ptr&lt;object&gt; p(new object);
+p-&gt;prepare_data(42);
+std::thread t(process_object,std::move(p));
+</code></pre>
+<p>object先被转移到新线程的内部存储中，然后进入process_object。</p>
+<h2 id="移动线程move"><a href="#移动线程move" class="headerlink" title="移动线程move()"></a>移动线程move()</h2><p>线程的所有权是可以移动的。但是不能通过对一个线程赋值舍弃原来的线程。例如，</p>
+<pre><code>std::thread t1(f1);
+std::thread t2(f2);
+t2 =  std::move(t1);
+</code></pre>
+<p>但是移动可以将所有权从一个函数中转移。</p>
+<pre><code>std::thread f()
+&#123;
+    void some_function();
+    return std::thread(some_function);
+&#125;
+std::thread g()
+&#123;
+    void some_other_function(int);
+    std::thread t(some_other_function,42);
+    return t;
+&#125;
+
+int main()
+&#123;
+    std::thread t1=f();
+    t1.join();
+    std::thread t2=g();
+    t2.join();
+&#125;
+</code></pre>
+<p>如果要把所有权转移到函数中，只能以值的形式接收std::thread的实例作为参数。</p>
+<pre><code>void f(std::thread t);
+void g()
+&#123;
+    f (std::thread(some_func);
+    std::thread t(some_func);
+    f(std::move(t));	
+&#125;
+</code></pre>
+<p>也就是说可以将线程作为参数传递，但是要用移动。</p>
+<p>可以结合thread_guard，确保退出一个作用域之前线程都已经完成。</p>
+<pre><code>#include &lt;thread&gt;
+#include &lt;utility&gt;
+
+class scoped_thread
+&#123;
+    std::thread t;
+public:
+    explicit scoped_thread(std::thread t_):
+        t(std::move(t_))
+    &#123;
+        if(!t.joinable())
+            throw std::logic_error(&quot;No thread&quot;);
+    &#125;
+    ~scoped_thread()
+    &#123;
+        t.join();
+    &#125;
+    scoped_thread(scoped_thread const&amp;)=delete;
+    scoped_thread&amp; operator=(scoped_thread const&amp;)=delete;
+&#125;;
+
+struct func	&#123;	&#125;;
+    
+void f()
+&#123;
+    int some_local_state;
+    scoped_thread t(std::thread(func(some_local_state)));
+        
+    do_something_in_current_thread();
+&#125;
+</code></pre>
+<p>同样也可以结合vector</p>
+<pre><code>#include &lt;vector&gt;
+#include &lt;thread&gt;
+#include &lt;algorithm&gt;
+#include &lt;functional&gt;
+
+void do_work(unsigned id)
+&#123;&#125;
+
+void f()
+&#123;
+    std::vector&lt;std::thread&gt; threads;
+    for(unsigned i=0;i&lt;20;++i)
+    &#123;
+        threads.push_back(std::thread(do_work,i));
+    &#125;
+    std::for_each(threads.begin(),threads.end(),
+        std::mem_fn(&amp;std::thread::join));
+&#125;
+
+int main()
+&#123;
+    f();
+&#125;
+</code></pre>
+<h2 id="thread-hardware-currency-线程数量"><a href="#thread-hardware-currency-线程数量" class="headerlink" title="thread::hardware_currency 线程数量"></a>thread::hardware_currency 线程数量</h2><p>该函数返回一个对于给定程序执行时能够真正并发运行的线程数量的指示。如果该信息不可用则函数可能返回0，但是这有利于线程间分割任务。比如下面是std::accumulate的简单并行版本。该实现假定所有操作没有异常。</p>
+<pre><code>#include &lt;thread&gt;
+#include &lt;numeric&gt;
+#include &lt;algorithm&gt;
+#include &lt;functional&gt;
+#include &lt;vector&gt;
+#include &lt;iostream&gt;
+
+template&lt;typename Iterator,typename T&gt;
+struct accumulate_block
+&#123;
+    void operator()(Iterator first,Iterator last,T&amp; result)
+    &#123;
+        result=std::accumulate(first,last,result);
+    &#125;
+&#125;;
+
+template&lt;typename Iterator,typename T&gt;
+T parallel_accumulate(Iterator first,Iterator last,T init)
+&#123;
+    unsigned long const length=std::distance(first,last);
+
+    if(!length)
+        return init;	//输入范围为空时返回init
+
+    unsigned long const min_per_thread=25;
+    unsigned long const max_threads=
+        (length+min_per_thread-1)/min_per_thread;	//计算最大线程数
+
+    unsigned long const hardware_threads=
+        std::thread::hardware_concurrency();
+
+    //实际运行的线程数取最大线程数和硬件线程数的最小值。
+    //如果硬件线程返回0那么给它赋值2
+    unsigned long const num_threads=
+        std::min(hardware_threads!=0?hardware_threads:2,max_threads);	
+
+    unsigned long const block_size=length/num_threads;	//每个线程处理的范围
+
+    std::vector&lt;T&gt; results(num_threads);	
+    std::vector&lt;std::thread&gt;  threads(num_threads-1);	//创建线程，注意这里-1因为已经有一个
+
+    Iterator block_start=first;
+    for(unsigned long i=0;i&lt;(num_threads-1);++i)	//
+    &#123;
+        Iterator block_end=block_start;
+        std::advance(block_end,block_size);		//给迭代器增加指定偏移量
+        threads[i]=std::thread(					//启动线程累计这一块的结果
+            accumulate_block&lt;Iterator,T&gt;(),
+            block_start,block_end,std::ref(results[i]));
+        block_start=block_end;					//下一个块的开始
+    &#125;
+    //处理最后剩余的一块
+    accumulate_block&lt;Iterator,T&gt;()(block_start,last,results[num_threads-1]);
+    
+    std::for_each(threads.begin(),threads.end(),
+        std::mem_fn(&amp;std::thread::join));	//等待所有线程完成
+
+    return std::accumulate(results.begin(),results.end(),init);		//返回累加结果
+&#125;
+
+int main()
+&#123;
+    std::vector&lt;int&gt; vi;
+    for(int i=0;i&lt;10;++i)
+    &#123;
+        vi.push_back(10);
+    &#125;
+    int sum=parallel_accumulate(vi.begin(),vi.end(),5);
+    std::cout&lt;&lt;&quot;sum=&quot;&lt;&lt;sum&lt;&lt;std::endl;
+&#125;
+</code></pre>
+<p>但是这里不能直接从一个线程中返回值，所以必须将结果传入result中，我们可以用future替代。</p>
+<h2 id="std-thread-id-线程id"><a href="#std-thread-id-线程id" class="headerlink" title="std::thread::id 线程id"></a>std::thread::id 线程id</h2><p>方式：</p>
+<ol>
+<li><code>get_id()</code></li>
+<li><code>std::this_thread::get_id()</code></li>
+</ol>
+<p>可以对id类型进行复制和比较。还可以对它进行排序、hash。</p>
+<p>id还可以用来检车一个线程是否需要执行某些操作。</p>
+<pre><code>std::thread::id master_thread;
+if(std::this_thread::get_id() == master_thread_
+&#123;
+    do_something();
+&#125;
+</code></pre>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/c/" rel="tag"># c++</a>
+              <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
+              <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag"># 多线程</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2016/09/05/Markdown%E5%B7%A5%E5%85%B7remarkable%E7%9A%84%E5%AE%89%E8%A3%85/" rel="prev" title="Remarkable的安装">
+                  <i class="fa fa-chevron-left"></i> Remarkable的安装
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2016/10/20/VS2010%E4%B8%8B%E9%85%8D%E7%BD%AEpthread/" rel="next" title="windows下配置pthread">
+                  windows下配置pthread <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">StoneHan</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

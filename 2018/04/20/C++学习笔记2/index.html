@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.11.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="这一部分主要介绍C++面向对象，多个类之间的关系。另外介绍了虚函数及其实现机制和一些设计模式。  Inheritance 继承 is-a Composition 复合 has-a Delegation 委托">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++学习笔记2-类之间的关系">
+<meta property="og:url" content="http://example.com/2018/04/20/C++%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02/index.html">
+<meta property="og:site_name" content="StoneHan&#39;s blog">
+<meta property="og:description" content="这一部分主要介绍C++面向对象，多个类之间的关系。另外介绍了虚函数及其实现机制和一些设计模式。  Inheritance 继承 is-a Composition 复合 has-a Delegation 委托">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.imgur.com/YNH6ZB6.png">
+<meta property="og:image" content="https://i.imgur.com/pxxKYNT.png">
+<meta property="og:image" content="https://i.imgur.com/6kIzYZg.png">
+<meta property="og:image" content="https://i.imgur.com/LxDL5nW.png">
+<meta property="og:image" content="https://i.imgur.com/Ukuf8L1.png">
+<meta property="og:image" content="https://i.imgur.com/nPyXsxl.png">
+<meta property="og:image" content="https://i.imgur.com/9YnCa2K.png">
+<meta property="og:image" content="https://i.imgur.com/LxDL5nW.png">
+<meta property="article:published_time" content="2018-04-20T10:25:09.000Z">
+<meta property="article:modified_time" content="2018-08-28T08:21:22.631Z">
+<meta property="article:author" content="StoneHan">
+<meta property="article:tag" content="C++">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/YNH6ZB6.png">
+
+
+<link rel="canonical" href="http://example.com/2018/04/20/C++%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2018/04/20/C++%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02/","path":"2018/04/20/C++学习笔记2/","title":"C++学习笔记2-类之间的关系"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>C++学习笔记2-类之间的关系 | StoneHan's blog</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">StoneHan's blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">韩苏东的个人博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Composition-%E5%A4%8D%E5%90%88-has-a"><span class="nav-number">1.</span> <span class="nav-text">Composition 复合 has-a</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="nav-number">1.1.</span> <span class="nav-text">构造函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Delegation-composion-by-reference"><span class="nav-number">1.2.</span> <span class="nav-text">Delegation-composion by reference</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Inheritance-is-a"><span class="nav-number">2.</span> <span class="nav-text">Inheritance is-a</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#inheritance-with-virtual-function"><span class="nav-number">2.1.</span> <span class="nav-text">inheritance with virtual function</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Inheritance-Composition"><span class="nav-number">2.2.</span> <span class="nav-text">Inheritance+Composition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Delegation-Inheritance"><span class="nav-number">2.3.</span> <span class="nav-text">Delegation+Inheritance</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Observer%E6%A8%A1%E5%BC%8F"><span class="nav-number">2.3.1.</span> <span class="nav-text">Observer模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#composite%E6%A8%A1%E5%BC%8F"><span class="nav-number">2.3.2.</span> <span class="nav-text">composite模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#prototype%E6%A8%A1%E5%BC%8F"><span class="nav-number">2.3.3.</span> <span class="nav-text">prototype模式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B"><span class="nav-number">3.</span> <span class="nav-text">对象模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#vptr%E5%92%8Cvtbl"><span class="nav-number">3.1.</span> <span class="nav-text">vptr和vtbl</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#this%E6%8C%87%E9%92%88"><span class="nav-number">3.2.</span> <span class="nav-text">this指针</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="StoneHan"
+      src="/images/3.jpg">
+  <p class="site-author-name" itemprop="name">StoneHan</p>
+  <div class="site-description" itemprop="description">想把你写成一首歌，想养一只猫</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">41</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Stone-Han" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Stone-Han" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:592024747@qq.com" title="E-Mail → mailto:592024747@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://weibo.com/2133952903/profile?rightmod=1&wvr=6&mod=personinfo" title="Weibo → http:&#x2F;&#x2F;weibo.com&#x2F;2133952903&#x2F;profile?rightmod&#x3D;1&amp;wvr&#x3D;6&amp;mod&#x3D;personinfo" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/04/20/C++%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/3.jpg">
+      <meta itemprop="name" content="StoneHan">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="StoneHan's blog">
+      <meta itemprop="description" content="想把你写成一首歌，想养一只猫">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="C++学习笔记2-类之间的关系 | StoneHan's blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          C++学习笔记2-类之间的关系
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-04-20 18:25:09" itemprop="dateCreated datePublished" datetime="2018-04-20T18:25:09+08:00">2018-04-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2018-08-28 16:21:22" itemprop="dateModified" datetime="2018-08-28T16:21:22+08:00">2018-08-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>这一部分主要介绍C++面向对象，多个类之间的关系。另外介绍了虚函数及其实现机制和一些设计模式。</p>
+<ul>
+<li>Inheritance 继承 is-a</li>
+<li>Composition 复合 has-a</li>
+<li>Delegation 委托</li>
+</ul>
+<span id="more"></span>
+
+<h1 id="Composition-复合-has-a"><a href="#Composition-复合-has-a" class="headerlink" title="Composition 复合 has-a"></a>Composition 复合 has-a</h1><pre><code>class queue
+&#123;
+    ...
+protected:
+    deque&lt;T&gt; c;
+public:
+    void pop() &#123;c.pop_front();&#125;
+
+&#125;;
+</code></pre>
+<p>类queue是一个队列，deque是双向队列，比queue功能强大。这里设计queue包含deque，所以是has-a，这种设计模式又叫做adapter.</p>
+<h2 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h2><p><img src="https://i.imgur.com/YNH6ZB6.png"></p>
+<p><strong>构造由内而外</strong>：Container::Container(): Component(){…};	&#x2F;&#x2F;默认调用默认构造函数</p>
+<p><strong>析构由外而内</strong>：Container::Container(){… ~Component()};</p>
+<h2 id="Delegation-composion-by-reference"><a href="#Delegation-composion-by-reference" class="headerlink" title="Delegation-composion by reference"></a>Delegation-composion by reference</h2><pre><code>String 
+&#123;
+    StringRep* rep;
+&#125;
+</code></pre>
+<p>一个类有另一个类的指针。复合的生命是同步的，有了A就有B，但是委托的生命不是同步的，当需要调用b的时候b才会生成。这种写法叫做pimpl(pointer to implementation或者handle&#x2F;body)。这种方法的好处是，String类的具体实现可以不同，但是接口都一样，所以客户端不变，实现方法可以变化。</p>
+<p><img src="https://i.imgur.com/pxxKYNT.png"></p>
+<p>上面这个例子的图示如上，每生成一个String类，都会增加一个reference counting，共享空间。如果a要改变数据，会单独拷贝一份数据给a。</p>
+<h1 id="Inheritance-is-a"><a href="#Inheritance-is-a" class="headerlink" title="Inheritance is-a"></a>Inheritance is-a</h1><pre><code>struct _List_node_base
+&#123;
+    _List_node_base* _M_next;
+    _List_node_base* _M_prev;
+&#125;;
+
+template&lt;typename _Tp&gt;
+struct _List_node
+    :public _List_node_base
+&#123;
+    _Tp _M_data;
+&#125;
+</code></pre>
+<p><img src="https://i.imgur.com/6kIzYZg.png"></p>
+<p><strong>构造由内而外，析构由外而内</strong></p>
+<p>**base class 的dtor必须是virtual，否则会出现undefined behavior **</p>
+<h2 id="inheritance-with-virtual-function"><a href="#inheritance-with-virtual-function" class="headerlink" title="inheritance with virtual function"></a>inheritance with virtual function</h2><ol>
+<li>non-virtual函数 :不希望derived class重新定义它</li>
+<li>virtual函数：希望derived class 重新定义它(override)，并且对它已经有默认定义。</li>
+<li>pure virtual:希望derived class一定要重写它，并且没有默认定义。</li>
+</ol>
+<p>举例：<br>    class Shape{</p>
+<pre><code>public:
+virtual void draw() const=0; 	//pure virtual
+virtual void error(const std::string&amp; msg);	//impure virtual
+int objectID() const;	//non-virtual
+
+&#125;
+</code></pre>
+<p>应用：<strong>Template Method</strong>(先搭出来一套框架，具体实现延迟到应用再实现)<br><img src="https://i.imgur.com/LxDL5nW.png"></p>
+<p>如上图，对于打开文件这个动作，可以先设计一套框架，但是对于serialize这个函数，父类无法实现，于是声明为虚函数。当调用的时候，子类的指针调用父类的函数，但是具体实现是用的子类复写的方法。过程见灰色的线。</p>
+<h2 id="Inheritance-Composition"><a href="#Inheritance-Composition" class="headerlink" title="Inheritance+Composition"></a>Inheritance+Composition</h2><p><img src="https://i.imgur.com/Ukuf8L1.png"></p>
+<h2 id="Delegation-Inheritance"><a href="#Delegation-Inheritance" class="headerlink" title="Delegation+Inheritance"></a>Delegation+Inheritance</h2><h3 id="Observer模式"><a href="#Observer模式" class="headerlink" title="Observer模式"></a><strong>Observer模式</strong></h3><p><img src="https://i.imgur.com/nPyXsxl.png"></p>
+<h3 id="composite模式"><a href="#composite模式" class="headerlink" title="composite模式"></a>composite模式</h3><h3 id="prototype模式"><a href="#prototype模式" class="headerlink" title="prototype模式"></a>prototype模式</h3><h1 id="对象模型"><a href="#对象模型" class="headerlink" title="对象模型"></a>对象模型</h1><h2 id="vptr和vtbl"><a href="#vptr和vtbl" class="headerlink" title="vptr和vtbl"></a>vptr和vtbl</h2><p><img src="https://i.imgur.com/9YnCa2K.png"></p>
+<p>静态绑定：call XXX<br>动态绑定满足3个条件：</p>
+<ol>
+<li>通过指针</li>
+<li>向上转型</li>
+<li>调用虚函数</li>
+</ol>
+<p>由于指针不确定，所以称为动态绑定。  </p>
+<p>看图中3个类的继承关系A&lt;-B&lt;-C, A中有两个虚函数，两个非虚函数。 B继承了A，所以也有两个虚函数，但是对其中一个虚函数进行了重写。同样C也是。所以这里一共有8个函数。如图所示。这里对虚函数的继承是指的对调用权的继承，具体的机制是，每个类都有一个虚指针，指向一个虚表，虚表中存放所有虚函数的地址。具体的调用形式见图上下方。</p>
+<h2 id="this指针"><a href="#this指针" class="headerlink" title="this指针"></a>this指针</h2><p><img src="https://i.imgur.com/LxDL5nW.png"></p>
+<p><code>myDoc.OnFileOpen()</code>在调用的时候会传一个参数this，这里this指的就是myDoc这个子类的对象。然后调用<code>OnFileOpen()</code>的时候会把这个指针传到函数中，这个函数中所有的调用都变成了<code>this-&gt;XXX()</code>，当调用<code>Serialize()</code>的时候，转换成<code>(*(this-vptr)[n])(this)</code>这种形式，动态绑定子类的Serialize()函数。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C/" rel="tag"># C++</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2018/04/15/C++%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="prev" title="C++学习笔记1--类">
+                  <i class="fa fa-chevron-left"></i> C++学习笔记1--类
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/04/25/C++%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B03/" rel="next" title="C++学习笔记3--类">
+                  C++学习笔记3--类 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">StoneHan</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

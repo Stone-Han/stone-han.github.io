@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.11.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="本文主要是讲了GLPK在cpp文件中的调用，包括路径的配置及执行。另外还讲了在kdevelop下的配置。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GLPK在终端及kdevelop中的使用">
+<meta property="og:url" content="http://example.com/2016/08/14/GLPK%E5%9C%A8%E7%BB%88%E7%AB%AF%E5%8F%8Akdevelop%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:site_name" content="StoneHan&#39;s blog">
+<meta property="og:description" content="本文主要是讲了GLPK在cpp文件中的调用，包括路径的配置及执行。另外还讲了在kdevelop下的配置。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2016-08-14T10:25:09.000Z">
+<meta property="article:modified_time" content="2017-05-10T10:41:45.721Z">
+<meta property="article:author" content="StoneHan">
+<meta property="article:tag" content="glpk">
+<meta property="article:tag" content="教程">
+<meta property="article:tag" content="kdevelop">
+<meta property="article:tag" content="cmake">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2016/08/14/GLPK%E5%9C%A8%E7%BB%88%E7%AB%AF%E5%8F%8Akdevelop%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2016/08/14/GLPK%E5%9C%A8%E7%BB%88%E7%AB%AF%E5%8F%8Akdevelop%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/","path":"2016/08/14/GLPK在终端及kdevelop中的使用/","title":"GLPK在终端及kdevelop中的使用"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>GLPK在终端及kdevelop中的使用 | StoneHan's blog</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">StoneHan's blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">韩苏东的个人博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%88%E7%AB%AF"><span class="nav-number">1.</span> <span class="nav-text">终端</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#kdevelop"><span class="nav-number">2.</span> <span class="nav-text">kdevelop</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="StoneHan"
+      src="/images/3.jpg">
+  <p class="site-author-name" itemprop="name">StoneHan</p>
+  <div class="site-description" itemprop="description">想把你写成一首歌，想养一只猫</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">41</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Stone-Han" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Stone-Han" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:592024747@qq.com" title="E-Mail → mailto:592024747@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://weibo.com/2133952903/profile?rightmod=1&wvr=6&mod=personinfo" title="Weibo → http:&#x2F;&#x2F;weibo.com&#x2F;2133952903&#x2F;profile?rightmod&#x3D;1&amp;wvr&#x3D;6&amp;mod&#x3D;personinfo" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2016/08/14/GLPK%E5%9C%A8%E7%BB%88%E7%AB%AF%E5%8F%8Akdevelop%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/3.jpg">
+      <meta itemprop="name" content="StoneHan">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="StoneHan's blog">
+      <meta itemprop="description" content="想把你写成一首歌，想养一只猫">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="GLPK在终端及kdevelop中的使用 | StoneHan's blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          GLPK在终端及kdevelop中的使用
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2016-08-14 18:25:09" itemprop="dateCreated datePublished" datetime="2016-08-14T18:25:09+08:00">2016-08-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2017-05-10 18:41:45" itemprop="dateModified" datetime="2017-05-10T18:41:45+08:00">2017-05-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>本文主要是讲了GLPK在cpp文件中的调用，包括路径的配置及执行。<br>另外还讲了在kdevelop下的配置。</p>
+<span id="more"></span>
+
+<h2 id="终端"><a href="#终端" class="headerlink" title="终端"></a>终端</h2><p>首先把说明文档中的程序输入GLPK.cpp<br>然后</p>
+<pre><code>gcc -c GLPK.cpp
+gcc GLPK.o -lglpk -lm
+</code></pre>
+<p>然后生成了一个a.out命令，运行之后报错:</p>
+<pre><code>error while loading shared libraries: libglpk.so.0: cannot open shared object:NO such file or directory
+</code></pre>
+<p>在网上查了，这是因为共享库文件安装到了&#x2F;usr&#x2F;local&#x2F;lib下面<a target="_blank" rel="noopener" href="http://blog.csdn.net/sahusoft/article/details/7388617">参考网站</a> </p>
+<p>那么要把新共享库目录加入到共享库配置文件&#x2F;etc&#x2F;ld.so.conf中。</p>
+<pre><code>cat /ect/ld.so.conf
+include ld.so.conf.d/*.conf
+echo &quot;/usr/local/lib&quot;&gt;&gt;/etc.ld.so.conf
+bash: /etc.ld.so.conf: 权限不够
+</code></pre>
+<p>切换到root用户下设置，因为是第一次所以要设置root密码</p>
+<pre><code>stone@stone-Lenovo:/$ sudo passwd root
+输入新的 UNIX 密码： 
+重新输入新的 UNIX 密码： 
+passwd：已成功更新密码
+stone@stone-Lenovo:/$ su
+root@stone-Lenovo:/# echo &quot;/usr/local/lib&quot;&gt;&gt; /etc.ld.so.conf
+root@stone-Lenovo:/# cat /etc.ld.so.conf
+/usr/local/lib
+root@stone-Lenovo:/# ldconfig
+root@stone-Lenovo:/# exit
+</code></pre>
+<p>然后再执行<code>./a.out</code>就可以看到结果</p>
+<pre><code>*     0: obj =   0.000000000e+00  infeas =  0.000e+00 (0)
+*     2: obj =   7.333333333e+02  infeas =  0.000e+00 (0)
+OPTIMAL SOLUTION FOUND
+
+z = 733.333; x1 = 33.3333; x2 = 66.6667; x3 = 0
+</code></pre>
+<h2 id="kdevelop"><a href="#kdevelop" class="headerlink" title="kdevelop"></a>kdevelop</h2><p>在kdevelop里面建了一个工程，输入从网上找的一个程序，但是编译报了很多错。<br>报错类似于</p>
+<pre><code>/home/stone/projects/d/main.cpp:11: undefined reference to `glp_create_prob&#39;
+</code></pre>
+<p>然后我的思路是想把命令行敲的命令配置到Kdevelop下，感觉应该是路径的问题。<br>我尝试在CMakefilelists.txt中添加了一行</p>
+<pre><code>add_librariy(/usr/local/lib/lglpk.so)
+</code></pre>
+<p>没有错误了，但是仍然无法运行。在运行配置里输入-lglpk -lm都不行。<br>然后在网上搜了一堆make 和cmake的语法，看了半天都没有讲怎么加参数的。<br>不过有几个教程特别好。</p>
+<p><a target="_blank" rel="noopener" href="http://bbs.chinaunix.net/thread-408225-1-1.html">跟我一起写makefile</a></p>
+<p> <a target="_blank" rel="noopener" href="https://www.ibm.com/developerworks/cn/linux/l-cn-cmake/">在Linux下使用cmake构建应用程序</a> </p>
+<p>根据这里面的例子，我看到了添加库和链接库的语法</p>
+<pre><code>INCLUDE_DIRECTORIES($&#123;LIBDB_CXX_INCLUDE_DIR&#125;)
+  MESSAGE( $&#123;LIBDB_CXX_LIBRARIES&#125; )
+   TARGET_LINK_LIBRARIES(main $&#123;LIBDB_CXX_LIBRARIES&#125;18 )
+</code></pre>
+<p>根据网上各种教程尝试写的都不管用，后来我看了一下在windows下的配置，发现都是配置好Include路径和Lib路径就可以了。然后我梳理了一下生成的过程。</p>
+<pre><code>   gcc -c GLPK.cpp
+gcc GLPK.o -lglpk -lm
+</code></pre>
+<p>第一句话就是生成.o文件，第二句话仍然不知道-lglpk -lm是干什么用的，但是应该是把链接库链入.o文件然后生成可执行文件。<br>然后我在工程里写入</p>
+<pre><code>include_directories(glpk.h /usr/local/include)
+target_link_libraries(d /usr/local/lib/libglpk.so)
+</code></pre>
+<p>然后就编译成功，执行结果也出来了。<br>好像第一句也不用加。不过注意第二句话要写在add_executable 后面。</p>
+<p>下一步在需要的地方调用就可以了。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/glpk/" rel="tag"># glpk</a>
+              <a href="/tags/%E6%95%99%E7%A8%8B/" rel="tag"># 教程</a>
+              <a href="/tags/kdevelop/" rel="tag"># kdevelop</a>
+              <a href="/tags/cmake/" rel="tag"># cmake</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2016/08/12/GLPK%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8Aglpsol%E7%9A%84%E4%BD%BF%E7%94%A8/" rel="prev" title="GLPK的安装及glpsol的使用">
+                  <i class="fa fa-chevron-left"></i> GLPK的安装及glpsol的使用
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2016/09/05/Markdown%E5%B7%A5%E5%85%B7remarkable%E7%9A%84%E5%AE%89%E8%A3%85/" rel="next" title="Remarkable的安装">
+                  Remarkable的安装 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">StoneHan</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.11.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="原理webbench首先fork出多个子进程，每个子进程都循环做web访问测试。子进程把访问的结果通过pipe告诉父进程，父进程做最终的统计结果。 项目地址:http:&#x2F;&#x2F;home.tiscali.cz&#x2F;~cz210552&#x2F;webbench.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="压力测试工具Webbench源码分析">
+<meta property="og:url" content="http://example.com/2018/05/13/%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7/index.html">
+<meta property="og:site_name" content="StoneHan&#39;s blog">
+<meta property="og:description" content="原理webbench首先fork出多个子进程，每个子进程都循环做web访问测试。子进程把访问的结果通过pipe告诉父进程，父进程做最终的统计结果。 项目地址:http:&#x2F;&#x2F;home.tiscali.cz&#x2F;~cz210552&#x2F;webbench.html">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2018-05-13T10:25:09.000Z">
+<meta property="article:modified_time" content="2018-08-27T01:46:11.685Z">
+<meta property="article:author" content="StoneHan">
+<meta property="article:tag" content="网络">
+<meta property="article:tag" content="压力测试">
+<meta property="article:tag" content="webbench">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2018/05/13/%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2018/05/13/%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7/","path":"2018/05/13/压力测试工具/","title":"压力测试工具Webbench源码分析"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>压力测试工具Webbench源码分析 | StoneHan's blog</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">StoneHan's blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">韩苏东的个人博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8E%9F%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E7%BB%93%E6%9E%84"><span class="nav-number">2.</span> <span class="nav-text">程序结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#socket%E5%87%BD%E6%95%B0%E6%BA%90%E7%A0%81"><span class="nav-number">3.</span> <span class="nav-text">socket函数源码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Webbench%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8"><span class="nav-number">4.</span> <span class="nav-text">Webbench的安装和使用</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="StoneHan"
+      src="/images/3.jpg">
+  <p class="site-author-name" itemprop="name">StoneHan</p>
+  <div class="site-description" itemprop="description">想把你写成一首歌，想养一只猫</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">41</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Stone-Han" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Stone-Han" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:592024747@qq.com" title="E-Mail → mailto:592024747@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://weibo.com/2133952903/profile?rightmod=1&wvr=6&mod=personinfo" title="Weibo → http:&#x2F;&#x2F;weibo.com&#x2F;2133952903&#x2F;profile?rightmod&#x3D;1&amp;wvr&#x3D;6&amp;mod&#x3D;personinfo" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/05/13/%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/3.jpg">
+      <meta itemprop="name" content="StoneHan">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="StoneHan's blog">
+      <meta itemprop="description" content="想把你写成一首歌，想养一只猫">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="压力测试工具Webbench源码分析 | StoneHan's blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          压力测试工具Webbench源码分析
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-05-13 18:25:09" itemprop="dateCreated datePublished" datetime="2018-05-13T18:25:09+08:00">2018-05-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2018-08-27 09:46:11" itemprop="dateModified" datetime="2018-08-27T09:46:11+08:00">2018-08-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p>webbench首先fork出多个子进程，每个子进程都循环做web访问测试。子进程把访问的结果通过pipe告诉父进程，父进程做最终的统计结果。</p>
+<p>项目地址:<br><a target="_blank" rel="noopener" href="http://home.tiscali.cz/~cz210552/webbench.html">http://home.tiscali.cz/~cz210552&#x2F;webbench.html</a></p>
+<span id="more"></span>
+
+<h1 id="程序结构"><a href="#程序结构" class="headerlink" title="程序结构"></a>程序结构</h1><p><strong>主函数：</strong></p>
+<p>main函数解析参数，调用bench();</p>
+<p><strong>bench():</strong></p>
+<ol>
+<li><p><strong>检查目标服务器是否可用</strong>：</p>
+<p> i &#x3D; Socket(proxyhost&#x3D;&#x3D;NULL?host:proxyhost,proxyport);</p>
+</li>
+<li><p><strong>创建pipe</strong>;(pipe声明：mypipe[2];)若成功返回0，否则返回-1。其中pipe[0]是读管道，pipe[1]是写管道。参考<a target="_blank" rel="noopener" href="https://www.cnblogs.com/kunhu/p/3608109.html">网址</a>。</p>
+</li>
+<li><p><strong>开辟子进程</strong>。<br> for(i&#x3D;0;i&lt;clients;i++)<br> {<br> pid&#x3D;fork();<br> &#x2F;&#x2F;…<br> }<br>关于fork()函数参考<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/fork/7143171?fr=aladdin">这里</a>，子进程返回0，父进程返回子进程标记，否则返回0.</p>
+</li>
+<li><p>如果是<strong>子进程</strong>，调用<code>benchcore(host/proxyhost,proxyport,request)</code>。将数据speed,failed,bytes的结果写入pipe。<code>f=fdopen(mypipe[1],&quot;w&quot;);</code>fdopen取一个现存的文件描述符，并使一个标准的I &#x2F; O流与该描述符相结合,转换成功时返回指向该流的文件指针。失败则返回NULL，并把错误代码存在errno中.<br>fdopen参考<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/fdopen/10942178?fr=aladdin">这里</a></p>
+</li>
+<li><p>如果是<strong>父进程</strong>，循环从文件中读取数据，直到只剩一个进程为止。统计并输出最终结果。这里用到一个函数<code>setvbuf</code>，这个函数是设置缓冲区的，这里用<code>_INOBF</code>是无缓冲区，直接从流数据中读取。<a target="_blank" rel="noopener" href="https://www.cnblogs.com/lichenlong/p/5170059.html">参考</a></p>
+</li>
+</ol>
+<p><strong>benchcore()：</strong></p>
+<ol>
+<li>设置计时器时间为benchtime，利用<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/sigaction/4515754">sigaction</a>.</li>
+<li>连接s&#x3D;soket(host,port)；</li>
+<li>write(s,req,rlen)写入请求。</li>
+<li>shutdown(s,1)关闭写请求。</li>
+<li>如果force&#x3D;&#x3D;0即不用等待服务器返回，读取socket中所有的数据i&#x3D;read(s,buf,1500)。</li>
+<li>close(s)</li>
+</ol>
+<p><strong>alarm_handler()：</strong><br>计时器超时函数，设置timerexpired&#x3D;1;</p>
+<h1 id="socket函数源码"><a href="#socket函数源码" class="headerlink" title="socket函数源码"></a>socket函数源码</h1><pre><code>int Socket(const char *host, int clientPort)
+&#123;
+    int sock;
+    unsigned long inaddr;
+    struct sockaddr_in ad;
+    struct hostent *hp;
+    
+    memset(&amp;ad, 0, sizeof(ad));
+    ad.sin_family = AF_INET;
+
+    inaddr = inet_addr(host);
+    if (inaddr != INADDR_NONE)
+        memcpy(&amp;ad.sin_addr, &amp;inaddr, sizeof(inaddr));
+    else
+    &#123;
+        hp = gethostbyname(host);
+        if (hp == NULL)
+            return -1;
+        memcpy(&amp;ad.sin_addr, hp-&gt;h_addr, hp-&gt;h_length);
+    &#125;
+    ad.sin_port = htons(clientPort);
+    
+    sock = socket(AF_INET, SOCK_STREAM, 0);
+    if (sock &lt; 0)
+        return sock;
+    if (connect(sock, (struct sockaddr *)&amp;ad, sizeof(ad)) &lt; 0)
+        return -1;
+    return sock;
+&#125;
+</code></pre>
+<h1 id="Webbench的安装和使用"><a href="#Webbench的安装和使用" class="headerlink" title="Webbench的安装和使用"></a>Webbench的安装和使用</h1><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xiuluo--angel/p/7092896.html">参考</a></p>
+<pre><code>[root@node1 ~]# yum install -y gcc ctags
+[root@node1 ~]# wget http://www.ha97.com/code/webbench-1.5.tar.gz
+[root@node1 ~]# tar -xvf  webbench-1.5.tar.gz
+[root@node1 data]# cd webbench-1.5
+[root@node1 webbench-1.5]# make &amp;&amp; make install    ##这一步可能遇到如下错误，手动创建目录即可
+cc -Wall -ggdb -W -O   -c -o webbench.o webbench.c
+webbench.c: In function 鈥榓larm_handler鈥
+
+                                           webbench.c:77: warning: unused parameter 鈥榮ignal鈥
+cc -Wall -ggdb -W -O  -o webbench webbench.o  
+ctags *.c
+install -s webbench /usr/local/bin
+install -m 644 webbench.1 /usr/local/man/man1
+install: cannot create regular file `/usr/local/man/man1&#39;: No such file or directory
+make: *** [install] Error 1
+[root@node1 webbench-1.5]# mkdir /usr/local/man
+[root@node1 webbench-1.5]# mkdir /usr/local/man/man1
+[root@node1 webbench-1.5]# make &amp;&amp;make install
+make: Nothing to be done for `all&#39;.
+install -s webbench /usr/local/bin
+install -m 644 webbench.1 /usr/local/man/man1
+install -d /usr/local/share/doc/webbench
+install -m 644 debian/copyright /usr/local/share/doc/webbench
+install -m 644 debian/changelog /usr/local/share/doc/webbench
+</code></pre>
+<p>usage()</p>
+<pre><code>[root@node1 data]# webbench --help
+webbench [option]... URL
+  -f|--force               Don&#39;t wait for reply from server.
+  -r|--reload              Send reload request - Pragma: no-cache.
+  -t|--time &lt;sec&gt;          Run benchmark for &lt;sec&gt; seconds. Default 30.
+  -p|--proxy &lt;server:port&gt; Use proxy server for request.
+  -c|--clients &lt;n&gt;         Run &lt;n&gt; HTTP clients at once. Default one.
+  -9|--http09              Use HTTP/0.9 style requests.
+  -1|--http10              Use HTTP/1.0 protocol.
+  -2|--http11              Use HTTP/1.1 protocol.
+  --get                    Use GET request method.
+  --head                   Use HEAD request method.
+  --options                Use OPTIONS request method.
+  --trace                  Use TRACE request method.
+  -?|-h|--help             This information.
+  -V|--version             Display program version.
+</code></pre>
+<p>执行命令：<code>webbench -c 10 http://www.baidu.com</code><br>命令就是用10个客户端并发百度网站30秒，但是在执行的命令报错了：<code>Invalid URL syntax - hostname don&#39;t ends with &#39;/&#39;</code>。解决办法就是在url后加个“&#x2F;”</p>
+<p>执行结果反馈内容：</p>
+<pre><code>[root@node1 data]# webbench -c 10 -t 30 http://www.baidu.com/
+Webbench - Simple Web Benchmark 1.5
+Copyright (c) Radim Kolar 1997-2004, GPL Open Source Software.
+
+Benchmarking: GET http://www.baidu.com/
+10 clients, running 30 sec.
+
+Speed=2254 pages/min, 4188293 bytes/sec.
+Requests: 1110 susceed, 17 failed.
+</code></pre>
+<p>其他一些压测工具：<br>http_load<br>apache bench<br>seige<br>wrk</p>
+<p>测评的网址：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/tuyile006/p/3635261.html">参考1</a>，<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/Lam7/p/5842061.html">参考2</a>。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag"># 网络</a>
+              <a href="/tags/%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95/" rel="tag"># 压力测试</a>
+              <a href="/tags/webbench/" rel="tag"># webbench</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2018/05/08/%E9%87%91%E8%9E%8D%E6%80%9D%E7%BB%B47/" rel="prev" title="金融思维7：资本资产定价 股票/公司估值">
+                  <i class="fa fa-chevron-left"></i> 金融思维7：资本资产定价 股票/公司估值
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/05/19/linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" rel="next" title="linux网络编程-select/poll/epoll">
+                  linux网络编程-select/poll/epoll <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">StoneHan</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
