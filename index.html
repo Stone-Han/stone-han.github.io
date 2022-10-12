@@ -213,9 +213,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2022-10-12 11:13:09 / 修改时间：23:57:16" itemprop="dateCreated datePublished" datetime="2022-10-12T11:13:09+08:00">2022-10-12</time>
+      <time title="创建时间：2022-10-12 11:13:09" itemprop="dateCreated datePublished" datetime="2022-10-12T11:13:09+08:00">2022-10-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-10-13 00:09:13" itemprop="dateModified" datetime="2022-10-13T00:09:13+08:00">2022-10-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -237,15 +243,12 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>Day1 704. 二分查找 27.移除元素</p>
-<p>作业条：<a target="_blank" rel="noopener" href="https://docs.qq.com/doc/DUG9UR2ZUc3BjRUdY">https://docs.qq.com/doc/DUG9UR2ZUc3BjRUdY</a></p>
-<p>题目链接：</p>
-<ol>
-<li>二分查找 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-search/">https://leetcode.cn/problems/binary-search/</a></li>
-</ol>
-<p>文章讲解：<a target="_blank" rel="noopener" href="https://programmercarl.com/0704.%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE.html">https://programmercarl.com/0704.%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE.html</a><br>视频讲解：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1fA4y1o715">https://www.bilibili.com/video/BV1fA4y1o715</a></p>
-<p>第一想法：二分查找经典题目，边界条件是left&lt;&#x3D;right，然后取中间的指针，和target比较，分别修改left和right的值直到最后找到；如果超出边界条件仍然没找到，返回-1；</p>
-<p>看完解答后的想法：<br>需要注意循环不变量，也就是搜索的区间到底是左闭右闭还是左闭右开，并且要在设置边界值的时候坚持这个不变。</p>
+          <p>作业条：<a target="_blank" rel="noopener" href="https://docs.qq.com/doc/DUG9UR2ZUc3BjRUdY">https://docs.qq.com/doc/DUG9UR2ZUc3BjRUdY</a></p>
+<h1 id="704-二分查找"><a href="#704-二分查找" class="headerlink" title="704 二分查找"></a>704 二分查找</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-search/">https://leetcode.cn/problems/binary-search/</a></p>
+<p>文章讲解<br><a target="_blank" rel="noopener" href="https://programmercarl.com/0704.%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE.html">https://programmercarl.com/0704.%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE.html</a></p>
+<p>视频讲解<br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1fA4y1o715">https://www.bilibili.com/video/BV1fA4y1o715</a></p>
+<h2 id="第一想法"><a href="#第一想法" class="headerlink" title="第一想法"></a>第一想法</h2><p>二分查找经典题目，边界条件是left&lt;&#x3D;right，然后取中间的指针，和target比较，分别修改left和right的值直到最后找到；如果超出边界条件仍然没找到，返回-1；</p>
+<h2 id="看完解答后的想法："><a href="#看完解答后的想法：" class="headerlink" title="看完解答后的想法："></a>看完解答后的想法：</h2><p>需要注意循环不变量，也就是搜索的区间到底是左闭右闭还是左闭右开，并且要在设置边界值的时候坚持这个不变。</p>
 <p>左闭右闭的写法，left &#x3D; 0 ; right &#x3D; num.size -1; while(left &lt;&#x3D; right ) left&#x2F;right &#x3D; mid+&#x2F;-1;<br>左闭右开的写法，right &#x3D; nums.size; while(left &lt; right&gt;) right &#x3D; mid; left &#x3D; mid+1;</p>
 <p>二分查找需要思考的几个点：</p>
 <ol>
@@ -256,19 +259,16 @@
 <li>其他输入异常情况</li>
 <li>注意条件：是否是有序</li>
 </ol>
-<p>实现过程中的问题：思路是对的，但是有细节需要改善；比如如何取中间值不越界；边界条件是&lt;还是&lt;&#x3D;</p>
-<ol start="27">
-<li>移除元素<br>题目链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-element/">https://leetcode.cn/problems/remove-element/</a><br>文章讲解：<a target="_blank" rel="noopener" href="https://programmercarl.com/0027.%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0.html">https://programmercarl.com/0027.%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0.html</a><br>视频讲解：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV12A4y1Z7LP">https://www.bilibili.com/video/BV12A4y1Z7LP</a></li>
-</ol>
-<p>第一想法：<br>暴力法：遍历判断当前元素是不是要移除的元素，如果是的话，把它后面所有元素前移；<br>双指针法：一个指针遍历数组，一个指针指向新数组当前位置；如果是要移除的元素，快指针+1，慢指针不变；如果不是要移除的元素，fast指向的值赋值给slow指向的值，fast+1，slow+1；返回slow<br>最终想法：</p>
-<ol>
+<h2 id="实现过程中的问题"><a href="#实现过程中的问题" class="headerlink" title="实现过程中的问题"></a>实现过程中的问题</h2><p>思路是对的，但是有细节需要改善；比如如何取中间值不越界；边界条件是&lt;还是&lt;&#x3D;</p>
+<h1 id="27-移除元素"><a href="#27-移除元素" class="headerlink" title="27. 移除元素"></a>27. 移除元素</h1><p>题目链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-element/">https://leetcode.cn/problems/remove-element/</a><br>文章讲解：<a target="_blank" rel="noopener" href="https://programmercarl.com/0027.%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0.html">https://programmercarl.com/0027.%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0.html</a><br>视频讲解：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV12A4y1Z7LP">https://www.bilibili.com/video/BV12A4y1Z7LP</a> </p>
+<h2 id="第一想法："><a href="#第一想法：" class="headerlink" title="第一想法："></a>第一想法：</h2><p>暴力法：遍历判断当前元素是不是要移除的元素，如果是的话，把它后面所有元素前移；<br>双指针法：一个指针遍历数组，一个指针指向新数组当前位置；如果是要移除的元素，快指针+1，慢指针不变；如果不是要移除的元素，fast指向的值赋值给slow指向的值，fast+1，slow+1；返回slow</p>
+<h2 id="最终想法："><a href="#最终想法：" class="headerlink" title="最终想法："></a>最终想法：</h2><ol>
 <li>两个指针的初始位置都是0，快指针从0走到最后一位，慢指针只在快指针不等于val的时候才会走。</li>
 <li>循环终止条件：快指针遍历完数组</li>
 <li>返回值：慢指针-1+1（慢指针在的位置是最终数组+1的位置，所以-1，但是这个位置是下标，需要再+1）</li>
 </ol>
-<p>实现过程中的问题：</p>
-<p>第二次做，出错的地方在于应该是判断快指针的值和val，而不是慢指针</p>
-<p>今日收获和学习时长：自己写的过了，复习了一遍，学习1.5h</p>
+<h2 id="实现过程中的问题："><a href="#实现过程中的问题：" class="headerlink" title="实现过程中的问题："></a>实现过程中的问题：</h2><p>第二次做，出错的地方在于应该是判断快指针的值和val，而不是慢指针</p>
+<h2 id="今日收获和学习时长"><a href="#今日收获和学习时长" class="headerlink" title="今日收获和学习时长"></a>今日收获和学习时长</h2><p>自己写的过了，复习了一遍，学习1.5h</p>
 
       
     </div>
