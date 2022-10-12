@@ -128,7 +128,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-count">45</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -176,6 +176,116 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/12/Day1%20704.%20%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%2027.%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/3.jpg">
+      <meta itemprop="name" content="StoneHan">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="StoneHan's blog">
+      <meta itemprop="description" content="想把你写成一首歌，想养一只猫">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | StoneHan's blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/10/12/Day1%20704.%20%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%2027.%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0/" class="post-title-link" itemprop="url">Day1 704. 二分查找 27.移除元素</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2022-10-12 11:13:09 / 修改时间：23:57:16" itemprop="dateCreated datePublished" datetime="2022-10-12T11:13:09+08:00">2022-10-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>Day1 704. 二分查找 27.移除元素</p>
+<p>作业条：<a target="_blank" rel="noopener" href="https://docs.qq.com/doc/DUG9UR2ZUc3BjRUdY">https://docs.qq.com/doc/DUG9UR2ZUc3BjRUdY</a></p>
+<p>题目链接：</p>
+<ol>
+<li>二分查找 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-search/">https://leetcode.cn/problems/binary-search/</a></li>
+</ol>
+<p>文章讲解：<a target="_blank" rel="noopener" href="https://programmercarl.com/0704.%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE.html">https://programmercarl.com/0704.%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE.html</a><br>视频讲解：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1fA4y1o715">https://www.bilibili.com/video/BV1fA4y1o715</a></p>
+<p>第一想法：二分查找经典题目，边界条件是left&lt;&#x3D;right，然后取中间的指针，和target比较，分别修改left和right的值直到最后找到；如果超出边界条件仍然没找到，返回-1；</p>
+<p>看完解答后的想法：<br>需要注意循环不变量，也就是搜索的区间到底是左闭右闭还是左闭右开，并且要在设置边界值的时候坚持这个不变。</p>
+<p>左闭右闭的写法，left &#x3D; 0 ; right &#x3D; num.size -1; while(left &lt;&#x3D; right ) left&#x2F;right &#x3D; mid+&#x2F;-1;<br>左闭右开的写法，right &#x3D; nums.size; while(left &lt; right&gt;) right &#x3D; mid; left &#x3D; mid+1;</p>
+<p>二分查找需要思考的几个点：</p>
+<ol>
+<li>循环的停止条件 while (low &lt;&#x3D; high)是因为有可能查找到两端的值</li>
+<li>取中位数的方法 mid &#x3D; low + (high-low)&#x2F;2，防止high+low&#x2F;2溢出</li>
+<li>边界收缩：如果要找的值在左边这块，那么右边界-1；右边同理；-1是因为值不可能在mid；</li>
+<li>返回值，找到返回mid，没找到即循环结束，返回-1；</li>
+<li>其他输入异常情况</li>
+<li>注意条件：是否是有序</li>
+</ol>
+<p>实现过程中的问题：思路是对的，但是有细节需要改善；比如如何取中间值不越界；边界条件是&lt;还是&lt;&#x3D;</p>
+<ol start="27">
+<li>移除元素<br>题目链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-element/">https://leetcode.cn/problems/remove-element/</a><br>文章讲解：<a target="_blank" rel="noopener" href="https://programmercarl.com/0027.%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0.html">https://programmercarl.com/0027.%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0.html</a><br>视频讲解：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV12A4y1Z7LP">https://www.bilibili.com/video/BV12A4y1Z7LP</a></li>
+</ol>
+<p>第一想法：<br>暴力法：遍历判断当前元素是不是要移除的元素，如果是的话，把它后面所有元素前移；<br>双指针法：一个指针遍历数组，一个指针指向新数组当前位置；如果是要移除的元素，快指针+1，慢指针不变；如果不是要移除的元素，fast指向的值赋值给slow指向的值，fast+1，slow+1；返回slow<br>最终想法：</p>
+<ol>
+<li>两个指针的初始位置都是0，快指针从0走到最后一位，慢指针只在快指针不等于val的时候才会走。</li>
+<li>循环终止条件：快指针遍历完数组</li>
+<li>返回值：慢指针-1+1（慢指针在的位置是最终数组+1的位置，所以-1，但是这个位置是下标，需要再+1）</li>
+</ol>
+<p>实现过程中的问题：</p>
+<p>第二次做，出错的地方在于应该是判断快指针的值和val，而不是慢指针</p>
+<p>今日收获和学习时长：自己写的过了，复习了一遍，学习1.5h</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1027,99 +1137,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2018/05/19/linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2018/05/13/%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/3.jpg">
-      <meta itemprop="name" content="StoneHan">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="StoneHan's blog">
-      <meta itemprop="description" content="想把你写成一首歌，想养一只猫">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | StoneHan's blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/05/13/%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7/" class="post-title-link" itemprop="url">压力测试工具Webbench源码分析</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2018-05-13 18:25:09" itemprop="dateCreated datePublished" datetime="2018-05-13T18:25:09+08:00">2018-05-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2018-08-27 09:46:11" itemprop="dateModified" datetime="2018-08-27T09:46:11+08:00">2018-08-27</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p>webbench首先fork出多个子进程，每个子进程都循环做web访问测试。子进程把访问的结果通过pipe告诉父进程，父进程做最终的统计结果。</p>
-<p>项目地址:<br><a target="_blank" rel="noopener" href="http://home.tiscali.cz/~cz210552/webbench.html">http://home.tiscali.cz/~cz210552&#x2F;webbench.html</a></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/05/13/%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
