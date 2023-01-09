@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.11.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="题目：● 454.四数相加II● 383. 赎金信● 15. 三数之和● 18. 四数之和">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Day7 哈希表2">
+<meta property="og:url" content="http://example.com/2023/01/09/Day7%20%E5%93%88%E5%B8%8C%E8%A1%A82/index.html">
+<meta property="og:site_name" content="StoneHan&#39;s blog">
+<meta property="og:description" content="题目：● 454.四数相加II● 383. 赎金信● 15. 三数之和● 18. 四数之和">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-01-09T03:13:09.000Z">
+<meta property="article:modified_time" content="2023-01-09T15:54:19.103Z">
+<meta property="article:author" content="StoneHan">
+<meta property="article:tag" content="leetcode">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="C++">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2023/01/09/Day7%20%E5%93%88%E5%B8%8C%E8%A1%A82/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2023/01/09/Day7%20%E5%93%88%E5%B8%8C%E8%A1%A82/","path":"2023/01/09/Day7 哈希表2/","title":"Day7 哈希表2"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Day7 哈希表2 | StoneHan's blog</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">StoneHan's blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Stone的个人博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#454-%E5%9B%9B%E6%95%B0%E7%9B%B8%E5%8A%A02"><span class="nav-number">1.</span> <span class="nav-text">454 四数相加2</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E6%83%B3%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">第一想法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9C%8B%E5%AE%8C%E8%A7%A3%E7%AD%94%E5%90%8E%E7%9A%84%E6%83%B3%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">看完解答后的想法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E8%BF%87%E7%A8%8B%E4%B8%AD%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">1.3.</span> <span class="nav-text">实现过程中的问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#383%E8%B5%8E%E9%87%91%E4%BF%A1"><span class="nav-number">2.</span> <span class="nav-text">383赎金信</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E6%83%B3%E6%B3%95-1"><span class="nav-number">2.1.</span> <span class="nav-text">第一想法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9C%8B%E5%AE%8C%E8%A7%A3%E7%AD%94%E5%90%8E%E7%9A%84%E6%83%B3%E6%B3%95-1"><span class="nav-number">2.2.</span> <span class="nav-text">看完解答后的想法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E8%BF%87%E7%A8%8B%E4%B8%AD%E7%9A%84%E9%97%AE%E9%A2%98-1"><span class="nav-number">2.3.</span> <span class="nav-text">实现过程中的问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text"></span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E6%83%B3%E6%B3%95-2"><span class="nav-number">3.1.</span> <span class="nav-text">第一想法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9C%8B%E5%AE%8C%E8%A7%A3%E7%AD%94%E5%90%8E%E7%9A%84%E6%83%B3%E6%B3%95-2"><span class="nav-number">3.2.</span> <span class="nav-text">看完解答后的想法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E8%BF%87%E7%A8%8B%E4%B8%AD%E7%9A%84%E9%97%AE%E9%A2%98-2"><span class="nav-number">3.3.</span> <span class="nav-text">实现过程中的问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#-1"><span class="nav-number">4.</span> <span class="nav-text"></span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E6%83%B3%E6%B3%95%EF%BC%9A"><span class="nav-number">4.1.</span> <span class="nav-text">第一想法：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9C%8B%E5%AE%8C%E8%A7%A3%E7%AD%94%E5%90%8E%E7%9A%84%E6%83%B3%E6%B3%95%EF%BC%9A"><span class="nav-number">4.2.</span> <span class="nav-text">看完解答后的想法：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E8%BF%87%E7%A8%8B%E4%B8%AD%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%9A"><span class="nav-number">4.3.</span> <span class="nav-text">实现过程中的问题：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8A%E6%97%A5%E6%94%B6%E8%8E%B7%E5%92%8C%E5%AD%A6%E4%B9%A0%E6%97%B6%E9%95%BF"><span class="nav-number">4.4.</span> <span class="nav-text">今日收获和学习时长</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="StoneHan"
+      src="/images/3.jpg">
+  <p class="site-author-name" itemprop="name">StoneHan</p>
+  <div class="site-description" itemprop="description">想把你写成一首歌，想养一只猫</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">41</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Stone-Han" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Stone-Han" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:592024747@qq.com" title="E-Mail → mailto:592024747@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/01/09/Day7%20%E5%93%88%E5%B8%8C%E8%A1%A82/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/3.jpg">
+      <meta itemprop="name" content="StoneHan">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="StoneHan's blog">
+      <meta itemprop="description" content="想把你写成一首歌，想养一只猫">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Day7 哈希表2 | StoneHan's blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Day7 哈希表2
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-01-09 11:13:09 / 修改时间：23:54:19" itemprop="dateCreated datePublished" datetime="2023-01-09T11:13:09+08:00">2023-01-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>题目：<br>● 454.四数相加II<br>● 383. 赎金信<br>● 15. 三数之和<br>● 18. 四数之和 </p>
+<span id="more"></span>
+
+<h1 id="454-四数相加2"><a href="#454-四数相加2" class="headerlink" title="454 四数相加2"></a>454 四数相加2</h1><p>题目链接：<br><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/4sum-ii/">https://leetcode.cn/problems/4sum-ii/</a></p>
+<p>文章讲解<br><a target="_blank" rel="noopener" href="https://programmercarl.com/0454.%E5%9B%9B%E6%95%B0%E7%9B%B8%E5%8A%A0II.html">https://programmercarl.com/0454.%E5%9B%9B%E6%95%B0%E7%9B%B8%E5%8A%A0II.html</a></p>
+<p>视频讲解</p>
+<h2 id="第一想法"><a href="#第一想法" class="headerlink" title="第一想法"></a>第一想法</h2><p>用两个map分别统计a+b,c+d的和出现的次数，然后找0-sum1是否存在并且把出现次数乘</p>
+<h2 id="看完解答后的想法"><a href="#看完解答后的想法" class="headerlink" title="看完解答后的想法"></a>看完解答后的想法</h2><p>相同</p>
+<h2 id="实现过程中的问题"><a href="#实现过程中的问题" class="headerlink" title="实现过程中的问题"></a>实现过程中的问题</h2><p>最后的结果是两个出现次数相乘<br>由于涉及到两个map的操作，所以要注意map的遍历利用iter遍历<br>并且查找的是first值，找到之后将second的值相乘</p>
+<h1 id="383赎金信"><a href="#383赎金信" class="headerlink" title="383赎金信"></a>383赎金信</h1><p>题目链接：<br><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/ransom-note/">https://leetcode.cn/problems/ransom-note/</a></p>
+<p>文章讲解<br><a target="_blank" rel="noopener" href="https://programmercarl.com/0383.%E8%B5%8E%E9%87%91%E4%BF%A1.html">https://programmercarl.com/0383.%E8%B5%8E%E9%87%91%E4%BF%A1.html</a></p>
+<p>视频讲解</p>
+<h2 id="第一想法-1"><a href="#第一想法-1" class="headerlink" title="第一想法"></a>第一想法</h2><p>对两个字符串分别构建一个&lt;key,value&gt;，value表示出现的次数；<br>然后如果第二个字符串字幕对应出现次数大于等于第一个，则true；有一个小于则false<br>或者使用数组构建&lt;key,value&gt;</p>
+<h2 id="看完解答后的想法-1"><a href="#看完解答后的想法-1" class="headerlink" title="看完解答后的想法"></a>看完解答后的想法</h2><p>相同</p>
+<h2 id="实现过程中的问题-1"><a href="#实现过程中的问题-1" class="headerlink" title="实现过程中的问题"></a>实现过程中的问题</h2><p>注意需要先用magazine统计++,然后用哪个ransomeNote – 因为magazine里面出现的字幕比ransomeNote多</p>
+<h1 id=""><a href="#" class="headerlink" title=""></a></h1><p>题目链接：</p>
+<p>文章讲解</p>
+<p>视频讲解</p>
+<h2 id="第一想法-2"><a href="#第一想法-2" class="headerlink" title="第一想法"></a>第一想法</h2><h2 id="看完解答后的想法-2"><a href="#看完解答后的想法-2" class="headerlink" title="看完解答后的想法"></a>看完解答后的想法</h2><h2 id="实现过程中的问题-2"><a href="#实现过程中的问题-2" class="headerlink" title="实现过程中的问题"></a>实现过程中的问题</h2><h1 id="-1"><a href="#-1" class="headerlink" title=""></a></h1><h2 id="第一想法："><a href="#第一想法：" class="headerlink" title="第一想法："></a>第一想法：</h2><h2 id="看完解答后的想法："><a href="#看完解答后的想法：" class="headerlink" title="看完解答后的想法："></a>看完解答后的想法：</h2><h2 id="实现过程中的问题："><a href="#实现过程中的问题：" class="headerlink" title="实现过程中的问题："></a>实现过程中的问题：</h2><h2 id="今日收获和学习时长"><a href="#今日收获和学习时长" class="headerlink" title="今日收获和学习时长"></a>今日收获和学习时长</h2>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/leetcode/" rel="tag"># leetcode</a>
+              <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+              <a href="/tags/C/" rel="tag"># C++</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/01/06/Day6%20%E5%93%88%E5%B8%8C242%20349%20202%201/" rel="prev" title="Day6 哈希表1">
+                  <i class="fa fa-chevron-left"></i> Day6 哈希表1
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">StoneHan</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
