@@ -128,7 +128,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">45</span>
+          <span class="site-state-item-count">51</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -176,6 +176,607 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/01/09/Day7%20%E5%93%88%E5%B8%8C%E8%A1%A8%20454%20383%2015%2018%20/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/3.jpg">
+      <meta itemprop="name" content="StoneHan">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="StoneHan's blog">
+      <meta itemprop="description" content="想把你写成一首歌，想养一只猫">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | StoneHan's blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/01/09/Day7%20%E5%93%88%E5%B8%8C%E8%A1%A8%20454%20383%2015%2018%20/" class="post-title-link" itemprop="url">Day7 哈希表2</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-01-09 11:13:09 / 修改时间：23:44:00" itemprop="dateCreated datePublished" datetime="2023-01-09T11:13:09+08:00">2023-01-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="454-四数相加2"><a href="#454-四数相加2" class="headerlink" title="454 四数相加2"></a>454 四数相加2</h1><p>题目链接：<br><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/4sum-ii/">https://leetcode.cn/problems/4sum-ii/</a></p>
+<p>文章讲解<br><a target="_blank" rel="noopener" href="https://programmercarl.com/0454.%E5%9B%9B%E6%95%B0%E7%9B%B8%E5%8A%A0II.html">https://programmercarl.com/0454.%E5%9B%9B%E6%95%B0%E7%9B%B8%E5%8A%A0II.html</a></p>
+<p>视频讲解</p>
+<h2 id="第一想法"><a href="#第一想法" class="headerlink" title="第一想法"></a>第一想法</h2><p>用两个map分别统计a+b,c+d的和出现的次数，然后找0-sum1是否存在并且把出现次数乘</p>
+<h2 id="看完解答后的想法"><a href="#看完解答后的想法" class="headerlink" title="看完解答后的想法"></a>看完解答后的想法</h2><p>相同</p>
+<h2 id="实现过程中的问题"><a href="#实现过程中的问题" class="headerlink" title="实现过程中的问题"></a>实现过程中的问题</h2><p>最后的结果是两个出现次数相乘<br>由于涉及到两个map的操作，所以要注意map的遍历利用iter遍历<br>并且查找的是first值，找到之后将second的值相乘</p>
+<h1 id="383赎金信"><a href="#383赎金信" class="headerlink" title="383赎金信"></a>383赎金信</h1><p>题目链接：<br><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/ransom-note/">https://leetcode.cn/problems/ransom-note/</a></p>
+<p>文章讲解<br><a target="_blank" rel="noopener" href="https://programmercarl.com/0383.%E8%B5%8E%E9%87%91%E4%BF%A1.html">https://programmercarl.com/0383.%E8%B5%8E%E9%87%91%E4%BF%A1.html</a></p>
+<p>视频讲解</p>
+<h2 id="第一想法-1"><a href="#第一想法-1" class="headerlink" title="第一想法"></a>第一想法</h2><p>对两个字符串分别构建一个&lt;key,value&gt;，value表示出现的次数；<br>然后如果第二个字符串字幕对应出现次数大于等于第一个，则true；有一个小于则false<br>或者使用数组构建&lt;key,value&gt;</p>
+<h2 id="看完解答后的想法-1"><a href="#看完解答后的想法-1" class="headerlink" title="看完解答后的想法"></a>看完解答后的想法</h2><p>相同</p>
+<h2 id="实现过程中的问题-1"><a href="#实现过程中的问题-1" class="headerlink" title="实现过程中的问题"></a>实现过程中的问题</h2><p>注意需要先用magazine统计++,然后用哪个ransomeNote – 因为magazine里面出现的字幕比ransomeNote多</p>
+<h1 id=""><a href="#" class="headerlink" title=""></a></h1><p>题目链接：</p>
+<p>文章讲解</p>
+<p>视频讲解</p>
+<h2 id="第一想法-2"><a href="#第一想法-2" class="headerlink" title="第一想法"></a>第一想法</h2><h2 id="看完解答后的想法-2"><a href="#看完解答后的想法-2" class="headerlink" title="看完解答后的想法"></a>看完解答后的想法</h2><h2 id="实现过程中的问题-2"><a href="#实现过程中的问题-2" class="headerlink" title="实现过程中的问题"></a>实现过程中的问题</h2><h1 id="-1"><a href="#-1" class="headerlink" title=""></a></h1><h2 id="第一想法："><a href="#第一想法：" class="headerlink" title="第一想法："></a>第一想法：</h2><h2 id="看完解答后的想法："><a href="#看完解答后的想法：" class="headerlink" title="看完解答后的想法："></a>看完解答后的想法：</h2><h2 id="实现过程中的问题："><a href="#实现过程中的问题：" class="headerlink" title="实现过程中的问题："></a>实现过程中的问题：</h2><h2 id="今日收获和学习时长"><a href="#今日收获和学习时长" class="headerlink" title="今日收获和学习时长"></a>今日收获和学习时长</h2>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/01/06/Day6%20%E5%93%88%E5%B8%8C242%20349%20202%201/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/3.jpg">
+      <meta itemprop="name" content="StoneHan">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="StoneHan's blog">
+      <meta itemprop="description" content="想把你写成一首歌，想养一只猫">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | StoneHan's blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/01/06/Day6%20%E5%93%88%E5%B8%8C242%20349%20202%201/" class="post-title-link" itemprop="url">Day6 哈希表1</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-01-06 11:13:09" itemprop="dateCreated datePublished" datetime="2023-01-06T11:13:09+08:00">2023-01-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-01-09 22:44:33" itemprop="dateModified" datetime="2023-01-09T22:44:33+08:00">2023-01-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>作业条：</p>
+<h1 id="242-有效的字母异位词"><a href="#242-有效的字母异位词" class="headerlink" title="242. 有效的字母异位词"></a>242. 有效的字母异位词</h1><p>题目链接：<br><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/valid-anagram/">https://leetcode.cn/problems/valid-anagram/</a></p>
+<p>文章讲解<br><a target="_blank" rel="noopener" href="https://programmercarl.com/0242.%E6%9C%89%E6%95%88%E7%9A%84%E5%AD%97%E6%AF%8D%E5%BC%82%E4%BD%8D%E8%AF%8D.html#%E6%80%9D%E8%B7%AF">https://programmercarl.com/0242.%E6%9C%89%E6%95%88%E7%9A%84%E5%AD%97%E6%AF%8D%E5%BC%82%E4%BD%8D%E8%AF%8D.html#%E6%80%9D%E8%B7%AF</a></p>
+<p>视频讲解</p>
+<h2 id="第一想法"><a href="#第一想法" class="headerlink" title="第一想法"></a>第一想法</h2><p>创建一个26个单位的数组表示每个字母出现的频次，然后分别统计两个单词字母出现的频率，如果不相同则直接返回，如果最后数组一致则为异位词。</p>
+<h2 id="看完解答后的想法"><a href="#看完解答后的想法" class="headerlink" title="看完解答后的想法"></a>看完解答后的想法</h2><p>相同</p>
+<h2 id="实现过程中的问题"><a href="#实现过程中的问题" class="headerlink" title="实现过程中的问题"></a>实现过程中的问题</h2><p>无</p>
+<h1 id="349-两个数组的交集"><a href="#349-两个数组的交集" class="headerlink" title="349. 两个数组的交集"></a>349. 两个数组的交集</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/intersection-of-two-arrays/">https://leetcode.cn/problems/intersection-of-two-arrays/</a></p>
+<h2 id="第一想法："><a href="#第一想法：" class="headerlink" title="第一想法："></a>第一想法：</h2><p>用第一个数组创建一个set，如果第二个数组在这个set里面出现，那么就把这个值加入到结果set；<br>或者开辟一个长度为1001的数组，然后如果数组1出现，就把对应值设为1；如果数组2里面也出现并且hash值为1，那么就是相交数字。</p>
+<h2 id="看完解答后的想法："><a href="#看完解答后的想法：" class="headerlink" title="看完解答后的想法："></a>看完解答后的想法：</h2><h2 id="实现过程中的问题："><a href="#实现过程中的问题：" class="headerlink" title="实现过程中的问题："></a>实现过程中的问题：</h2><p>注意unordeder_set的使用方法<br>初始化：unordered_set<int> set1(nums1.begin(),nums1.end());<br>查找：set1.find(num)!&#x3D;set1.end()<br>插入：res.insert(num);</p>
+<h1 id="202-快乐数"><a href="#202-快乐数" class="headerlink" title="202. 快乐数"></a>202. 快乐数</h1><p>编写一个算法来判断一个数 n 是不是快乐数。</p>
+<p>「快乐数」 定义为：</p>
+<p>对于一个正整数，每一次将该数替换为它每个位置上的数字的平方和。<br>然后重复这个过程直到这个数变为 1，也可能是 无限循环 但始终变不到 1。<br>如果这个过程 结果为 1，那么这个数就是快乐数。<br>如果 n 是 快乐数 就返回 true ；不是，则返回 false 。</p>
+<h2 id="第一想法：-1"><a href="#第一想法：-1" class="headerlink" title="第一想法："></a>第一想法：</h2><p>没看明白</p>
+<h2 id="看完解答后的想法：-1"><a href="#看完解答后的想法：-1" class="headerlink" title="看完解答后的想法："></a>看完解答后的想法：</h2><p>每次计算每个位上数字的平方和，然后判断这个和有没有在set中出现，如果出现过则表示重复，不是happy数；如果是1则是happy数。</p>
+<h2 id="实现过程中的问题：-1"><a href="#实现过程中的问题：-1" class="headerlink" title="实现过程中的问题："></a>实现过程中的问题：</h2><h1 id="1-两数之和"><a href="#1-两数之和" class="headerlink" title="1.两数之和"></a>1.两数之和</h1><p>题目链接：<br><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/two-sum/">https://leetcode.cn/problems/two-sum/</a></p>
+<p>文章讲解<br><a target="_blank" rel="noopener" href="https://programmercarl.com/0001.%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C.html#%E6%80%9D%E8%B7%AF">https://programmercarl.com/0001.%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C.html#%E6%80%9D%E8%B7%AF</a></p>
+<p>视频讲解</p>
+<h2 id="第一想法-1"><a href="#第一想法-1" class="headerlink" title="第一想法"></a>第一想法</h2><p>用双重循环遍历数组</p>
+<h2 id="看完解答后的想法-1"><a href="#看完解答后的想法-1" class="headerlink" title="看完解答后的想法"></a>看完解答后的想法</h2><p>用map保存数字和下标，然后用target-nums[i]直接找有没有对应的，如果没有，则加入map；如果有，则输出两个值的下标</p>
+<h2 id="实现过程中的问题-1"><a href="#实现过程中的问题-1" class="headerlink" title="实现过程中的问题"></a>实现过程中的问题</h2><p>注意map的初始化和使用<br>    std::unordered_map &lt;int,int&gt; map;<br>    auto iter &#x3D; map.find(target - nums[i]);<br>    if(iter !&#x3D; map.end())<br>        return {iter-&gt;second, i};<br>    map.insert(pair&lt;int, int&gt;(nums[i], i)); </p>
+<h2 id="今日收获和学习时长"><a href="#今日收获和学习时长" class="headerlink" title="今日收获和学习时长"></a>今日收获和学习时长</h2><p>2h</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/01/02/Day3%20%E9%93%BE%E8%A1%A8%20203%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0%20707%E8%AE%BE%E8%AE%A1%E9%93%BE%E8%A1%A8%20206%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/3.jpg">
+      <meta itemprop="name" content="StoneHan">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="StoneHan's blog">
+      <meta itemprop="description" content="想把你写成一首歌，想养一只猫">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | StoneHan's blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/01/02/Day3%20%E9%93%BE%E8%A1%A8%20203%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0%20707%E8%AE%BE%E8%AE%A1%E9%93%BE%E8%A1%A8%20206%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/" class="post-title-link" itemprop="url">Day3</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-01-02 11:13:09" itemprop="dateCreated datePublished" datetime="2023-01-02T11:13:09+08:00">2023-01-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-01-03 22:46:49" itemprop="dateModified" datetime="2023-01-03T22:46:49+08:00">2023-01-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>作业条：<a target="_blank" rel="noopener" href="https://docs.qq.com/doc/DUGdqYWNYeGhlaVR6">https://docs.qq.com/doc/DUGdqYWNYeGhlaVR6</a></p>
+<h1 id="203-移除链表元素"><a href="#203-移除链表元素" class="headerlink" title="203.移除链表元素"></a>203.移除链表元素</h1><p>题目链接：<br><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-linked-list-elements/">https://leetcode.cn/problems/remove-linked-list-elements/</a></p>
+<p>文章讲解<br><a target="_blank" rel="noopener" href="https://programmercarl.com/0203.%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0.html">https://programmercarl.com/0203.%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0.html</a></p>
+<p>视频讲解<br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV18B4y1s7R9/?spm_id_from=pageDriver">https://www.bilibili.com/video/BV18B4y1s7R9/?spm_id_from=pageDriver</a></p>
+<h2 id="第一想法"><a href="#第一想法" class="headerlink" title="第一想法"></a>第一想法</h2><p>删除元素的时候注意处理头结点的特殊情况或者插入一个新的头结点；<br>在做的时候用了双指针的思路，一个标记pre，一个标记当前节点p</p>
+<h2 id="实现过程中的问题"><a href="#实现过程中的问题" class="headerlink" title="实现过程中的问题"></a>实现过程中的问题</h2><p>在实现过程中混淆了break和continue的用法，break是结束所有循环，continue是结束当前循环<br>注意删除不需要的节点</p>
+<h2 id="看完解答后的想法"><a href="#看完解答后的想法" class="headerlink" title="看完解答后的想法"></a>看完解答后的想法</h2><p>解答也是考虑了是否插入头结点的方法，但是在判断循环的时候用的是p-&gt;next，删除元素的时候用了一个tmp节点。</p>
+<h1 id="707-设计链表"><a href="#707-设计链表" class="headerlink" title="707 设计链表"></a>707 设计链表</h1><h2 id="第一想法："><a href="#第一想法：" class="headerlink" title="第一想法："></a>第一想法：</h2><p>把链表指针反方向指</p>
+<h2 id="看完解答后的想法："><a href="#看完解答后的想法：" class="headerlink" title="看完解答后的想法："></a>看完解答后的想法：</h2><p>想复杂了，还想加一个dumphead以及判断链表是不是空的，是不是只有一个元素，结果看了一眼解答，不加dumphead之后写法更简洁，并且能统一处理上面的边界情况</p>
+<h2 id="实现过程中的问题："><a href="#实现过程中的问题：" class="headerlink" title="实现过程中的问题："></a>实现过程中的问题：</h2><p>无</p>
+<h2 id="今日收获和学习时长"><a href="#今日收获和学习时长" class="headerlink" title="今日收获和学习时长"></a>今日收获和学习时长</h2><p>2小时28分</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/01/01/Day0%20template/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/3.jpg">
+      <meta itemprop="name" content="StoneHan">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="StoneHan's blog">
+      <meta itemprop="description" content="想把你写成一首歌，想养一只猫">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | StoneHan's blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/01/01/Day0%20template/" class="post-title-link" itemprop="url">Day</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-01-01 11:13:09" itemprop="dateCreated datePublished" datetime="2023-01-01T11:13:09+08:00">2023-01-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-01-03 22:47:53" itemprop="dateModified" datetime="2023-01-03T22:47:53+08:00">2023-01-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>作业条：</p>
+<h1 id=""><a href="#" class="headerlink" title=""></a></h1><p>题目链接：</p>
+<p>文章讲解</p>
+<p>视频讲解</p>
+<h2 id="第一想法"><a href="#第一想法" class="headerlink" title="第一想法"></a>第一想法</h2><h2 id="看完解答后的想法"><a href="#看完解答后的想法" class="headerlink" title="看完解答后的想法"></a>看完解答后的想法</h2><h2 id="实现过程中的问题"><a href="#实现过程中的问题" class="headerlink" title="实现过程中的问题"></a>实现过程中的问题</h2><h1 id="-1"><a href="#-1" class="headerlink" title=""></a></h1><h2 id="第一想法："><a href="#第一想法：" class="headerlink" title="第一想法："></a>第一想法：</h2><h2 id="看完解答后的想法："><a href="#看完解答后的想法：" class="headerlink" title="看完解答后的想法："></a>看完解答后的想法：</h2><h2 id="实现过程中的问题："><a href="#实现过程中的问题：" class="headerlink" title="实现过程中的问题："></a>实现过程中的问题：</h2><h2 id="今日收获和学习时长"><a href="#今日收获和学习时长" class="headerlink" title="今日收获和学习时长"></a>今日收获和学习时长</h2>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/01/01/Day4%2024%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%2019%20%E5%88%A0%E9%99%A4%E5%80%92%E6%95%B0n%2002.07%E9%93%BE%E8%A1%A8%E7%9B%B8%E4%BA%A4%20142%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/3.jpg">
+      <meta itemprop="name" content="StoneHan">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="StoneHan's blog">
+      <meta itemprop="description" content="想把你写成一首歌，想养一只猫">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | StoneHan's blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/01/01/Day4%2024%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%2019%20%E5%88%A0%E9%99%A4%E5%80%92%E6%95%B0n%2002.07%E9%93%BE%E8%A1%A8%E7%9B%B8%E4%BA%A4%20142%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8/" class="post-title-link" itemprop="url">Day</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-01-01 11:13:09" itemprop="dateCreated datePublished" datetime="2023-01-01T11:13:09+08:00">2023-01-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-01-04 21:28:52" itemprop="dateModified" datetime="2023-01-04T21:28:52+08:00">2023-01-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>作业条：</p>
+<h1 id="24-两两交换链表中的节点"><a href="#24-两两交换链表中的节点" class="headerlink" title="24. 两两交换链表中的节点"></a>24. 两两交换链表中的节点</h1><p>题目链接：<br><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/swap-nodes-in-pairs/">https://leetcode.cn/problems/swap-nodes-in-pairs/</a></p>
+<p>文章讲解<br><a target="_blank" rel="noopener" href="https://programmercarl.com/0024.%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9.html#%E6%80%9D%E8%B7%AF">https://programmercarl.com/0024.%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9.html#%E6%80%9D%E8%B7%AF</a></p>
+<p>视频讲解<br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1YT411g7br/">https://www.bilibili.com/video/BV1YT411g7br/</a></p>
+<h2 id="第一想法"><a href="#第一想法" class="headerlink" title="第一想法"></a>第一想法</h2><p>直接对两个相邻链表指针进行反转，但是到反转下两个的时候发现不太对，因为第一个没办法指向第三个</p>
+<h2 id="看完解答后的想法"><a href="#看完解答后的想法" class="headerlink" title="看完解答后的想法"></a>看完解答后的想法</h2><p>思路要用第一个操作后面两个节点，而不仅仅是对两个节点的操作</p>
+<ol>
+<li>什么时候需要考虑加dump head?</li>
+<li>判断循环终止的条件到底是cur不为空还是cur-&gt;next不为空：当链表为奇数的时候是cur-&gt;next-&gt;next为空结束，当链表为偶数是cur-&gt;next为空结束</li>
+<li>下一次循环只需要把cur赋值为cur-&gt;next-&gt;next就可以，不用管是不是交换过了值</li>
+</ol>
+<h2 id="实现过程中的问题"><a href="#实现过程中的问题" class="headerlink" title="实现过程中的问题"></a>实现过程中的问题</h2><p>主要注意循环条件</p>
+<h1 id="19-删除链表的倒数第-N-个结点"><a href="#19-删除链表的倒数第-N-个结点" class="headerlink" title="19. 删除链表的倒数第 N 个结点"></a>19. 删除链表的倒数第 N 个结点</h1><p>题目链接：<br><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-nth-node-from-end-of-list/">https://leetcode.cn/problems/remove-nth-node-from-end-of-list/</a><br>文章讲解<br><a target="_blank" rel="noopener" href="https://programmercarl.com/0019.%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E8%8A%82%E7%82%B9.html#%E6%80%9D%E8%B7%AF">https://programmercarl.com/0019.%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E8%8A%82%E7%82%B9.html#%E6%80%9D%E8%B7%AF</a><br>视频讲解<br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1vW4y1U7Gf/?spm_id_from=333.788">https://www.bilibili.com/video/BV1vW4y1U7Gf/?spm_id_from=333.788</a></p>
+<h2 id="第一想法："><a href="#第一想法：" class="headerlink" title="第一想法："></a>第一想法：</h2><p>只是有印象要用快慢指针，但是具体怎么用忘记了。还以为是直接一个指针走到size-n的位置，但是链表没有具体的size，所以需要遍历两遍；<br>但是快慢指针，快指针先走，慢指针再走，其实也是遍历两遍；</p>
+<h2 id="看完解答后的想法："><a href="#看完解答后的想法：" class="headerlink" title="看完解答后的想法："></a>看完解答后的想法：</h2><p>看完解答之后发现只需要让快指针多走就可以了。</p>
+<ol>
+<li>怎么确定快指针要走快多少步</li>
+<li>循环终止条件</li>
+<li>需不需要dumphead： 需要<br>快指针比慢指针走快n+1步，并且快指针不为空；<br>快指针比慢指针走快n步，并且快指针-&gt;next不为空；<br>这两个判断条件一样吗？一样的，两种写法都可以。</li>
+</ol>
+<h2 id="实现过程中的问题："><a href="#实现过程中的问题：" class="headerlink" title="实现过程中的问题："></a>实现过程中的问题：</h2><p>无</p>
+<h1 id="面试题-02-07-链表相交"><a href="#面试题-02-07-链表相交" class="headerlink" title="面试题 02.07. 链表相交"></a>面试题 02.07. 链表相交</h1><p>题目链接：<br><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/intersection-of-two-linked-lists-lcci/">https://leetcode.cn/problems/intersection-of-two-linked-lists-lcci/</a></p>
+<p>文章讲解<br><a target="_blank" rel="noopener" href="https://programmercarl.com/%E9%9D%A2%E8%AF%95%E9%A2%9802.07.%E9%93%BE%E8%A1%A8%E7%9B%B8%E4%BA%A4.html#%E6%80%9D%E8%B7%AF">https://programmercarl.com/%E9%9D%A2%E8%AF%95%E9%A2%9802.07.%E9%93%BE%E8%A1%A8%E7%9B%B8%E4%BA%A4.html#%E6%80%9D%E8%B7%AF</a></p>
+<p>视频讲解</p>
+<h2 id="第一想法-1"><a href="#第一想法-1" class="headerlink" title="第一想法"></a>第一想法</h2><p>用两个指针分别指向两个链表，当遍历完自己之后去遍历对方，最终两个指针如果相等就是相交的节点。</p>
+<h2 id="看完解答后的想法-1"><a href="#看完解答后的想法-1" class="headerlink" title="看完解答后的想法"></a>看完解答后的想法</h2><p>想法一致</p>
+<h2 id="实现过程中的问题-1"><a href="#实现过程中的问题-1" class="headerlink" title="实现过程中的问题"></a>实现过程中的问题</h2><p>循环结束条件：当两个链表相交的时候，结束条件为指针相同；当两个链表不相交的时候，最终两个指针的值也会相同并且为null</p>
+<h2 id="今日收获和学习时长"><a href="#今日收获和学习时长" class="headerlink" title="今日收获和学习时长"></a>今日收获和学习时长</h2><p>3h</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/13/Day2%20977%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E7%9A%84%E5%B9%B3%E6%96%B9%20209.%E9%95%BF%E5%BA%A6%E6%9C%80%E5%B0%8F%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84%2059.%E8%9E%BA%E6%97%8B%E7%9F%A9%E9%98%B5II/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/3.jpg">
+      <meta itemprop="name" content="StoneHan">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="StoneHan's blog">
+      <meta itemprop="description" content="想把你写成一首歌，想养一只猫">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | StoneHan's blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/10/13/Day2%20977%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E7%9A%84%E5%B9%B3%E6%96%B9%20209.%E9%95%BF%E5%BA%A6%E6%9C%80%E5%B0%8F%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84%2059.%E8%9E%BA%E6%97%8B%E7%9F%A9%E9%98%B5II/" class="post-title-link" itemprop="url">Day2 977.有序数组的平方 209.长度最小的子数组 59.螺旋矩阵II</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-10-13 11:13:09" itemprop="dateCreated datePublished" datetime="2022-10-13T11:13:09+08:00">2022-10-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-01-02 21:23:01" itemprop="dateModified" datetime="2023-01-02T21:23:01+08:00">2023-01-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>作业条：<a target="_blank" rel="noopener" href="https://docs.qq.com/doc/DUGRwWXNOVEpyaVpG">https://docs.qq.com/doc/DUGRwWXNOVEpyaVpG</a></p>
+<h1 id="977-有序数组的平方"><a href="#977-有序数组的平方" class="headerlink" title="977.有序数组的平方"></a>977.有序数组的平方</h1><p>题目链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/squares-of-a-sorted-array/">https://leetcode.cn/problems/squares-of-a-sorted-array/</a></p>
+<p>文章讲解：<a target="_blank" rel="noopener" href="https://programmercarl.com/0977.%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E7%9A%84%E5%B9%B3%E6%96%B9.html">https://programmercarl.com/0977.%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E7%9A%84%E5%B9%B3%E6%96%B9.html</a></p>
+<p>视频讲解： <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1QB4y1D7ep">https://www.bilibili.com/video/BV1QB4y1D7ep</a> </p>
+<h2 id="第一想法"><a href="#第一想法" class="headerlink" title="第一想法"></a>第一想法</h2><p>暴力：计算每个数字的平方，然后整体排序 O（nlogn）<br>双指针：找到最小值，用两个指针分别指向最小值左边和右边，然后比较两个平方值，小的放入新数组；<br>双指针分别指向头和尾，比较头尾两个的平方值，较大的放入数组尾部</p>
+<h2 id="看完解答后的想法"><a href="#看完解答后的想法" class="headerlink" title="看完解答后的想法"></a>看完解答后的想法</h2><p>同上</p>
+<h2 id="实现过程中的问题"><a href="#实现过程中的问题" class="headerlink" title="实现过程中的问题"></a>实现过程中的问题</h2><p>写数组从小到大排序发现太麻烦了，然后想到了可以从后向前</p>
+<h1 id="209-长度最小的子数组"><a href="#209-长度最小的子数组" class="headerlink" title="209.长度最小的子数组"></a>209.长度最小的子数组</h1><p>题目链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-size-subarray-sum/">https://leetcode.cn/problems/minimum-size-subarray-sum/</a><br>文章讲解：<a target="_blank" rel="noopener" href="https://programmercarl.com/0209.%E9%95%BF%E5%BA%A6%E6%9C%80%E5%B0%8F%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84.html">https://programmercarl.com/0209.%E9%95%BF%E5%BA%A6%E6%9C%80%E5%B0%8F%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84.html</a><br>视频讲解：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1tZ4y1q7XE">https://www.bilibili.com/video/BV1tZ4y1q7XE</a></p>
+<h2 id="第一想法："><a href="#第一想法：" class="headerlink" title="第一想法："></a>第一想法：</h2><p>利用滑动窗口和两个指针分别指向窗口第一个位置和结束位置，先将元素加入窗口，判断窗口的和，如果满足条件那么记录下当前的长度；<br>然后再缩小左边的窗口，如果仍然满足条件，判断和之前的长度取最小长度记录下来。</p>
+<h2 id="看完解答后的想法："><a href="#看完解答后的想法：" class="headerlink" title="看完解答后的想法："></a>看完解答后的想法：</h2><p>同上</p>
+<h2 id="实现过程中的问题："><a href="#实现过程中的问题：" class="headerlink" title="实现过程中的问题："></a>实现过程中的问题：</h2><ol>
+<li>算法的终止条件是什么？由于算法最后遍历了所有的元素，所以终止条件是其中一个指针（窗口右端）遍历完数组。</li>
+<li>如何组织算法流程？外循环遍历数组，计算元素的和，然后判断是否满足条件，不满足则直接跳出循环进行下一次加入；满足条件的情况下，先记录下当前满足条件的长度，然后尝试缩减长度，记录缩减后并且还满足条件的最小长度；</li>
+</ol>
+<h1 id="59-螺旋矩阵II"><a href="#59-螺旋矩阵II" class="headerlink" title="59.螺旋矩阵II"></a>59.螺旋矩阵II</h1><p>题目链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/spiral-matrix-ii/">https://leetcode.cn/problems/spiral-matrix-ii/</a><br>文章讲解：<a target="_blank" rel="noopener" href="https://programmercarl.com/0059.%E8%9E%BA%E6%97%8B%E7%9F%A9%E9%98%B5II.html">https://programmercarl.com/0059.%E8%9E%BA%E6%97%8B%E7%9F%A9%E9%98%B5II.html</a><br>视频讲解：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1SL4y1N7mV/">https://www.bilibili.com/video/BV1SL4y1N7mV/</a></p>
+<h2 id="第一想法：-1"><a href="#第一想法：-1" class="headerlink" title="第一想法："></a>第一想法：</h2><p>按照螺旋的顺序依次打印数组，只是知道这个想法，但是具体实现的时候对想法模糊不清。</p>
+<h2 id="看完解答后的想法：-1"><a href="#看完解答后的想法：-1" class="headerlink" title="看完解答后的想法："></a>看完解答后的想法：</h2><ol>
+<li>循环终止条件：循环的圈数是n&#x2F;2，因为每次一圈包含两行&#x2F;列；注意n如果是奇数的情况，单独处理最后一个数</li>
+<li>每一圈的处理：按照螺旋循环，每次左开右闭</li>
+<li>如何控制每一圈的赋值：使用一个变量标记每圈的起始位置，以及每行&#x2F;列的终止位置</li>
+</ol>
+<h2 id="实现过程中的问题：-1"><a href="#实现过程中的问题：-1" class="headerlink" title="实现过程中的问题："></a>实现过程中的问题：</h2><p>每次循环开始都是不固定的，所以每次startx和starty要赋值给i,j；<br>对奇数矩阵中心数的处理</p>
+<h2 id="今日收获和学习时长"><a href="#今日收获和学习时长" class="headerlink" title="今日收获和学习时长"></a>今日收获和学习时长</h2><p>1小时18分</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -592,575 +1193,8 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2019/01/21/%E9%87%91%E8%9E%8D%E6%80%9D%E7%BB%B49/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/3.jpg">
-      <meta itemprop="name" content="StoneHan">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="StoneHan's blog">
-      <meta itemprop="description" content="想把你写成一首歌，想养一只猫">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | StoneHan's blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2019/01/21/%E9%87%91%E8%9E%8D%E6%80%9D%E7%BB%B49/" class="post-title-link" itemprop="url">金融思维9：金融子行业介绍</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2019-01-21 18:25:09" itemprop="dateCreated datePublished" datetime="2019-01-21T18:25:09+08:00">2019-01-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2019-01-22 16:34:11" itemprop="dateModified" datetime="2019-01-22T16:34:11+08:00">2019-01-22</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E9%87%91%E8%9E%8D/" itemprop="url" rel="index"><span itemprop="name">金融</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>本文主要介绍金融子行业的介绍，以及其商业模式、核心创收职位等。主要包括投行&#x2F;VC&#x2F;PE&#x2F;基金&#x2F;商行等。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/01/21/%E9%87%91%E8%9E%8D%E6%80%9D%E7%BB%B49/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2019/01/19/%E9%87%91%E8%9E%8D%E6%80%9D%E7%BB%B48/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/3.jpg">
-      <meta itemprop="name" content="StoneHan">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="StoneHan's blog">
-      <meta itemprop="description" content="想把你写成一首歌，想养一只猫">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | StoneHan's blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2019/01/19/%E9%87%91%E8%9E%8D%E6%80%9D%E7%BB%B48/" class="post-title-link" itemprop="url">金融思维8：金融市场（股市/债市/商品/外汇）</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2019-01-19 18:25:09" itemprop="dateCreated datePublished" datetime="2019-01-19T18:25:09+08:00">2019-01-19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2019-01-21 14:49:15" itemprop="dateModified" datetime="2019-01-21T14:49:15+08:00">2019-01-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E9%87%91%E8%9E%8D/" itemprop="url" rel="index"><span itemprop="name">金融</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>本文主要介绍不同的金融市场以及影响其运作的主要逻辑。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/01/19/%E9%87%91%E8%9E%8D%E6%80%9D%E7%BB%B48/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2018/09/03/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8ppt%E5%88%B6%E4%BD%9C%E9%AB%98%E6%B8%85%E6%B5%B7%E6%8A%A5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/3.jpg">
-      <meta itemprop="name" content="StoneHan">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="StoneHan's blog">
-      <meta itemprop="description" content="想把你写成一首歌，想养一只猫">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | StoneHan's blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/09/03/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8ppt%E5%88%B6%E4%BD%9C%E9%AB%98%E6%B8%85%E6%B5%B7%E6%8A%A5/" class="post-title-link" itemprop="url">如何使用ppt制作高清海报(会议论文poster)</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2018-09-03 18:25:09 / 修改时间：16:40:00" itemprop="dateCreated datePublished" datetime="2018-09-03T18:25:09+08:00">2018-09-03</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>最近参加会议需要制作poster，在ppt上选好模板做好之后，发现实验图不清晰。下面记录一下生成高清海报的过程：</p>
-<ul>
-<li>首先实验图要清晰的。先把实验图从pdf中转成jpg，在转换的时候有个设置，可以全部设置成最高级别。生成的图就很清晰了。</li>
-</ul>
-<p><img src="https://i.imgur.com/bhs3pGU.png"></p>
-<ul>
-<li>然后插入ppt的时候尽量不要有压缩。这个可以在ppt的选项-高级中设置，插入的图片</li>
-</ul>
-<p><img src="https://i.imgur.com/gLjSD0H.png"></p>
-<ul>
-<li>最后ppt生成的图片也要是清晰的，这里需要用到注册表，win+R 输入regedit，找到ppt对应的键值。新建一个ExportBitmapResolution，数值为十进制的300.然后把ppt转成jpg就可以啦。</li>
-</ul>
-<p><img src="https://i.imgur.com/y4TTKDT.png"></p>
-<p>下面贴两张自己做的海报。嘻嘻。</p>
-<p><img src="https://i.imgur.com/uBVj1vl.jpg"></p>
-<p><img src="https://i.imgur.com/TtHi3o7.jpg"></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2018/08/30/%E9%98%BF%E9%87%8C%E9%9D%A2%E8%AF%95%E6%80%BB%E7%BB%93/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/3.jpg">
-      <meta itemprop="name" content="StoneHan">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="StoneHan's blog">
-      <meta itemprop="description" content="想把你写成一首歌，想养一只猫">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | StoneHan's blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/08/30/%E9%98%BF%E9%87%8C%E9%9D%A2%E8%AF%95%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">阿里四面总结</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2018-08-30 18:25:09" itemprop="dateCreated datePublished" datetime="2018-08-30T18:25:09+08:00">2018-08-30</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2018-08-31 20:31:26" itemprop="dateModified" datetime="2018-08-31T20:31:26+08:00">2018-08-31</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%B1%82%E8%81%8C/" itemprop="url" rel="index"><span itemprop="name">求职</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>持续一周的阿里面试终于结束了，一共面了四次，最终止步于boss面上。但是在面试的过程中也学到了不少东西，对自己的优点弱点也了解了不少，总结一下，算是为下面的面试做铺垫了。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/08/30/%E9%98%BF%E9%87%8C%E9%9D%A2%E8%AF%95%E6%80%BB%E7%BB%93/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2018/05/26/C++%E6%A0%87%E5%87%86%E5%BA%932/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/3.jpg">
-      <meta itemprop="name" content="StoneHan">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="StoneHan's blog">
-      <meta itemprop="description" content="想把你写成一首歌，想养一只猫">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | StoneHan's blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/05/26/C++%E6%A0%87%E5%87%86%E5%BA%932/" class="post-title-link" itemprop="url">C++标准库-算法</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2018-05-26 18:25:09" itemprop="dateCreated datePublished" datetime="2018-05-26T18:25:09+08:00">2018-05-26</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2018-08-28 16:55:19" itemprop="dateModified" datetime="2018-08-28T16:55:19+08:00">2018-08-28</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="STL六大部件"><a href="#STL六大部件" class="headerlink" title="STL六大部件"></a>STL六大部件</h1><ul>
-<li>容器 Containers</li>
-<li>分配器 Allocators</li>
-<li>算法 Algorithms</li>
-<li>迭代器 Iterators</li>
-<li>适配器 Adapters</li>
-<li>仿函数 Functors</li>
-</ul>
-<p>这一章主要讲STL中的算法。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/05/26/C++%E6%A0%87%E5%87%86%E5%BA%932/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2018/05/19/linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/3.jpg">
-      <meta itemprop="name" content="StoneHan">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="StoneHan's blog">
-      <meta itemprop="description" content="想把你写成一首歌，想养一只猫">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | StoneHan's blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/05/19/linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" class="post-title-link" itemprop="url">linux网络编程-select/poll/epoll</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2018-05-19 18:25:09" itemprop="dateCreated datePublished" datetime="2018-05-19T18:25:09+08:00">2018-05-19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2018-08-28 22:41:00" itemprop="dateModified" datetime="2018-08-28T22:41:00+08:00">2018-08-28</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>本文的主要内容：</p>
-<ul>
-<li>select函数</li>
-<li>poll函数</li>
-<li>epoll函数</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/05/19/linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 </div>
@@ -1172,7 +1206,7 @@
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2022</span>
+  <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
